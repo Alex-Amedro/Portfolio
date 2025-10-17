@@ -7,13 +7,13 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      title: 'Creative Front-End Developer',
-      subtitle: 'Passionate about creating intuitive and performant web interfaces.',
-      cta: 'Explore My Work',
+      title: 'Hi, I\'m Alexandre Amedro',
+      subtitle: 'Multimedia Engineering Student',
+      cta: 'View My Work',
     },
     about: {
       title: 'About Me',
-      description: 'I\'m a passionate front-end developer with 3+ years of experience building beautiful and performant web applications. I specialize in modern JavaScript frameworks like React and Astro, and I\'m always eager to learn new technologies and best practices in web development.',
+      description: 'Master\'s student (M1) at ENSEEIHT, specializing in Imaging and Multimedia, currently on an academic exchange in Taiwan. I am interested in all areas related to multimedia, including computer graphics, computer vision, audio and video signal processing, machine learning, and data analysis.',
     },
     featured: {
       title: 'My Best Work',
@@ -58,13 +58,13 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      title: 'Développeur Front-End Créatif',
-      subtitle: 'Passionné par la création d\'interfaces web intuitives et performantes.',
-      cta: 'Découvrir mon travail',
+      title: 'Bonjour, je suis Alexandre Amedro',
+      subtitle: 'Étudiant Ingénieur en Imagerie Multimédia',
+      cta: 'Voir mes réalisations',
     },
     about: {
-      title: 'À Propos de moi',
-      description: 'Je suis un développeur front-end passionné avec 3+ ans d\'expérience dans la création d\'applications web belles et performantes. Je me spécialise dans les frameworks JavaScript modernes comme React et Astro, et j\'aime toujours apprendre de nouvelles technologies et bonnes pratiques.',
+      title: 'À propos',
+      description: 'Étudiant en Master 1 à l\'ENSEEIHT, spécialisé en Imagerie et Multimédia, actuellement en échange universitaire à Taïwan. Je m\'intéresse à tous les domaines liés au multimédia, notamment l\'informatique graphique, la vision par ordinateur, le traitement du signal audio et vidéo, l\'apprentissage automatique et l\'analyse de données.',
     },
     featured: {
       title: 'Mon Meilleur Travail',
@@ -109,13 +109,13 @@ export const translations = {
       contact: '联系',
     },
     hero: {
-      title: '创意前端开发者',
-      subtitle: '热衷于创建直观且高性能的网络界面。',
-      cta: '探索我的作品',
+      title: '你好，我是 Alexandre Amedro',
+      subtitle: '多媒体工程学生',
+      cta: '查看我的作品',
     },
     about: {
       title: '关于我',
-      description: '我是一名充满热情的前端开发者，拥有3年以上构建美观高性能Web应用的经验。我专门使用React和Astro等现代JavaScript框架，并且总是渴望学习新技术和Web开发的最佳实践。',
+      description: '我是ENSEEIHT的硕士研究生（M1），专攻成像与多媒体，目前在台湾进行学术交流。我对多媒体相关的所有领域都感兴趣，包括计算机图形学、计算机视觉、音视频信号处理、机器学习和数据分析。',
     },
     featured: {
       title: '我的最佳作品',
