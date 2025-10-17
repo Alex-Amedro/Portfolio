@@ -1,0 +1,13 @@
+# Robots.txt for Alexandre Amedro's Portfolio
+
+User-agent: *
+Allow: /
+
+# Allow all robots to access the site
+Disallow:
+
+# Sitemap location
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1

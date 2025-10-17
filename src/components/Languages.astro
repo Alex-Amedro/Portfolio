@@ -1,0 +1,77 @@
+---
+// src/components/Languages.astro
+interface Props {
+  translations: any;
+}
+
+const { translations } = Astro.props;
+
+const languages = [
+  {
+    name: translations.languages.french,
+    level: translations.languages.native,
+    proficiency: 100,
+    flag: '🇫🇷',
+  },
+  {
+    name: translations.languages.english,
+    level: translations.languages.fluent,
+    proficiency: 85,
+    flag: '🇬🇧',
+    certifications: 'TOEIC & GRE ' + translations.languages.certifications,
+  },
+  {
+    name: translations.languages.chinese,
+    level: translations.languages.learning,
+    proficiency: 40,
+    flag: '🇨🇳',
+  },
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {languages.map((language) => (
+    <div class="bg-white dark:bg-dark-bg-secondary rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-4xl">{language.flag}</span>
+        <div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-dark-text">
+            {language.name}
+          </h3>
+          <p class="text-sm text-blue-600 dark:text-accent-blue font-semibold">
+            {language.level}
+          </p>
+        </div>
+      </div>
+      
+      <!-- Barre de progression -->
+      <div class="mb-3">
+        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+          <div 
+            class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-accent-blue dark:to-blue-400 h-2.5 rounded-full transition-all duration-1000"
+            style={`width: ${language.proficiency}%`}
+          ></div>
+        </div>
+      </div>
+      
+      <!-- Certifications -->
+      {language.certifications && (
+        <p class="text-xs text-gray-600 dark:text-dark-text-secondary italic">
+          {language.certifications}
+        </p>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  @keyframes progressBar {
+    from {
+      width: 0%;
+    }
+  }
+  
+  .bg-gradient-to-r {
+    animation: progressBar 1.5s ease-out;
+  }
+</style>

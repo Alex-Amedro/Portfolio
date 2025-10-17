@@ -9,6 +9,9 @@ interface Props {
 }
 
 const { title = 'Alexandre Amedro | Multimedia Engineering Student', description = 'Master\'s student at ENSEEIHT specializing in Imaging and Multimedia, passionate about computer graphics, computer vision, and machine learning', ogImage = 'https://via.placeholder.com/1200x630?text=Portfolio' } = Astro.props;
+
+// Google Analytics ID (à remplir par l'utilisateur)
+const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Remplacer par votre ID Google Analytics
 ---
 
 <!doctype html>
@@ -17,15 +20,44 @@ const { title = 'Alexandre Amedro | Multimedia Engineering Student', description
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url.href} />
+    
+    <!-- Favicon (à ajouter) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
     <title>{title}</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Google Analytics -->
+    {GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA_MEASUREMENT_ID);
+        </script>
+      </>
+    )}
     
     <!-- Script pour éviter le flash en mode sombre -->
     <script is:inline>

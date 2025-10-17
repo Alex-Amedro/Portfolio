@@ -1,0 +1,123 @@
+---
+// src/components/ExperienceCard.astro
+import type { Experience } from '../data/experience';
+
+interface Props {
+  experience: Experience[];
+  lang: 'en' | 'fr' | 'zh';
+  translations: any;
+}
+
+const { experience, lang, translations } = Astro.props;
+
+function formatDate(dateString: string | null, isPresent: boolean) {
+  if (dateString === null) return isPresent ? translations.experience.present : '';
+  const [year, month] = dateString.split('-');
+  const months = {
+    en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    fr: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+    zh: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+  };
+  return `${months[lang][parseInt(month) - 1]} ${year}`;
+}
+
+function getTypeColor(type: string) {
+  const colors = {
+    internship: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+    job: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+    volunteering: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
+    association: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  };
+  return colors[type] || colors.job;
+}
+
+function getTypeLabel(type: string, lang: string) {
+  const labels = {
+    internship: { en: 'Internship', fr: 'Stage', zh: '实习' },
+    job: { en: 'Job', fr: 'Emploi', zh: '工作' },
+    volunteering: { en: 'Volunteering', fr: 'Bénévolat', zh: '志愿服务' },
+    association: { en: 'Association', fr: 'Association', zh: '协会' },
+  };
+  return labels[type]?.[lang] || labels.job[lang];
+}
+---
+
+<div class="space-y-6">
+  {experience.map((exp) => (
+    <div class="bg-white dark:bg-dark-bg-secondary rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+      <div class="p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-dark-text">
+                {exp.title[lang]}
+              </h3>
+              <span class={`px-3 py-1 rounded-full text-xs font-semibold ${getTypeColor(exp.type)}`}>
+                {getTypeLabel(exp.type, lang)}
+              </span>
+            </div>
+            <p class="text-lg font-semibold text-blue-600 dark:text-accent-blue">
+              {exp.company}
+            </p>
+            <div class="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-dark-text-secondary">
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                {exp.location}
+              </div>
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                {formatDate(exp.startDate, false)} - {formatDate(exp.endDate, true) || translations.experience.present}
+              </div>
+            </div>
+          </div>
+          
+          {exp.logo && (
+            <img 
+              src={exp.logo} 
+              alt={`${exp.company} logo`}
+              class="w-16 h-16 object-contain ml-4"
+            />
+          )}
+        </div>
+        
+        <!-- Description -->
+        <p class="text-gray-700 dark:text-dark-text mb-4">
+          {exp.description[lang]}
+        </p>
+        
+        <!-- Achievements -->
+        {exp.achievements[lang].length > 0 && (
+          <div class="mb-4">
+            <ul class="space-y-2">
+              {exp.achievements[lang].map((achievement) => (
+                <li class="flex items-start gap-2 text-gray-700 dark:text-dark-text">
+                  <svg class="w-5 h-5 text-blue-500 dark:text-accent-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-sm">{achievement}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        <!-- Technologies -->
+        {exp.technologies && exp.technologies.length > 0 && (
+          <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            {exp.technologies.map((tech) => (
+              <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium">
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
