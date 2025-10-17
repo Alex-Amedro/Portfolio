@@ -1,0 +1,71 @@
+---
+// src/components/ProjectCard.astro
+import { getTranslation } from '../data/translations';
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  stack: string[];
+  slug: string;
+  status: 'completed' | 'in-progress';
+  lang: string;
+}
+
+const { title, description, image, stack, slug, status, lang } = Astro.props;
+const viewProject = getTranslation(lang, 'projects.viewProject');
+const comingSoon = getTranslation(lang, 'projects.comingSoon');
+const isInProgress = status === 'in-progress';
+---
+
+<div class="project-card group relative overflow-hidden rounded-xl bg-white dark:bg-dark-bg-secondary border border-gray-200 dark:border-slate-700 shadow-md">
+  <!-- Image Container -->
+  <div class="relative h-64 overflow-hidden bg-gray-100 dark:bg-slate-800">
+    <img
+      src={image}
+      alt={title}
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+      loading="lazy"
+    />
+    <!-- Badge Coming Soon -->
+    {
+      isInProgress && (
+        <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+          {comingSoon}
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Content -->
+  <div class="p-6">
+    <!-- Title -->
+    <h3 class="text-xl font-bold text-text-dark dark:text-dark-text mb-2 group-hover:text-primary dark:group-hover:text-accent-blue transition-colors">{title}</h3>
+
+    <!-- Description -->
+    <p class="text-gray-600 dark:text-dark-text-secondary text-sm mb-4 line-clamp-2">{description}</p>
+
+    <!-- Stack Tags -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      {
+        stack.slice(0, 3).map((tech) => (
+          <span class="inline-block bg-primary/10 dark:bg-accent-blue/20 text-primary dark:text-accent-blue text-xs font-medium px-3 py-1 rounded-full">
+            {tech}
+          </span>
+        ))
+      }
+      {stack.length > 3 && <span class="inline-block text-gray-500 dark:text-slate-400 text-xs px-3 py-1">+{stack.length - 3}</span>}
+    </div>
+
+    <!-- CTA Button -->
+    <a
+      href={`/${lang}/projects/${slug}`}
+      class="inline-flex items-center gap-2 font-medium text-primary dark:text-accent-blue hover:text-primary-light dark:hover:text-blue-400 transition-colors group/btn"
+    >
+      {viewProject}
+      <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+---
+// src/components/LanguageSwitcher.astro
+interface Props {
+  currentLang: string;
+  currentPath?: string;
+}
+
+const { currentLang, currentPath = '/' } = Astro.props;
+
+const languages = [
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
+];
+
+const currentLangObj = languages.find((l) => l.code === currentLang);
+---
+
+<div class="relative group">
+  <button class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors font-medium text-sm text-text-dark dark:text-dark-text">
+    <span class="text-lg">{currentLangObj?.flag}</span>
+    <span class="hidden sm:inline">{currentLangObj?.code.toUpperCase()}</span>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-dark-bg-secondary rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+    {
+      languages.map((lang) => (
+        <a
+          href={`/${lang.code}${currentPath}`}
+          class={`flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors ${
+            lang.code === currentLang ? 'bg-primary/10 dark:bg-accent-blue/20 text-primary dark:text-accent-blue font-semibold' : 'text-text-dark dark:text-dark-text'
+          }`}
+        >
+          <span class="text-lg">{lang.flag}</span>
+          <span>{lang.name}</span>
+        </a>
+      ))
+    }
+  </div>
+</div>

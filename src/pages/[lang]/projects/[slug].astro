@@ -1,0 +1,227 @@
+---
+// src/pages/[lang]/projects/[slug].astro
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getTranslation } from '../../../data/translations';
+import { getProjectBySlug, getAllProjects } from '../../../data/projects';
+
+export function getStaticPaths() {
+  const languages = ['en', 'fr', 'zh'];
+  const projects = getAllProjects();
+  
+  return languages.flatMap(lang => 
+    projects.map(project => ({
+      params: { lang, slug: project.slug }
+    }))
+  );
+}
+
+const { lang, slug } = Astro.params;
+const currentLang = lang || 'en';
+const project = getProjectBySlug(slug!);
+
+if (!project) {
+  return Astro.redirect(`/${currentLang}/projects`);
+}
+
+// Traductions
+const challengeLabel = getTranslation(currentLang, 'projects.challenge');
+const solutionLabel = getTranslation(currentLang, 'projects.solution');
+const learningsLabel = getTranslation(currentLang, 'projects.learnings');
+const stackLabel = getTranslation(currentLang, 'projects.stack');
+const viewLive = getTranslation(currentLang, 'projects.viewLive');
+const viewOnGithub = getTranslation(currentLang, 'projects.viewOnGithub');
+const previousLabel = getTranslation(currentLang, 'projects.previous');
+const nextLabel = getTranslation(currentLang, 'projects.next');
+const statusLabel = getTranslation(currentLang, 'projects.status');
+const completed = getTranslation(currentLang, 'projects.completed');
+const inProgress = getTranslation(currentLang, 'projects.inProgress');
+const dateLabel = getTranslation(currentLang, 'projects.date');
+
+// Fonctions pour récupérer les contenus traduits
+function getTitle() {
+  if (currentLang === 'fr') return project.titleFr;
+  if (currentLang === 'zh') return project.titleZh;
+  return project.titleEn;
+}
+
+function getFullDescription() {
+  if (currentLang === 'fr') return project.fullDescriptionFr;
+  if (currentLang === 'zh') return project.fullDescriptionZh;
+  return project.fullDescriptionEn;
+}
+
+function getChallenge() {
+  if (currentLang === 'fr') return project.challengeFr;
+  if (currentLang === 'zh') return project.challengeZh;
+  return project.challengeEn;
+}
+
+function getSolution() {
+  if (currentLang === 'fr') return project.solutionFr;
+  if (currentLang === 'zh') return project.solutionZh;
+  return project.solutionEn;
+}
+
+function getLearnings() {
+  if (currentLang === 'fr') return project.learningsFr;
+  if (currentLang === 'zh') return project.learningsZh;
+  return project.learningsEn;
+}
+
+function getProjectTitle(p: any) {
+  if (currentLang === 'fr') return p.titleFr;
+  if (currentLang === 'zh') return p.titleZh;
+  return p.titleEn;
+}
+
+// Navigation projets précédent/suivant
+const allProjects = getAllProjects();
+const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+const previousProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
+
+const dateObj = new Date(project.date);
+const formattedDate = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' : currentLang === 'zh' ? 'zh-CN' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${getTitle()} | John Doe`} description={project.descriptionEn} ogImage={project.image}>
+  <Header lang={currentLang} />
+
+  <main class="pt-32">
+    <!-- Hero Image -->
+    <div class="w-full h-96 overflow-hidden">
+      <img src={project.image} alt={getTitle()} class="w-full h-full object-cover" />
+    </div>
+
+    <!-- Project Details -->
+    <div class="max-w-4xl mx-auto px-6 py-20">
+      <!-- Header -->
+      <div class="mb-12 data-animate">
+        <h1 class="text-5xl md:text-6xl font-bold text-text-dark dark:text-dark-text mb-4">{getTitle()}</h1>
+        <div class="flex flex-wrap items-center gap-6 mb-6 text-gray-600 dark:text-dark-text-secondary">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold">{statusLabel}:</span>
+            <span class={project.status === 'completed' ? 'text-green-600 dark:text-green-400 font-medium' : 'text-orange-600 dark:text-orange-400 font-medium'}>
+              {project.status === 'completed' ? completed : inProgress}
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-semibold">{dateLabel}:</span>
+            <span>{formattedDate}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="prose prose-lg max-w-none mb-16 data-animate">
+        <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-4">Overview</h2>
+        <div class="text-lg text-gray-700 dark:text-dark-text-secondary leading-relaxed whitespace-pre-wrap">
+          {getFullDescription()}
+        </div>
+      </div>
+
+      <!-- Challenge Section -->
+      <div class="bg-primary/5 dark:bg-accent-blue/10 border-l-4 border-primary dark:border-accent-blue rounded-r-lg p-6 mb-12 data-animate">
+        <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{challengeLabel}</h2>
+        <p class="text-gray-700 dark:text-dark-text-secondary leading-relaxed">{getChallenge()}</p>
+      </div>
+
+      <!-- Solution Section -->
+      <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 rounded-r-lg p-6 mb-12 data-animate">
+        <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{solutionLabel}</h2>
+        <p class="text-gray-700 dark:text-dark-text-secondary leading-relaxed">{getSolution()}</p>
+      </div>
+
+      <!-- Learnings Section -->
+      <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-400 rounded-r-lg p-6 mb-12 data-animate">
+        <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{learningsLabel}</h2>
+        <p class="text-gray-700 dark:text-dark-text-secondary leading-relaxed">{getLearnings()}</p>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="mb-12 data-animate">
+        <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-6">{stackLabel}</h2>
+        <div class="flex flex-wrap gap-3">
+          {
+            project.stack.map((tech) => (
+              <span class="bg-primary dark:bg-accent-blue text-white px-4 py-2 rounded-full font-medium hover:bg-primary-light dark:hover:bg-blue-500 transition-colors">
+                {tech}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Gallery (if images exist) -->
+      {
+        project.images && project.images.length > 0 && (
+          <div class="mb-12 data-animate">
+            <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-6">Gallery</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.images.map((image) => (
+                <img
+                  src={image}
+                  alt="Project screenshot"
+                  class="w-full h-80 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-20 data-animate">
+        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          {viewLive}
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4-6l6 6m0 0l-6 6m6-6H3"></path>
+          </svg>
+        </a>
+        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          {viewOnGithub}
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Navigation Projects -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 border-t border-gray-200 dark:border-slate-700">
+        {
+          previousProject ? (
+            <a href={`/${currentLang}/projects/${previousProject.slug}`} class="group p-6 border border-gray-200 dark:border-slate-700 rounded-lg hover:border-primary dark:hover:border-accent-blue hover:bg-primary/5 dark:hover:bg-accent-blue/10 transition-all data-animate">
+              <p class="text-sm text-gray-600 dark:text-dark-text-secondary mb-2">← {previousLabel}</p>
+              <p class="text-lg font-bold text-text-dark dark:text-dark-text group-hover:text-primary dark:group-hover:text-accent-blue transition-colors">
+                {getProjectTitle(previousProject)}
+              </p>
+            </a>
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          nextProject ? (
+            <a href={`/${currentLang}/projects/${nextProject.slug}`} class="group p-6 border border-gray-200 dark:border-slate-700 rounded-lg hover:border-primary dark:hover:border-accent-blue hover:bg-primary/5 dark:hover:bg-accent-blue/10 transition-all data-animate text-right">
+              <p class="text-sm text-gray-600 dark:text-dark-text-secondary mb-2">{nextLabel} →</p>
+              <p class="text-lg font-bold text-text-dark dark:text-dark-text group-hover:text-primary dark:group-hover:text-accent-blue transition-colors">
+                {getProjectTitle(nextProject)}
+              </p>
+            </a>
+          ) : (
+            <div></div>
+          )
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>

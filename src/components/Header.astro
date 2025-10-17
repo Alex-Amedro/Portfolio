@@ -1,0 +1,56 @@
+---
+// src/components/Header.astro
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { getTranslation } from '../data/translations';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const navHome = getTranslation(lang, 'nav.home');
+const navProjects = getTranslation(lang, 'nav.projects');
+const navContact = getTranslation(lang, 'nav.contact');
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-bg-light/80 dark:bg-dark-bg/80 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href={`/${lang}`} class="text-2xl font-bold text-primary dark:text-accent-blue hover:text-primary-light dark:hover:text-blue-400 transition-colors">
+      JD
+    </a>
+
+    <!-- Navigation Desktop -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li>
+        <a href={`/${lang}#home`} class="text-text-dark dark:text-dark-text hover:text-primary dark:hover:text-accent-blue font-medium transition-colors">
+          {navHome}
+        </a>
+      </li>
+      <li>
+        <a href={`/${lang}/projects`} class="text-text-dark dark:text-dark-text hover:text-primary dark:hover:text-accent-blue font-medium transition-colors">
+          {navProjects}
+        </a>
+      </li>
+      <li>
+        <a href={`/${lang}#contact`} class="text-text-dark dark:text-dark-text hover:text-primary dark:hover:text-accent-blue font-medium transition-colors">
+          {navContact}
+        </a>
+      </li>
+    </ul>
+
+    <!-- Theme Toggle + Language Switcher + Menu Mobile -->
+    <div class="flex items-center gap-3">
+      <ThemeToggle />
+      <LanguageSwitcher currentLang={lang} />
+      
+      <!-- Mobile Menu Button (optionnel) -->
+      <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>

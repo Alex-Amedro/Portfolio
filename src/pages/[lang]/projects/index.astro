@@ -1,0 +1,70 @@
+---
+// src/pages/[lang]/projects/index.astro
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { getTranslation } from '../../../data/translations';
+import { getAllProjects } from '../../../data/projects';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang || 'en';
+const allProjects = getAllProjects();
+
+const pageTitle = getTranslation(currentLang, 'projects.allProjects');
+
+function getProjectTitle(project: any) {
+  if (currentLang === 'fr') return project.titleFr;
+  if (currentLang === 'zh') return project.titleZh;
+  return project.titleEn;
+}
+
+function getProjectDescription(project: any) {
+  if (currentLang === 'fr') return project.descriptionFr;
+  if (currentLang === 'zh') return project.descriptionZh;
+  return project.descriptionEn;
+}
+---
+
+<Layout title={`${pageTitle} | John Doe`} description="Explore all of my projects">
+  <Header lang={currentLang} />
+
+  <main class="pt-32">
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <!-- Page Header -->
+      <div class="mb-16 data-animate">
+        <h1 class="text-5xl md:text-6xl font-bold text-text-dark dark:text-dark-text mb-4">{pageTitle}</h1>
+        <p class="text-xl text-gray-600 dark:text-dark-text-secondary">
+          {allProjects.length} projects
+        </p>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 data-animate">
+        {
+          allProjects.map((project) => (
+            <ProjectCard
+              title={getProjectTitle(project)}
+              description={getProjectDescription(project)}
+              image={project.image}
+              stack={project.stack}
+              slug={project.slug}
+              status={project.status}
+              lang={currentLang}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>
