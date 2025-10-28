@@ -1,0 +1,56 @@
+---
+// src/components/SkillPill.astro
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+// Icônes SVG pour chaque langage/technologie
+const getIcon = (skillName: string): string => {
+  const lowerName = skillName.toLowerCase();
+  
+  // C++
+  if (lowerName === 'c++' || lowerName === 'cpp') {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><path d="M22.394 6c0-.818-.393-1.544-1.012-2.094l-5.09-4.03C15.467-.697 14.256-.697 13.44.375L13 .797l5.09 4.031c.619.55 1.012 1.276 1.012 2.094v11.812c0 .818-.393 1.545-1.012 2.094l-5.09 4.032-.44.421c.816 1.072 2.027 1.072 2.852.49l5.09-4.031c.619-.55 1.012-1.276 1.012-2.094V6z" fill="#00599C"/><path d="M11.561 23.906L6.471 19.875c-.619-.55-1.012-1.276-1.012-2.094V6.031c0-.818.393-1.544 1.012-2.094L11.561.906c.816-.61 2.027-.61 2.843 0l-.44.422-5.09 4.03c-.619.55-1.012 1.277-1.012 2.095v11.812c0 .818.393 1.545 1.012 2.094l5.09 4.032.44.421c-.816.61-2.027.61-2.843 0z" fill="#004482"/><text x="12" y="16" font-family="monospace" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">C++</text></svg>`;
+  }
+  
+  // Python
+  if (lowerName === 'python') {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.03v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.148V3.202S18.28 0 11.914 0zM8.847 1.892a1.27 1.27 0 11.001 2.541 1.27 1.27 0 01-.001-2.541z" fill="#366994"/><path d="M12.086 24c6.095 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121s3.9.445 3.9-5.735c0-6.18-3.403-5.96-3.403-5.96h-2.03v2.867s.109 3.42-3.35 3.42H9.451s-3.24-.052-3.24 3.148v5.292S5.72 24 12.086 24zm3.067-1.892a1.27 1.27 0 11-.001-2.541 1.27 1.27 0 01.001 2.541z" fill="#FFC836"/></svg>`;
+  }
+  
+  // Java
+  if (lowerName === 'java') {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218" fill="#5382A1"/><path d="M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573" fill="#E76F00"/><path d="M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118" fill="#5382A1"/><path d="M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627" fill="#E76F00"/></svg>`;
+  }
+  
+  // Assembly
+  if (lowerName === 'assembly' || lowerName === 'asm') {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#525252"/><text x="12" y="16" font-family="monospace" font-size="7" fill="#10B981" text-anchor="middle" font-weight="bold">ASM</text></svg>`;
+  }
+  
+  // MATLAB
+  if (lowerName === 'matlab') {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#E16737"/><path d="M4 16l4-6 3 4 5-8 4 6" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  }
+  
+  // AI / Machine Learning
+  if (lowerName.includes('ai') || lowerName.includes('machine learning') || lowerName.includes('ml')) {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="#8B5CF6"/><circle cx="6" cy="6" r="2" fill="#8B5CF6" opacity="0.6"/><circle cx="18" cy="6" r="2" fill="#8B5CF6" opacity="0.6"/><circle cx="6" cy="18" r="2" fill="#8B5CF6" opacity="0.6"/><circle cx="18" cy="18" r="2" fill="#8B5CF6" opacity="0.6"/><line x1="12" y1="12" x2="6" y2="6" stroke="#8B5CF6" stroke-width="1"/><line x1="12" y1="12" x2="18" y2="6" stroke="#8B5CF6" stroke-width="1"/><line x1="12" y1="12" x2="6" y2="18" stroke="#8B5CF6" stroke-width="1"/><line x1="12" y1="12" x2="18" y2="18" stroke="#8B5CF6" stroke-width="1"/></svg>`;
+  }
+  
+  // Computer Vision
+  if (lowerName.includes('vision') || lowerName.includes('cv')) {
+    return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" fill="#3B82F6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg>`;
+  }
+  
+  // Par défaut - icône générique
+  return `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#6366F1"/><circle cx="12" cy="12" r="4" fill="#fff"/></svg>`;
+};
+---
+
+<span class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-dark-bg-secondary border border-gray-200 dark:border-slate-700 rounded-full text-sm font-medium shadow-sm hover:shadow-md hover:border-blue-500 dark:hover:border-accent-blue transition-all duration-200">
+  <span class="flex-shrink-0" set:html={getIcon(name)}></span>
+  <span class="text-gray-800 dark:text-dark-text font-semibold">{name}</span>
+</span>

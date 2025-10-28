@@ -32,6 +32,122 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: '0',
+    slug: 'raytracer-3d',
+    titleEn: 'Rayt - 3D Ray Tracer & Scene Editor',
+    titleFr: 'Rayt - Ray Tracer 3D & Éditeur de Scène',
+    titleZh: 'Rayt - 3D光线追踪与场景编辑器',
+    descriptionEn: 'High-performance ray tracing engine with real-time 3D editor. Create photorealistic renders with advanced materials (metal, glass, neon) using C++, OpenGL and ImGui.',
+    descriptionFr: 'Moteur de ray tracing performant avec éditeur 3D temps réel. Créez des rendus photoréalistes avec matériaux avancés (métal, verre, néon) en C++, OpenGL et ImGui.',
+    descriptionZh: '高性能光线追踪引擎与实时3D编辑器。使用C++、OpenGL和ImGui创建照片级渲染。',
+    fullDescriptionEn: `A complete 3D rendering project combining two main components:
+
+1. Interactive 3D Scene Editor (mini-Blender)
+Built with OpenGL and ImGui, this editor allows you to:
+- Place and manipulate 3D objects (spheres, planes) in real-time
+- Adjust materials, colors, positions with instant visual feedback
+- Control an orbital camera (rotate, zoom, pan)
+- Import background images for scene composition
+- Save and load scenes in JSON format
+
+2. High-Performance Ray Tracer
+A photorealistic rendering engine that takes your scene and generates beautiful images:
+- Multiple material types: Diffuse, Metal (with roughness), Glass (with refraction), Emissive (neons), Mirror
+- Realistic lighting with shadows and reflections
+- Anti-aliasing for smooth edges
+- Depth of field effect (camera focus)
+- Multi-threaded rendering for speed
+
+The workflow is simple: design your scene in the OpenGL editor, then hit render to generate a photorealistic image with the ray tracer.`,
+    fullDescriptionFr: `Un projet 3D complet combinant deux composants principaux :
+
+1. Éditeur de Scène 3D Interactif (mini-Blender)
+Construit avec OpenGL et ImGui, cet éditeur permet de :
+- Placer et manipuler des objets 3D (sphères, plans) en temps réel
+- Ajuster matériaux, couleurs, positions avec retour visuel instantané
+- Contrôler une caméra orbitale (rotation, zoom, pan)
+- Importer des images de fond pour composer la scène
+- Sauvegarder et charger des scènes en JSON
+
+2. Ray Tracer Performant
+Un moteur de rendu photoréaliste qui transforme votre scène en images magnifiques :
+- Plusieurs types de matériaux : Diffus, Métal (avec rugosité), Verre (avec réfraction), Émissif (néons), Miroir
+- Éclairage réaliste avec ombres et réflexions
+- Anti-aliasing pour des bords lisses
+- Effet de profondeur de champ (focus caméra)
+- Rendu multi-threadé pour la rapidité
+
+Le workflow est simple : concevez votre scène dans l'éditeur OpenGL, puis lancez le rendu pour générer une image photoréaliste avec le ray tracer.`,
+    fullDescriptionZh: `完整的3D渲染项目，结合两个主要组件：
+
+1. 交互式3D场景编辑器（迷你Blender）
+使用OpenGL和ImGui构建，允许：实时放置和操作3D对象、调整材质和颜色、控制相机、导入背景图像、保存和加载JSON场景。
+
+2. 高性能光线追踪器
+照片级渲染引擎，生成美丽的图像：多种材质类型、真实光照、抗锯齿、景深效果、多线程渲染。`,
+    challengeEn: `The main technical challenges were:
+
+- Understanding and implementing ray-object intersection math (spheres, planes)
+- Coding realistic light physics: reflections, glass refraction (Snell's law), Fresnel equations
+- Optimizing rendering speed with multi-threading
+- Building a user-friendly OpenGL editor with proper camera controls
+- Managing complex C++ project organization (multiple modules, clean architecture)`,
+    challengeFr: `Les principaux défis techniques étaient :
+
+- Comprendre et implémenter les mathématiques d'intersection rayon-objet (sphères, plans)
+- Coder la physique réaliste de la lumière : réflexions, réfraction du verre (loi de Snell), équations de Fresnel
+- Optimiser la vitesse de rendu avec le multi-threading
+- Construire un éditeur OpenGL convivial avec contrôles de caméra appropriés
+- Gérer l'organisation d'un projet C++ complexe (modules multiples, architecture propre)`,
+    challengeZh: `主要技术挑战：理解和实现光线与对象相交数学、编码真实光物理、多线程优化、构建用户友好的OpenGL编辑器、管理复杂的C++项目组织。`,
+    solutionEn: `Created a modular architecture with separate components for ray tracing and the editor. Used modern C++ features (smart pointers, STL containers) for clean code. Implemented multi-threading to render faster. Built the UI with ImGui for quick iterations. Stored scenes in JSON for easy saving/loading.`,
+    solutionFr: `Création d'une architecture modulaire avec composants séparés pour le ray tracing et l'éditeur. Utilisation de fonctionnalités C++ modernes (smart pointers, conteneurs STL) pour un code propre. Multi-threading pour un rendu plus rapide. UI construite avec ImGui. Scènes stockées en JSON.`,
+    solutionZh: `创建模块化架构，分离光线追踪和编辑器组件。使用现代C++功能编写清晰代码。实现多线程加速渲染。使用ImGui构建UI。JSON存储场景。`,
+    learningsEn: `Technical Skills Learned:
+- C++ programming (OOP, pointers, memory management)
+- OpenGL graphics (shaders, objects, rendering pipeline)
+- 3D mathematics (vectors, matrices, transformations)
+- Physics calculations (optics, light behavior)
+- JSON data handling
+- Multi-threading and performance optimization
+- Project organization and clean architecture
+
+Soft Skills:
+- Problem-solving with complex algorithms
+- Self-learning from documentation and tutorials
+- Debugging visual and mathematical issues
+- Iterative development and testing`,
+    learningsFr: `Compétences Techniques Apprises :
+- Programmation C++ (POO, pointeurs, gestion mémoire)
+- Graphiques OpenGL (shaders, objets, pipeline de rendu)
+- Mathématiques 3D (vecteurs, matrices, transformations)
+- Calculs physiques (optique, comportement de la lumière)
+- Gestion de données JSON
+- Multi-threading et optimisation de performances
+- Organisation de projet et architecture propre
+
+Compétences Transversales :
+- Résolution de problèmes avec algorithmes complexes
+- Apprentissage autonome depuis documentation et tutoriels
+- Debugging de problèmes visuels et mathématiques
+- Développement itératif et tests`,
+    learningsZh: `学到的技术技能： C++编程、OpenGL图形、3D数学、物理计算、JSON处理、多线程优化、项目组织。
+
+软技能： 算法问题解决、自主学习、调试、迭代开发。`,
+    stack: ['C++17', 'OpenGL', 'ImGui', 'GLFW', 'GLM', 'JSON (nlohmann)'],
+    image: '/projects/raytracer/raytracer-render.jpg',
+    images: [
+      '/projects/raytracer/raytracer-render.jpg',
+      '/projects/raytracer/raytracer-800x600.jpg',
+      '/projects/raytracer/image.png',
+    ],
+    liveUrl: '',
+    githubUrl: 'https://github.com/Alex-Amedro',
+    status: 'completed' as const,
+    date: '2024-12',
+    featured: true,
+  },
+  {
     id: '1',
     slug: 'ecommerce-platform',
     titleEn: 'E-Commerce Platform',

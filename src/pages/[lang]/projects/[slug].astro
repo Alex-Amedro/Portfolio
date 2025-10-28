@@ -27,7 +27,6 @@ if (!project) {
 
 // Traductions
 const challengeLabel = getTranslation(currentLang, 'projects.challenge');
-const solutionLabel = getTranslation(currentLang, 'projects.solution');
 const learningsLabel = getTranslation(currentLang, 'projects.learnings');
 const stackLabel = getTranslation(currentLang, 'projects.stack');
 const viewLive = getTranslation(currentLang, 'projects.viewLive');
@@ -58,12 +57,6 @@ function getChallenge() {
   return project.challengeEn;
 }
 
-function getSolution() {
-  if (currentLang === 'fr') return project.solutionFr;
-  if (currentLang === 'zh') return project.solutionZh;
-  return project.solutionEn;
-}
-
 function getLearnings() {
   if (currentLang === 'fr') return project.learningsFr;
   if (currentLang === 'zh') return project.learningsZh;
@@ -76,6 +69,119 @@ function getProjectTitle(p: any) {
   return p.titleEn;
 }
 
+type OrderedItem =
+  | { type: 'text'; content: string }
+  | { type: 'image'; src: string; alt: string; caption?: string };
+
+type ContentBlock =
+  | { type: 'paragraph'; content: string }
+  | { type: 'ul'; items: string[] }
+  | { type: 'ol'; items: OrderedItem[] }
+  | { type: 'image'; src: string; alt: string; caption?: string };
+
+function parseContent(content: string): ContentBlock[] {
+  const lines = content.split(/\r?\n/);
+  const blocks: ContentBlock[] = [];
+
+  let currentParagraph: string[] = [];
+  let currentUnordered: string[] = [];
+  let currentOrdered: string[] = [];
+
+  const flushParagraph = () => {
+    if (currentParagraph.length) {
+      blocks.push({ type: 'paragraph', content: currentParagraph.join(' ') });
+      currentParagraph = [];
+    }
+  };
+
+  const flushUnordered = () => {
+    if (currentUnordered.length) {
+      blocks.push({ type: 'ul', items: currentUnordered });
+      currentUnordered = [];
+    }
+  };
+
+  const flushOrdered = () => {
+    if (currentOrdered.length) {
+      blocks.push({
+        type: 'ol',
+        items: currentOrdered.map((item) => ({ type: 'text', content: item })),
+      });
+      currentOrdered = [];
+    }
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushParagraph();
+      flushUnordered();
+      flushOrdered();
+      continue;
+    }
+
+    const orderedMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+    if (orderedMatch) {
+      flushParagraph();
+      flushUnordered();
+      currentOrdered.push(orderedMatch[2]);
+      continue;
+    }
+
+    if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
+      flushParagraph();
+      flushOrdered();
+      currentUnordered.push(trimmed.replace(/^[-•]\s*/, ''));
+      continue;
+    }
+
+    flushUnordered();
+    flushOrdered();
+    currentParagraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushUnordered();
+  flushOrdered();
+
+  return blocks;
+}
+
+const descriptionBlocks = parseContent(getFullDescription());
+const challengeBlocks = parseContent(getChallenge());
+const learningsBlocks = parseContent(getLearnings());
+
+const isRaytracerProject = project.slug === 'raytracer-3d';
+const miniBlenderImage = '/projects/raytracer/image.png';
+const rayTracerBannerImage = '/projects/raytracer/raytracer-800x600.jpg';
+
+if (isRaytracerProject) {
+  const firstOrderedBlock = descriptionBlocks.find((block): block is Extract<ContentBlock, { type: 'ol' }> => block.type === 'ol');
+  if (firstOrderedBlock) {
+    const enhancedItems: OrderedItem[] = [];
+    firstOrderedBlock.items.forEach((item, index) => {
+      enhancedItems.push(item);
+      if (index === 0) {
+        enhancedItems.push({
+          type: 'image',
+          src: miniBlenderImage,
+          alt: 'Raytracer scene editor',
+          caption: 'Interactive scene editor built with OpenGL + ImGui (mini Blender) before launching the ray tracer.',
+        });
+      }
+      if (index === 1) {
+        enhancedItems.push({
+          type: 'image',
+          src: rayTracerBannerImage,
+          alt: 'Raytracer photorealistic render',
+          caption: 'High-performance ray tracer producing photorealistic rendered images.',
+        });
+      }
+    });
+    firstOrderedBlock.items = enhancedItems;
+  }
+}
 // Navigation projets précédent/suivant
 const allProjects = getAllProjects();
 const currentIndex = allProjects.findIndex((p) => p.slug === slug);
@@ -121,27 +227,159 @@ const formattedDate = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' 
       <!-- Main Content -->
       <div class="prose prose-lg max-w-none mb-16 data-animate">
         <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-4">Overview</h2>
-        <div class="text-lg text-gray-700 dark:text-dark-text-secondary leading-relaxed whitespace-pre-wrap">
-          {getFullDescription()}
+        <div class="space-y-5 text-base md:text-lg text-gray-700 dark:text-dark-text-secondary">
+          {descriptionBlocks.map((block, index) => {
+            if (block.type === 'paragraph') {
+              return (
+                <p class="leading-relaxed" key={`description-paragraph-${index}`}>
+                  {block.content}
+                </p>
+              );
+            }
+
+            if (block.type === 'ul') {
+              return (
+                <ul class="list-disc pl-6 space-y-2" key={`description-ul-${index}`}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`description-ul-${index}-${itemIndex}`}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+
+            if (block.type === 'ol') {
+              const textItems = block.items.filter((item): item is Extract<OrderedItem, { type: 'text' }> => item.type === 'text');
+              const imageItems = block.items.filter((item): item is Extract<OrderedItem, { type: 'image' }> => item.type === 'image');
+
+              return (
+                <>
+                  <ol class="list-decimal pl-6 space-y-2" key={`description-ol-${index}`}>
+                    {textItems.map((item, itemIndex) => (
+                      <li key={`description-ol-${index}-${itemIndex}`}>
+                        {item.content}
+                      </li>
+                    ))}
+                  </ol>
+                  {imageItems.map((img, imgIndex) => (
+                    <div class="my-6 overflow-hidden rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700" key={`description-image-${index}-${imgIndex}`}>
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        class="w-full h-72 object-cover"
+                        loading="lazy"
+                      />
+                      {img.caption && (
+                        <div class="bg-white/80 dark:bg-dark-bg/80 backdrop-blur px-6 py-4 text-sm text-gray-600 dark:text-dark-text-secondary">
+                          {img.caption}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </>
+              );
+            }
+
+            if (block.type === 'image') {
+              return (
+                <div class="my-6 overflow-hidden rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700" key={`description-image-${index}`}>
+                  <img
+                    src={block.src}
+                    alt={block.alt}
+                    class="w-full h-72 object-cover"
+                    loading="lazy"
+                  />
+                  {block.caption && (
+                    <div class="bg-white/80 dark:bg-dark-bg/80 backdrop-blur px-6 py-4 text-sm text-gray-600 dark:text-dark-text-secondary">
+                      {block.caption}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return null;
+          })}
         </div>
       </div>
 
       <!-- Challenge Section -->
       <div class="bg-primary/5 dark:bg-accent-blue/10 border-l-4 border-primary dark:border-accent-blue rounded-r-lg p-6 mb-12 data-animate">
         <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{challengeLabel}</h2>
-        <p class="text-gray-700 dark:text-dark-text-secondary leading-relaxed">{getChallenge()}</p>
-      </div>
+        <div class="space-y-4 text-base md:text-lg text-gray-700 dark:text-dark-text-secondary">
+          {challengeBlocks.map((block, index) => {
+            if (block.type === 'paragraph') {
+              return (
+                <p class="leading-relaxed" key={`challenge-paragraph-${index}`}>
+                  {block.content}
+                </p>
+              );
+            }
 
-      <!-- Solution Section -->
-      <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 rounded-r-lg p-6 mb-12 data-animate">
-        <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{solutionLabel}</h2>
-        <p class="text-gray-700 dark:text-dark-text-secondary leading-relaxed">{getSolution()}</p>
+            if (block.type === 'ul') {
+              return (
+                <ul class="list-disc pl-6 space-y-2" key={`challenge-ul-${index}`}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`challenge-ul-${index}-${itemIndex}`}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+
+            if (block.type === 'ol') {
+              return (
+                <ol class="list-decimal pl-6 space-y-2" key={`challenge-ol-${index}`}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`challenge-ol-${index}-${itemIndex}`}>
+                      {item.type === 'text' ? item.content : ''}
+                    </li>
+                  ))}
+                </ol>
+              );
+            }
+
+            return null;
+          })}
+        </div>
       </div>
 
       <!-- Learnings Section -->
       <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-400 rounded-r-lg p-6 mb-12 data-animate">
         <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{learningsLabel}</h2>
-        <p class="text-gray-700 dark:text-dark-text-secondary leading-relaxed">{getLearnings()}</p>
+        <div class="space-y-4 text-base md:text-lg text-gray-700 dark:text-dark-text-secondary">
+          {learningsBlocks.map((block, index) => {
+            if (block.type === 'paragraph') {
+              return (
+                <p class="leading-relaxed" key={`learnings-paragraph-${index}`}>
+                  {block.content}
+                </p>
+              );
+            }
+
+            if (block.type === 'ul') {
+              return (
+                <ul class="list-disc pl-6 space-y-2" key={`learnings-ul-${index}`}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`learnings-ul-${index}-${itemIndex}`}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+
+            if (block.type === 'ol') {
+              return (
+                <ol class="list-decimal pl-6 space-y-2" key={`learnings-ol-${index}`}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`learnings-ol-${index}-${itemIndex}`}>
+                      {item.type === 'text' ? item.content : ''}
+                    </li>
+                  ))}
+                </ol>
+              );
+            }
+
+            return null;
+          })}
+        </div>
       </div>
 
       <!-- Tech Stack -->
