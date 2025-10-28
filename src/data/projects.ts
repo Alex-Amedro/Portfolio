@@ -138,7 +138,6 @@ Compétences Transversales :
     image: '/projects/raytracer/raytracer-render.jpg',
     images: [
       '/projects/raytracer/raytracer-render.jpg',
-      '/projects/raytracer/raytracer-800x600.jpg',
       '/projects/raytracer/image.png',
     ],
     liveUrl: '',
