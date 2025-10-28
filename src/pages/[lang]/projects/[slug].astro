@@ -154,7 +154,6 @@ const learningsBlocks = parseContent(getLearnings());
 
 const isRaytracerProject = project.slug === 'raytracer-3d';
 const miniBlenderImage = '/projects/raytracer/image.png';
-const rayTracerBannerImage = '/projects/raytracer/raytracer-800x600.jpg';
 
 if (isRaytracerProject) {
   const firstOrderedBlock = descriptionBlocks.find((block): block is Extract<ContentBlock, { type: 'ol' }> => block.type === 'ol');
@@ -168,14 +167,6 @@ if (isRaytracerProject) {
           src: miniBlenderImage,
           alt: 'Raytracer scene editor',
           caption: 'Interactive scene editor built with OpenGL + ImGui (mini Blender) before launching the ray tracer.',
-        });
-      }
-      if (index === 1) {
-        enhancedItems.push({
-          type: 'image',
-          src: rayTracerBannerImage,
-          alt: 'Raytracer photorealistic render',
-          caption: 'High-performance ray tracer producing photorealistic rendered images.',
         });
       }
     });
@@ -227,7 +218,7 @@ const formattedDate = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' 
       <!-- Main Content -->
       <div class="prose prose-lg max-w-none mb-16 data-animate">
         <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-4">Overview</h2>
-        <div class="space-y-5 text-base md:text-lg text-gray-700 dark:text-dark-text-secondary">
+        <div class="space-y-5 text-lg text-gray-700 dark:text-dark-text-secondary">
           {descriptionBlocks.map((block, index) => {
             if (block.type === 'paragraph') {
               return (
@@ -248,34 +239,36 @@ const formattedDate = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' 
             }
 
             if (block.type === 'ol') {
-              const textItems = block.items.filter((item): item is Extract<OrderedItem, { type: 'text' }> => item.type === 'text');
-              const imageItems = block.items.filter((item): item is Extract<OrderedItem, { type: 'image' }> => item.type === 'image');
-
               return (
-                <>
-                  <ol class="list-decimal pl-6 space-y-2" key={`description-ol-${index}`}>
-                    {textItems.map((item, itemIndex) => (
-                      <li key={`description-ol-${index}-${itemIndex}`}>
-                        {item.content}
-                      </li>
-                    ))}
-                  </ol>
-                  {imageItems.map((img, imgIndex) => (
-                    <div class="my-6 overflow-hidden rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700" key={`description-image-${index}-${imgIndex}`}>
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        class="w-full h-72 object-cover"
-                        loading="lazy"
-                      />
-                      {img.caption && (
-                        <div class="bg-white/80 dark:bg-dark-bg/80 backdrop-blur px-6 py-4 text-sm text-gray-600 dark:text-dark-text-secondary">
-                          {img.caption}
+                <ol class="list-decimal pl-6 space-y-2" key={`description-ol-${index}`}>
+                  {block.items.map((item, itemIndex) => {
+                    if (item.type === 'text') {
+                      return (
+                        <li key={`description-ol-${index}-${itemIndex}`}>
+                          {item.content}
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={`description-ol-${index}-${itemIndex}`} class="list-none pl-0">
+                        <div class="my-6 overflow-hidden rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-72 object-cover"
+                            loading="lazy"
+                          />
+                          {item.caption && (
+                            <div class="bg-white/80 dark:bg-dark-bg/80 backdrop-blur px-6 py-4 text-sm text-gray-600 dark:text-dark-text-secondary">
+                              {item.caption}
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  ))}
-                </>
+                      </li>
+                    );
+                  })}
+                </ol>
               );
             }
 
@@ -305,7 +298,7 @@ const formattedDate = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' 
       <!-- Challenge Section -->
       <div class="bg-primary/5 dark:bg-accent-blue/10 border-l-4 border-primary dark:border-accent-blue rounded-r-lg p-6 mb-12 data-animate">
         <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{challengeLabel}</h2>
-        <div class="space-y-4 text-base md:text-lg text-gray-700 dark:text-dark-text-secondary">
+        <div class="space-y-4 text-gray-700 dark:text-dark-text-secondary">
           {challengeBlocks.map((block, index) => {
             if (block.type === 'paragraph') {
               return (
@@ -345,7 +338,7 @@ const formattedDate = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' 
       <!-- Learnings Section -->
       <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-400 rounded-r-lg p-6 mb-12 data-animate">
         <h2 class="text-2xl font-bold text-text-dark dark:text-dark-text mb-3">{learningsLabel}</h2>
-        <div class="space-y-4 text-base md:text-lg text-gray-700 dark:text-dark-text-secondary">
+        <div class="space-y-4 text-gray-700 dark:text-dark-text-secondary">
           {learningsBlocks.map((block, index) => {
             if (block.type === 'paragraph') {
               return (
