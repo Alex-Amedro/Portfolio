@@ -25,7 +25,8 @@ const isInProgress = status === 'in-progress';
       src={image}
       alt={title}
       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-      loading="lazy"
+      loading="eager"
+      decoding="async"
     />
     <!-- Badge Coming Soon -->
     {

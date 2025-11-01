@@ -148,132 +148,128 @@ Compétences Transversales :
   },
   {
     id: '1',
-    slug: 'ecommerce-platform',
-    titleEn: 'E-Commerce Platform',
-    titleFr: 'Plateforme E-Commerce',
-    titleZh: '电商平台',
-    descriptionEn: 'Full-stack e-commerce platform with payment integration and admin dashboard.',
-    descriptionFr: 'Plateforme e-commerce complète avec intégration de paiement et tableau de bord administrateur.',
-    descriptionZh: '完整的电子商务平台，具有支付集成和管理员仪表板。',
-    fullDescriptionEn: 'A complete e-commerce platform built with React and Node.js. This project includes a modern product catalog, shopping cart functionality, secure payment processing with Stripe, user authentication, and a comprehensive admin dashboard for managing products, orders, and customers. The platform is fully responsive and optimized for performance.\n\nThe frontend features a beautiful, intuitive user interface with product filtering, sorting, and search capabilities. The backend is built with Node.js and Express, using MongoDB for data persistence. All sensitive operations are secured with JWT authentication.',
-    fullDescriptionFr: 'Une plateforme e-commerce complète construite avec React et Node.js. Ce projet inclut un catalogue de produits moderne, une fonctionnalité de panier, un traitement des paiements sécurisé avec Stripe, une authentification utilisateur et un tableau de bord administrateur complet pour gérer les produits, les commandes et les clients. La plateforme est entièrement réactive et optimisée pour les performances.',
-    fullDescriptionZh: '使用React和Node.js构建的完整电商平台。该项目包括现代产品目录、购物车功能、使用Stripe进行安全支付处理、用户身份验证以及用于管理产品、订单和客户的全面管理员仪表板。该平台完全响应式且针对性能进行了优化。',
-    challengeEn: 'The main challenge was implementing a secure payment system while maintaining smooth user experience. We had to optimize database queries for handling thousands of products and manage real-time inventory updates.',
-    challengeFr: 'Le principal défi était de mettre en place un système de paiement sécurisé tout en maintenant une expérience utilisateur fluide. Nous avons dû optimiser les requêtes de base de données pour gérer des milliers de produits.',
-    challengeZh: '主要挑战是实现安全的支付系统，同时保持流畅的用户体验。我们必须优化数据库查询以处理数千种产品。',
-    solutionEn: 'We integrated Stripe for secure payment processing, implemented Redis caching for product data, and used MongoDB aggregation pipelines for efficient queries. The frontend was optimized with lazy loading and code splitting.',
-    solutionFr: 'Nous avons intégré Stripe pour le traitement sécurisé des paiements, implémenté la mise en cache Redis pour les données de produits, et utilisé les pipelines d\'agrégation MongoDB pour des requêtes efficaces.',
-    solutionZh: '我们集成了Stripe进行安全支付处理，实现了Redis缓存用于产品数据，并使用MongoDB聚合管道进行有效查询。',
-    learningsEn: 'Gained deep knowledge in payment gateway integration, database optimization, and implementing scalable backend architecture. Learned best practices for handling sensitive user data and PCI compliance.',
-    learningsFr: 'Acquisition de connaissances approfondies en intégration de passerelle de paiement, optimisation de base de données et implémentation d\'architecture backend évolutive.',
-    learningsZh: '获得了支付网关集成、数据库优化和实现可扩展后端架构的深入知识。',
-    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe', 'Redux', 'Tailwind CSS'],
-    image: 'https://via.placeholder.com/800x600?text=E-Commerce+Platform',
+    slug: 'hercule-roguelike',
+    titleEn: 'Hercule - 2D Action Roguelike',
+    titleFr: 'Hercule - Roguelike d\'Action 2D',
+    titleZh: 'Hercule - 2D动作Roguelike游戏',
+    descriptionEn: 'Complete 2D action roguelike game featuring real-time combat, procedural dungeons, and advanced animation systems built with Java and libGDX.',
+    descriptionFr: 'Jeu roguelike d\'action 2D complet avec combat en temps réel, donjons procéduraux et système d\'animation avancé, développé en Java avec libGDX.',
+    descriptionZh: '完整的2D动作Roguelike游戏，具有实时战斗、程序化地牢和高级动画系统，使用Java和libGDX构建。',
+    fullDescriptionEn: `A complete 2D action roguelike game built with Java and libGDX. Play as Hercule, the legendary Greek hero, exploring procedurally generated dungeons filled with enemies, treasures, and challenges.
+
+The game features four main systems:
+
+1. Action-Packed Combat System
+A robust real-time combat system with melee weapons (damage, range, cooldown stats), enemy AI with pursuit and attack behaviors, visual feedback through impact animations and sound effects, dash mechanics for tactical dodging, and comprehensive health management with damage calculation.
+
+2. Advanced Animation System
+Custom animation framework handling multi-directional character sprites (4 directions), enemy animations (idle, run, attack states), impact effects with 6-frame sequences, smooth transitions between animation states, and synchronized audio-visual feedback.
+
+3. Inventory & Item Management
+Complete inventory system with grid-based UI for item visualization, multiple weapon types with unique properties, health potions and consumables, equipment switching during gameplay, and visual representation with custom sprites.
+
+4. Procedural Dungeon System
+Room-based dungeon generation with connected chambers and doors, enemy spawning logic, item placement, and progressive difficulty scaling.`,
+    fullDescriptionFr: `Un jeu roguelike d'action 2D complet construit avec Java et libGDX. Incarnez Hercule, le héros légendaire grec, explorant des donjons générés procéduralement remplis d'ennemis, de trésors et de défis.
+
+Le jeu propose quatre systèmes principaux :
+
+1. Système de Combat Dynamique
+Système de combat en temps réel robuste avec armes de mêlée (statistiques de dégâts, portée, cooldown), IA ennemie avec comportements de poursuite et d'attaque, retour visuel via animations d'impact et effets sonores, mécanique de dash pour esquiver tactiquement, et gestion complète de la santé avec calcul des dégâts.
+
+2. Système d'Animation Avancé
+Framework d'animation personnalisé gérant les sprites de personnages multi-directionnels (4 directions), animations ennemies (états idle, course, attaque), effets d'impact avec séquences de 6 images, transitions fluides entre états d'animation, et feedback audio-visuel synchronisé.
+
+3. Gestion d'Inventaire et Objets
+Système d'inventaire complet avec interface UI en grille pour la visualisation des objets, plusieurs types d'armes avec propriétés uniques, potions de santé et consommables, changement d'équipement pendant le gameplay, et représentation visuelle avec sprites personnalisés.
+
+4. Système de Donjons Procéduraux
+Génération de donjons basée sur des salles avec chambres connectées par des portes, logique d'apparition d'ennemis, placement d'objets, et difficulté progressive.`,
+    fullDescriptionZh: `使用Java和libGDX构建的完整2D动作Roguelike游戏。扮演传奇希腊英雄赫拉克勒斯，探索充满敌人、宝藏和挑战的程序化生成地牢。
+
+游戏包含四个主要系统：
+
+1. 动作战斗系统
+强大的实时战斗系统，具有近战武器（伤害、射程、冷却时间属性）、具有追击和攻击行为的敌人AI、通过冲击动画和音效的视觉反馈、战术闪避机制以及带有伤害计算的全面健康管理。
+
+2. 高级动画系统
+自定义动画框架，处理多方向角色精灵（4个方向）、敌人动画（闲置、奔跑、攻击状态）、6帧序列的冲击效果、动画状态之间的流畅过渡以及同步的音视频反馈。
+
+3. 库存与物品管理
+完整的库存系统，包括基于网格的UI物品可视化、具有独特属性的多种武器类型、生命药水和消耗品、游戏中的装备切换以及自定义精灵的视觉表示。
+
+4. 程序化地牢系统
+基于房间的地牢生成，包括通过门连接的房间、敌人生成逻辑、物品放置和渐进式难度提升。`,
+    challengeEn: `The main technical challenges encountered:
+
+- Game Architecture: Structuring a clean MVC architecture, implementing entity-component system for flexibility, managing game states (menu, gameplay, pause, game over), and decoupling systems for maintainability
+- Real-Time Combat Physics: Calculating collision detection between entities, implementing attack hitboxes with precise timing, creating responsive controls, and balancing combat feel
+- Animation State Management: Synchronizing sprites with game logic, creating smooth transitions, managing multiple animation handlers simultaneously, and optimizing sprite rendering performance
+- AI Behavior: Programming enemy pathfinding and pursuit, creating attack patterns and range detection, balancing difficulty, and implementing state machines for enemy behavior
+- Performance Optimization: Managing memory with object pooling, optimizing sprite batch rendering, reducing garbage collection overhead, and maintaining smooth 60 FPS gameplay`,
+    challengeFr: `Les principaux défis techniques rencontrés :
+
+- Architecture de Jeu : Structurer une architecture MVC propre, implémenter un système entité-composant pour la flexibilité, gérer les états du jeu (menu, gameplay, pause, game over), et découpler les systèmes pour la maintenabilité
+- Physique de Combat en Temps Réel : Calculer la détection de collision entre entités, implémenter des hitboxes d'attaque avec timing précis, créer des contrôles réactifs, et équilibrer le ressenti du combat
+- Gestion des États d'Animation : Synchroniser les sprites avec la logique du jeu, créer des transitions fluides, gérer plusieurs gestionnaires d'animation simultanément, et optimiser les performances de rendu
+- Comportement IA : Programmer le pathfinding et la poursuite des ennemis, créer des patterns d'attaque et détection de portée, équilibrer la difficulté, et implémenter des machines à états pour le comportement ennemi
+- Optimisation des Performances : Gérer la mémoire avec l'object pooling, optimiser le batch rendering des sprites, réduire l'overhead du garbage collection, et maintenir un gameplay fluide à 60 FPS`,
+    challengeZh: `遇到的主要技术挑战：
+
+- 游戏架构：为游戏项目构建清晰的MVC架构、实现实体组件系统以提高灵活性、管理游戏状态（菜单、游戏、暂停、游戏结束）以及解耦系统以提高可维护性
+- 实时战斗物理：计算实体之间的碰撞检测、实现具有精确时间的攻击命中框、创建响应式控制以及平衡战斗感觉
+- 动画状态管理：将精灵与游戏逻辑同步、创建流畅的过渡、同时管理多个动画处理器以及优化精灵渲染性能
+- AI行为：编程敌人寻路和追击、创建攻击模式和范围检测、平衡难度以及实现敌人行为的状态机
+- 性能优化：使用对象池管理内存、优化精灵批量渲染、减少垃圾回收开销以及保持流畅的60 FPS游戏体验`,
+    solutionEn: `Created a modular architecture with separated systems for combat, animation, and inventory. Implemented design patterns (Observer, State, Strategy, Factory) for clean code organization. Used libGDX's sprite batching for optimal rendering performance. Built custom animation state machines with smooth transitions. Developed comprehensive debug tools for rapid iteration and testing.`,
+    solutionFr: `Création d'une architecture modulaire avec systèmes séparés pour le combat, l'animation et l'inventaire. Implémentation de design patterns (Observer, State, Strategy, Factory) pour une organisation de code propre. Utilisation du sprite batching de libGDX pour des performances de rendu optimales. Construction de machines à états d'animation personnalisées avec transitions fluides. Développement d'outils de debug complets pour itération et tests rapides.`,
+    solutionZh: `创建了模块化架构，为战斗、动画和库存分离了系统。实现了设计模式（观察者、状态、策略、工厂）以实现清晰的代码组织。使用libGDX的精灵批处理实现最佳渲染性能。构建了具有流畅过渡的自定义动画状态机。开发了全面的调试工具以实现快速迭代和测试。`,
+    learningsEn: `Technical Skills Learned:
+- Java Programming: Object-Oriented Programming (inheritance, polymorphism, interfaces), design patterns (Observer, State, Strategy, Factory), memory management and performance optimization, exception handling and debugging
+- libGDX Framework: Game loop and rendering pipeline, sprite batching and texture management, input handling (keyboard, mouse), audio system (music, sound effects), viewport and camera management
+- Game Development: Entity-component architecture, collision detection and physics, animation state machines, game state management, UI/UX design for games
+- Software Engineering: Project organization and clean code, modular architecture and separation of concerns, version control with Git, build automation with Gradle
+
+Soft Skills:
+- Problem-solving: Breaking down complex game mechanics into manageable components, debugging visual and logical issues, finding creative solutions to technical limitations
+- Self-learning: Reading libGDX documentation and API references, following tutorials and best practices, experimenting with different approaches
+- Project Management: Planning features and priorities, managing scope and time constraints, iterative development and testing
+- Attention to Detail: Fine-tuning game feel and responsiveness, creating cohesive visual feedback, balancing gameplay mechanics`,
+    learningsFr: `Compétences Techniques Apprises :
+- Programmation Java : Programmation orientée objet (héritage, polymorphisme, interfaces), design patterns (Observer, State, Strategy, Factory), gestion de la mémoire et optimisation des performances, gestion des exceptions et débogage
+- Framework libGDX : Boucle de jeu et pipeline de rendu, batch rendering de sprites et gestion de textures, gestion des entrées (clavier, souris), système audio (musique, effets sonores), gestion de viewport et caméra
+- Développement de Jeux : Architecture entité-composant, détection de collision et physique, machines à états d'animation, gestion des états de jeu, conception UI/UX pour jeux
+- Ingénierie Logicielle : Organisation de projet et code propre, architecture modulaire et séparation des préoccupations, contrôle de version avec Git, automatisation de build avec Gradle
+
+Compétences Transversales :
+- Résolution de Problèmes : Décomposer des mécaniques de jeu complexes en composants gérables, déboguer des problèmes visuels et logiques, trouver des solutions créatives aux limitations techniques
+- Apprentissage Autonome : Lecture de la documentation libGDX et références API, suivre des tutoriels et meilleures pratiques, expérimenter différentes approches
+- Gestion de Projet : Planifier les fonctionnalités et priorités, gérer la portée et les contraintes de temps, développement et tests itératifs
+- Attention aux Détails : Affiner le ressenti et la réactivité du jeu, créer un feedback visuel cohérent, équilibrer les mécaniques de gameplay`,
+    learningsZh: `学到的技术技能：
+- Java编程：面向对象编程（继承、多态、接口）、设计模式（观察者、状态、策略、工厂）、内存管理和性能优化、异常处理和调试
+- libGDX框架：游戏循环和渲染管道、精灵批处理和纹理管理、输入处理（键盘、鼠标）、音频系统（音乐、音效）、视口和相机管理
+- 游戏开发：实体组件架构、碰撞检测和物理、动画状态机、游戏状态管理、游戏UI/UX设计
+- 软件工程：项目组织和清晰代码、模块化架构和关注点分离、使用Git进行版本控制、使用Gradle进行构建自动化
+
+软技能：
+- 问题解决：将复杂的游戏机制分解为可管理的组件、调试视觉和逻辑问题、找到技术限制的创意解决方案
+- 自主学习：阅读libGDX文档和API参考、遵循教程和最佳实践、尝试不同方法
+- 项目管理：规划功能和优先级、管理范围和时间约束、迭代开发和测试
+- 注重细节：微调游戏感觉和响应性、创建连贯的视觉反馈、平衡游戏机制`,
+    stack: ['Java 21', 'libGDX', 'Gradle', 'OpenGL', 'LWJGL3'],
+    image: 'https://via.placeholder.com/800x600?text=Hercule+Game',
     images: [
-      'https://via.placeholder.com/800x600?text=E-Commerce+1',
-      'https://via.placeholder.com/800x600?text=E-Commerce+2',
-      'https://via.placeholder.com/800x600?text=E-Commerce+3',
+      'https://via.placeholder.com/800x600?text=Hercule+Combat',
+      'https://via.placeholder.com/800x600?text=Hercule+Dungeon',
+      'https://via.placeholder.com/800x600?text=Hercule+Inventory',
     ],
-    liveUrl: 'https://example-ecommerce.com',
-    githubUrl: 'https://github.com/yourusername/ecommerce-platform',
-    status: 'completed',
-    date: '2024-06-15',
-    featured: true,
-  },
-  {
-    id: '2',
-    slug: 'ai-content-generator',
-    titleEn: 'AI Content Generator',
-    titleFr: 'Générateur de Contenu IA',
-    titleZh: '人工智能内容生成器',
-    descriptionEn: 'AI-powered content generation tool using OpenAI API. Currently in development.',
-    descriptionFr: 'Outil de génération de contenu alimenté par l\'IA utilisant l\'API OpenAI. Actuellement en développement.',
-    descriptionZh: '使用OpenAI API的人工智能内容生成工具。目前处于开发阶段。',
-    fullDescriptionEn: 'An innovative AI-powered content generation tool that helps creators, marketers, and writers generate high-quality content in seconds. This web application leverages the OpenAI GPT API to create blog posts, social media content, product descriptions, and more.\n\nUsers can customize the tone, style, and length of generated content. The application includes a user-friendly dashboard where they can manage their generated content, save favorites, and export in various formats. We\'re currently building advanced features like content scheduling and team collaboration.',
-    fullDescriptionFr: 'Un outil innovant de génération de contenu alimenté par l\'IA qui aide les créateurs, les spécialistes du marketing et les rédacteurs à générer du contenu de haute qualité en quelques secondes. Cette application Web exploite l\'API OpenAI GPT pour créer des articles de blog, du contenu pour les réseaux sociaux, des descriptions de produits, etc.',
-    fullDescriptionZh: '一个创新的人工智能内容生成工具，帮助创作者、营销人员和作家在几秒钟内生成高质量的内容。该网络应用程序利用OpenAI GPT API来创建博客文章、社交媒体内容、产品描述等。',
-    challengeEn: 'Handling API rate limits, managing token usage costs, and ensuring generated content quality. We\'re also building a user-friendly interface that makes it easy for non-technical users to generate content.',
-    challengeFr: 'Gérer les limites de débit API, gérer les coûts d\'utilisation des jetons et assurer la qualité du contenu généré.',
-    challengeZh: '处理API速率限制、管理令牌使用成本并确保生成内容的质量。',
-    solutionEn: 'Implemented intelligent caching to reduce API calls, created cost optimization strategies, and built an intuitive interface with real-time content preview. Added content templates for different use cases.',
-    solutionFr: 'Implémentation de mise en cache intelligente pour réduire les appels API, création de stratégies d\'optimisation des coûts et construction d\'une interface intuitive.',
-    solutionZh: '实现智能缓存以减少API调用，创建成本优化策略，并构建了直观的界面。',
-    learningsEn: 'Deep dive into LLM integration, understanding token management, and building scalable systems. Learned about prompt engineering and how to optimize API costs while maintaining quality.',
-    learningsFr: 'Plongée approfondie dans l\'intégration LLM, compréhension de la gestion des jetons et construction de systèmes évolutifs.',
-    learningsZh: '深入学习LLM集成、令牌管理和构建可扩展系统。',
-    stack: ['Next.js', 'TypeScript', 'OpenAI API', 'Tailwind CSS', 'PostgreSQL', 'Clerk Auth'],
-    image: 'https://via.placeholder.com/800x600?text=AI+Content+Generator',
-    images: [
-      'https://via.placeholder.com/800x600?text=AI+Generator+1',
-      'https://via.placeholder.com/800x600?text=AI+Generator+2',
-    ],
-    liveUrl: 'https://example-ai-generator.com',
-    githubUrl: 'https://github.com/yourusername/ai-content-generator',
-    status: 'in-progress',
-    date: '2024-10-01',
-    featured: true,
-  },
-  {
-    id: '3',
-    slug: 'design-system',
-    titleEn: 'Design System Component Library',
-    titleFr: 'Bibliothèque de Composants du Système de Design',
-    titleZh: '设计系统组件库',
-    descriptionEn: 'Comprehensive component library with Storybook documentation and Figma integration.',
-    descriptionFr: 'Bibliothèque de composants complète avec documentation Storybook et intégration Figma.',
-    descriptionZh: '包含Storybook文档和Figma集成的完整组件库。',
-    fullDescriptionEn: 'A professional-grade design system and component library built with React and Storybook. This project serves as a single source of truth for all UI components across multiple projects. It includes comprehensive documentation, accessibility guidelines, and usage examples for each component.',
-    fullDescriptionFr: 'Un système de conception de qualité professionnelle et une bibliothèque de composants construits avec React et Storybook.',
-    fullDescriptionZh: '使用React和Storybook构建的专业级设计系统和组件库。',
-    challengeEn: 'Creating reusable components that work across different contexts while maintaining consistency and performance.',
-    challengeFr: 'Créer des composants réutilisables qui fonctionnent dans différents contextes tout en maintenant la cohérence.',
-    challengeZh: '创建在不同背景下工作的可重用组件，同时保持一致性和性能。',
-    solutionEn: 'Used compound component pattern, CSS-in-JS for styling, and Storybook for documentation and testing.',
-    solutionFr: 'Utilisation du modèle de composant composé, CSS-in-JS pour le style et Storybook pour la documentation.',
-    solutionZh: '使用复合组件模式、CSS-in-JS进行样式设计以及Storybook进行文档和测试。',
-    learningsEn: 'Learned component architecture best practices, design system principles, and how to effectively document components.',
-    learningsFr: 'Appris les meilleures pratiques d\'architecture de composants et les principes des systèmes de conception.',
-    learningsZh: '学习了组件架构最佳实践和设计系统原则。',
-    stack: ['React', 'Storybook', 'Tailwind CSS', 'TypeScript', 'Chromatic'],
-    image: 'https://via.placeholder.com/800x600?text=Design+System',
-    images: ['https://via.placeholder.com/800x600?text=Design+System+1'],
-    liveUrl: 'https://example-design-system.storybook.io',
-    githubUrl: 'https://github.com/yourusername/design-system',
-    status: 'completed',
-    date: '2024-04-20',
-    featured: true,
-  },
-  // Template pour les 17 projets restants
-  ...Array.from({ length: 17 }, (_, i) => ({
-    id: String(i + 4),
-    slug: `project-${i + 4}`,
-    titleEn: `Project ${i + 4}`,
-    titleFr: `Projet ${i + 4}`,
-    titleZh: `项目 ${i + 4}`,
-    descriptionEn: 'Add your project description here. Keep it concise and engaging.',
-    descriptionFr: 'Ajoutez votre description de projet ici. Gardez-la concise et engageante.',
-    descriptionZh: '在这里添加您的项目描述。保持简洁和引人入胜。',
-    fullDescriptionEn: 'Add a detailed description of your project here. Explain what the project does, the problems it solves, and the technologies used.',
-    fullDescriptionFr: 'Ajoutez une description détaillée de votre projet ici.',
-    fullDescriptionZh: '在这里添加项目的详细描述。',
-    challengeEn: 'Describe the main challenges faced during development.',
-    challengeFr: 'Décrivez les défis principaux rencontrés lors du développement.',
-    challengeZh: '描述开发过程中遇到的主要挑战。',
-    solutionEn: 'Explain how you solved these challenges.',
-    solutionFr: 'Expliquez comment vous avez résolu ces défis.',
-    solutionZh: '解释您如何解决这些挑战。',
-    learningsEn: 'Share what you learned from this project.',
-    learningsFr: 'Partagez ce que vous avez appris de ce projet.',
-    learningsZh: '分享您从这个项目中学到的内容。',
-    stack: ['React', 'Tailwind CSS', 'API'],
-    image: `https://via.placeholder.com/800x600?text=Project+${i + 4}`,
-    images: [`https://via.placeholder.com/800x600?text=Project+${i + 4}+Screenshot`],
-    liveUrl: '#',
-    githubUrl: '#',
+    liveUrl: '',
+    githubUrl: 'https://github.com/Alex-Amedro/Projet-long-java',
     status: 'completed' as const,
-    date: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().split('T')[0],
-    featured: false,
-  })),
+    date: '2024-11',
+    featured: true,
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
