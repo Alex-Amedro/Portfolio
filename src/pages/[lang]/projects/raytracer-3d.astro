@@ -9,9 +9,9 @@ import { getProjectBySlug } from '../../../data/projects';
 
 export function getStaticPaths() {
   return [
-    { params: { lang: 'en' } },
-    { params: { lang: 'fr' } },
-    { params: { lang: 'zh' } }
+    { params: { lang: 'en', slug: 'raytracer-3d' } },
+    { params: { lang: 'fr', slug: 'raytracer-3d' } },
+    { params: { lang: 'zh', slug: 'raytracer-3d' } }
   ];
 }
 
@@ -531,7 +531,7 @@ const challenges = {
           <!-- Ray Tracing Engine -->
           <div>
             <h3 class="text-2xl font-bold text-pink-600 dark:text-pink-400 mb-4 flex items-center gap-2">
-              <span>🎯</span>
+              <span></span>
               {currentLang === 'fr' ? 'Moteur de Ray Tracing' : currentLang === 'zh' ? '光线追踪引擎' : 'Ray Tracing Engine'}
             </h3>
             <div class="grid md:grid-cols-2 gap-4">
@@ -564,7 +564,7 @@ const challenges = {
           <!-- OpenGL Editor -->
           <div>
             <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center gap-2">
-              <span>🎮</span>
+              <span></span>
               {currentLang === 'fr' ? 'Éditeur OpenGL + ImGui' : currentLang === 'zh' ? 'OpenGL + ImGui编辑器' : 'OpenGL + ImGui Editor'}
             </h3>
             <div class="grid md:grid-cols-2 gap-4">
@@ -597,7 +597,7 @@ const challenges = {
           <!-- Performance -->
           <div>
             <h3 class="text-2xl font-bold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-              <span>🚀</span>
+              <span></span>
               {currentLang === 'fr' ? 'Optimisations Performance' : currentLang === 'zh' ? '性能优化' : 'Performance Optimizations'}
             </h3>
             <div class="space-y-3 text-slate-600 dark:text-slate-300">
