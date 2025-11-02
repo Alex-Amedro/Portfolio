@@ -148,14 +148,16 @@ Compétences Transversales :
   },
   {
     id: '1',
-    slug: 'hercule-roguelike',
-    titleEn: 'Hercule - 2D Action Roguelike',
-    titleFr: 'Hercule - Roguelike d\'Action 2D',
-    titleZh: 'Hercule - 2D动作Roguelike游戏',
+    slug: 'heracles-roguelike',
+    titleEn: 'Heracles - 2D Action Roguelike',
+    titleFr: 'Heracles - Roguelike d\'Action 2D',
+    titleZh: 'Heracles - 2D动作Roguelike游戏',
     descriptionEn: 'Complete 2D action roguelike game featuring real-time combat, procedural dungeons, and advanced animation systems built with Java and libGDX.',
     descriptionFr: 'Jeu roguelike d\'action 2D complet avec combat en temps réel, donjons procéduraux et système d\'animation avancé, développé en Java avec libGDX.',
     descriptionZh: '完整的2D动作Roguelike游戏，具有实时战斗、程序化地牢和高级动画系统，使用Java和libGDX构建。',
-    fullDescriptionEn: `A complete 2D action roguelike game built with Java and libGDX. Play as Hercule, the legendary Greek hero, exploring procedurally generated dungeons filled with enemies, treasures, and challenges.
+    fullDescriptionEn: `A complete 2D action roguelike game built with Java and libGDX. Play as Heracles, the legendary Greek hero, exploring procedurally generated dungeons filled with enemies, treasures, and challenges.
+
+![Heracles gameplay screenshot](/projects/heracles/spawn.png)
 
 The game features four main systems:
 
@@ -170,7 +172,7 @@ Complete inventory system with grid-based UI for item visualization, multiple we
 
 4. Procedural Dungeon System
 Room-based dungeon generation with connected chambers and doors, enemy spawning logic, item placement, and progressive difficulty scaling.`,
-    fullDescriptionFr: `Un jeu roguelike d'action 2D complet construit avec Java et libGDX. Incarnez Hercule, le héros légendaire grec, explorant des donjons générés procéduralement remplis d'ennemis, de trésors et de défis.
+    fullDescriptionFr: `Un jeu roguelike d'action 2D complet construit avec Java et libGDX. Incarnez Heracles, le héros légendaire grec, explorant des donjons générés procéduralement remplis d'ennemis, de trésors et de défis.
 
 Le jeu propose quatre systèmes principaux :
 
@@ -200,21 +202,21 @@ Génération de donjons basée sur des salles avec chambres connectées par des 
 
 4. 程序化地牢系统
 基于房间的地牢生成，包括通过门连接的房间、敌人生成逻辑、物品放置和渐进式难度提升。`,
-    challengeEn: `The main technical challenges encountered:
+    challengeEn: `Main technical challenges:
 
 - Game Architecture: Structuring a clean MVC architecture, implementing entity-component system for flexibility, managing game states (menu, gameplay, pause, game over), and decoupling systems for maintainability
 - Real-Time Combat Physics: Calculating collision detection between entities, implementing attack hitboxes with precise timing, creating responsive controls, and balancing combat feel
 - Animation State Management: Synchronizing sprites with game logic, creating smooth transitions, managing multiple animation handlers simultaneously, and optimizing sprite rendering performance
 - AI Behavior: Programming enemy pathfinding and pursuit, creating attack patterns and range detection, balancing difficulty, and implementing state machines for enemy behavior
 - Performance Optimization: Managing memory with object pooling, optimizing sprite batch rendering, reducing garbage collection overhead, and maintaining smooth 60 FPS gameplay`,
-    challengeFr: `Les principaux défis techniques rencontrés :
+    challengeFr: `Principaux défis techniques :
 
 - Architecture de Jeu : Structurer une architecture MVC propre, implémenter un système entité-composant pour la flexibilité, gérer les états du jeu (menu, gameplay, pause, game over), et découpler les systèmes pour la maintenabilité
 - Physique de Combat en Temps Réel : Calculer la détection de collision entre entités, implémenter des hitboxes d'attaque avec timing précis, créer des contrôles réactifs, et équilibrer le ressenti du combat
 - Gestion des États d'Animation : Synchroniser les sprites avec la logique du jeu, créer des transitions fluides, gérer plusieurs gestionnaires d'animation simultanément, et optimiser les performances de rendu
 - Comportement IA : Programmer le pathfinding et la poursuite des ennemis, créer des patterns d'attaque et détection de portée, équilibrer la difficulté, et implémenter des machines à états pour le comportement ennemi
 - Optimisation des Performances : Gérer la mémoire avec l'object pooling, optimiser le batch rendering des sprites, réduire l'overhead du garbage collection, et maintenir un gameplay fluide à 60 FPS`,
-    challengeZh: `遇到的主要技术挑战：
+    challengeZh: `主要技术挑战：
 
 - 游戏架构：为游戏项目构建清晰的MVC架构、实现实体组件系统以提高灵活性、管理游戏状态（菜单、游戏、暂停、游戏结束）以及解耦系统以提高可维护性
 - 实时战斗物理：计算实体之间的碰撞检测、实现具有精确时间的攻击命中框、创建响应式控制以及平衡战斗感觉
@@ -258,16 +260,149 @@ Compétences Transversales :
 - 项目管理：规划功能和优先级、管理范围和时间约束、迭代开发和测试
 - 注重细节：微调游戏感觉和响应性、创建连贯的视觉反馈、平衡游戏机制`,
     stack: ['Java 21', 'libGDX', 'Gradle', 'OpenGL', 'LWJGL3'],
-    image: 'https://via.placeholder.com/800x600?text=Hercule+Game',
+    image: '/projects/heracles/menubackground.png',
     images: [
-      'https://via.placeholder.com/800x600?text=Hercule+Combat',
-      'https://via.placeholder.com/800x600?text=Hercule+Dungeon',
-      'https://via.placeholder.com/800x600?text=Hercule+Inventory',
+      '/projects/heracles/menubackground.png',
+      '/projects/heracles/spawn.png',
     ],
     liveUrl: '',
     githubUrl: 'https://github.com/Alex-Amedro/Projet-long-java',
     status: 'completed' as const,
     date: '2024-11',
+    featured: true,
+  },
+  {
+    id: '2',
+    slug: 'minishell',
+    titleEn: 'Mini-Shell - Command-Line Shell Implementation',
+    titleFr: 'Mini-Shell - Implémentation d\'un Interpréteur de Commandes',
+    titleZh: 'Mini-Shell - 命令行Shell实现',
+    descriptionEn: 'Lightweight, educational shell implementation in C demonstrating core operating system concepts, POSIX system calls, and command-line interface design.',
+    descriptionFr: 'Implémentation légère et éducative d\'un shell en C démontrant les concepts fondamentaux du système d\'exploitation, les appels système POSIX et la conception d\'interface en ligne de commande.',
+    descriptionZh: '轻量级、教育性的C语言Shell实现，展示核心操作系统概念、POSIX系统调用和命令行界面设计。',
+    fullDescriptionEn: `A lightweight shell implementation written in C that demonstrates core operating system concepts and command-line interface design.
+
+The project implements a complete command execution pipeline:
+
+1. Interactive Command Prompt
+A user-friendly command-line interface where users can input and execute commands with a responsive prompt and proper error handling.
+
+2. Command Parsing
+Sophisticated tokenization and parsing system that breaks down user input into executable commands and arguments, handling edge cases like multiple spaces and special characters.
+
+3. Process Management
+Proper handling of process creation, execution, and termination using POSIX system calls (fork, exec, wait) with careful parent-child process synchronization.
+
+4. I/O Handling & Error Management
+Support for standard input/output operations with robust error handling that provides informative error messages without crashing the shell.
+
+5. Signal Handling
+Graceful handling of user interrupts (Ctrl+C) that interrupts only the current command, not the shell itself, using proper signal handlers.`,
+    fullDescriptionFr: `Implémentation légère d'un shell écrit en C qui démontre les concepts fondamentaux du système d'exploitation et la conception d'interface en ligne de commande.
+
+Le projet implémente un pipeline d'exécution de commandes complet :
+
+1. Invite de Commande Interactive
+Interface en ligne de commande conviviale où les utilisateurs peuvent saisir et exécuter des commandes avec une invite réactive et une gestion d'erreurs appropriée.
+
+2. Analyse de Commande
+Système de tokenisation et d'analyse sophistiqué qui décompose les entrées utilisateur en commandes exécutables et arguments, gérant les cas limites comme les espaces multiples et les caractères spéciaux.
+
+3. Gestion des Processus
+Manipulation appropriée de la création, exécution et terminaison des processus en utilisant les appels système POSIX (fork, exec, wait) avec synchronisation soigneuse parent-enfant.
+
+4. Gestion des E/S et Gestion d'Erreurs
+Support des opérations d'entrée/sortie standard avec gestion d'erreurs robuste qui fournit des messages d'erreur informatifs sans planter le shell.
+
+5. Gestion des Signaux
+Gestion gracieuse des interruptions utilisateur (Ctrl+C) qui interrompt uniquement la commande actuelle, pas le shell lui-même, en utilisant des gestionnaires de signaux appropriés.`,
+    fullDescriptionZh: `用C编写的轻量级shell实现，展示核心操作系统概念和命令行界面设计。
+
+该项目实现了完整的命令执行管道：
+
+1. 交互式命令提示符
+用户友好的命令行界面，用户可以输入和执行命令，具有响应式提示符和适当的错误处理。
+
+2. 命令解析
+复杂的分词和解析系统，将用户输入分解为可执行命令和参数，处理多个空格和特殊字符等边界情况。
+
+3. 流程管理
+使用POSIX系统调用（fork、exec、wait）进行适当的进程创建、执行和终止，具有仔细的父子进程同步。
+
+4. I/O处理和错误管理
+支持标准输入/输出操作，提供强大的错误处理，提供信息丰富的错误消息而不会使shell崩溃。
+
+5. 信号处理
+优雅地处理用户中断（Ctrl+C），仅中断当前命令而不是shell本身，使用适当的信号处理程序。`,
+    challengeEn: `Main technical challenges:
+
+- Command Parsing Complexity: Properly tokenizing user input while handling edge cases (multiple spaces, quotes, special characters) - solved with state machine logic and character-by-character analysis
+- Process Management: Creating and managing child processes without resource leaks - solved with proper use of fork/exec system calls with careful parent-child synchronization
+- Signal Handling: Gracefully handling user interrupts (Ctrl+C) without terminating the shell - solved with signal handlers that interrupt only current command
+- Error Recovery: Providing meaningful error messages without crashing - solved with comprehensive error checking at each execution stage
+- Memory Safety: Preventing memory leaks in long-running shell - solved with careful resource cleanup and proper allocation tracking`,
+    challengeFr: `Principaux défis techniques :
+
+- Complexité de l'Analyse de Commande : Tokeniser correctement l'entrée utilisateur tout en gérant les cas limites (espaces multiples, guillemets, caractères spéciaux) - résolu avec la logique de machine à états et analyse caractère par caractère
+- Gestion des Processus : Créer et gérer des processus enfants sans fuites de ressources - résolu avec une utilisation appropriée des appels système fork/exec avec synchronisation parent-enfant soigneuse
+- Gestion des Signaux : Gérer gracieusement les interruptions utilisateur (Ctrl+C) sans terminer le shell - résolu avec des gestionnaires de signaux qui interrompent uniquement la commande actuelle
+- Récupération d'Erreurs : Fournir des messages d'erreur significatifs sans planter - résolu avec une vérification d'erreur complète à chaque étape d'exécution
+- Sécurité de la Mémoire : Prévenir les fuites mémoire dans un shell longue durée - résolu avec nettoyage soigneux des ressources et suivi approprié de l'allocation`,
+    challengeZh: `主要技术挑战：
+
+- 命令解析复杂性：正确分词用户输入同时处理边界情况（多个空格、引号、特殊字符）- 通过状态机逻辑和逐字符分析解决
+- 流程管理：创建和管理子进程而不发生资源泄漏 - 通过适当使用fork/exec系统调用和仔细的父子同步解决
+- 信号处理：优雅地处理用户中断（Ctrl+C）而不终止shell - 通过仅中断当前命令的信号处理程序解决
+- 错误恢复：提供有意义的错误消息而不崩溃 - 通过在每个执行阶段进行全面的错误检查解决
+- 内存安全：防止长期运行的shell中的内存泄漏 - 通过仔细的资源清理和适当的分配跟踪解决`,
+    solutionEn: `Built a robust parser with state machine logic for handling complex command tokenization. Implemented proper process management using fork/exec with careful synchronization. Used signal handlers to manage interrupts gracefully. Created comprehensive error checking at each stage with informative messages. Implemented unit tests for the parsing module to ensure robustness.`,
+    solutionFr: `Construction d'un analyseur robuste avec logique de machine à états pour gérer la tokenisation complexe des commandes. Implémentation de la gestion appropriée des processus en utilisant fork/exec avec synchronisation soigneuse. Utilisation de gestionnaires de signaux pour gérer les interruptions gracieusement. Création d'une vérification d'erreur complète à chaque étape avec des messages informatifs. Implémentation de tests unitaires pour le module d'analyse pour assurer la robustesse.`,
+    solutionZh: `使用状态机逻辑构建了健壮的解析器来处理复杂的命令分词。使用fork/exec实现了适当的进程管理，具有仔细的同步。使用信号处理程序优雅地管理中断。在每个阶段创建了全面的错误检查，提供信息丰富的消息。为解析模块实现了单元测试以确保鲁棒性。`,
+    learningsEn: `Technical Skills Learned:
+- POSIX System Calls: Deep understanding of fork, exec, wait, signal handling, process lifecycle
+- Process Management: Parent-child process synchronization, file descriptors, resource cleanup
+- C Programming: Memory management, pointer manipulation, string processing, modular code organization
+- Parsing & Tokenization: State machines, edge case handling, input validation
+- System Programming: Understanding how shells work at the OS level
+
+Soft Skills:
+- Problem-solving: Debugging complex system interactions and race conditions
+- System thinking: Understanding processes and signals at OS level
+- Testing: Writing unit tests for core parsing functionality
+- Documentation: Clear code comments and technical documentation`,
+    learningsFr: `Compétences Techniques Apprises :
+- Appels Système POSIX : Compréhension approfondie de fork, exec, wait, gestion des signaux, cycle de vie des processus
+- Gestion des Processus : Synchronisation parent-enfant, descripteurs de fichiers, nettoyage des ressources
+- Programmation C : Gestion mémoire, manipulation de pointeurs, traitement de chaînes, organisation de code modulaire
+- Analyse et Tokenisation : Machines à états, gestion des cas limites, validation des entrées
+- Programmation Système : Comprendre comment les shells fonctionnent au niveau du système d'exploitation
+
+Compétences Transversales :
+- Résolution de Problèmes : Débogage des interactions système complexes et conditions de course
+- Pensée Système : Compréhension des processus et signaux au niveau du système d'exploitation
+- Tests : Écriture de tests unitaires pour la fonctionnalité d'analyse principale
+- Documentation : Commentaires de code clairs et documentation technique`,
+    learningsZh: `学到的技术技能：
+- POSIX系统调用：深入理解fork、exec、wait、信号处理、进程生命周期
+- 流程管理：父子进程同步、文件描述符、资源清理
+- C编程：内存管理、指针操作、字符串处理、模块化代码组织
+- 解析和分词：状态机、边界情况处理、输入验证
+- 系统编程：理解shell如何在OS级别工作
+
+软技能：
+- 问题解决：调试复杂系统交互和竞态条件
+- 系统思维：在OS级别理解进程和信号
+- 测试：为核心解析功能编写单元测试
+- 文档：清晰的代码注释和技术文档`,
+    stack: ['C (C11, POSIX)', 'Makefile', 'GCC', 'Unix/Linux'],
+    image: 'https://via.placeholder.com/800x600?text=Mini-Shell',
+    images: [
+      'https://via.placeholder.com/800x600?text=Mini-Shell+CLI',
+    ],
+    liveUrl: '',
+    githubUrl: 'https://github.com/Alex-Amedro',
+    status: 'completed' as const,
+    date: '2025-11-01',
     featured: true,
   },
 ];
