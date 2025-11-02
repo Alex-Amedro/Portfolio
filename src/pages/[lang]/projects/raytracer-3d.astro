@@ -1,0 +1,762 @@
+---
+// src/pages/[lang]/projects/raytracer-3d.astro
+// VERSION OPTIMISÉE RECRUTEUR - Focus sur le visuel
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getTranslation } from '../../../data/translations';
+import { getProjectBySlug } from '../../../data/projects';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang || 'en';
+const project = getProjectBySlug('raytracer-3d');
+
+if (!project) {
+  return Astro.redirect(`/${currentLang}/projects`);
+}
+
+const viewOnGithub = getTranslation(currentLang, 'projects.viewOnGithub');
+
+const heroTitles = {
+  en: 'Rayt - 3D Ray Tracer & Scene Editor',
+  fr: 'Rayt - Ray Tracer 3D & Éditeur de Scène',
+  zh: 'Rayt - 3D光线追踪与场景编辑器'
+};
+
+const heroPitches = {
+  en: 'Design in OpenGL. Render in photorealistic beauty.',
+  fr: 'Concevez en OpenGL. Rendez en beauté photoréaliste.',
+  zh: '在OpenGL中设计。以照片般真实的美丽渲染。'
+};
+
+const features = {
+  en: 'What Makes It Special',
+  fr: 'Ce Qui Le Rend Spécial',
+  zh: '特别之处'
+};
+
+const workflow = {
+  en: 'The Workflow',
+  fr: 'Le Workflow',
+  zh: '工作流程'
+};
+
+const materials = {
+  en: 'Material System',
+  fr: 'Système de Matériaux',
+  zh: '材质系统'
+};
+
+const techHighlights = {
+  en: 'Technical Highlights',
+  fr: 'Points Techniques Clés',
+  zh: '技术要点'
+};
+
+const challenges = {
+  en: 'Key Challenges Solved',
+  fr: 'Défis Relevés',
+  zh: '解决的关键挑战'
+};
+---
+
+<Layout title={`${heroTitles[currentLang]} | Alexandre Amedro`}>
+  <Header lang={currentLang} />
+
+  <main class="pt-20">
+    <!-- 🌟 HERO SECTION - Visual Impact -->
+    <section class="relative bg-gradient-to-br from-purple-900 via-pink-900 to-orange-900 text-white overflow-hidden min-h-screen flex items-center">
+      <!-- Animated background -->
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-6 py-20 w-full">
+        <!-- Top badges -->
+        <div class="flex flex-wrap gap-3 mb-8 justify-center data-animate">
+          <span class="px-5 py-2 bg-green-500/30 border-2 border-green-400 rounded-full text-green-200 font-bold text-sm backdrop-blur">
+            ✓ COMPLETED
+          </span>
+          <span class="px-5 py-2 bg-purple-500/30 border-2 border-purple-400 rounded-full text-purple-200 font-bold text-sm backdrop-blur">
+            December 2024
+          </span>
+          <span class="px-5 py-2 bg-orange-500/30 border-2 border-orange-400 rounded-full text-orange-200 font-bold text-sm backdrop-blur">
+            C++ • OpenGL • ImGui
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-center mb-6 leading-tight data-animate bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-200 to-orange-200">
+          {heroTitles[currentLang]}
+        </h1>
+        
+        <p class="text-2xl md:text-4xl text-center text-pink-200 font-bold mb-12 data-animate">
+          {heroPitches[currentLang]}
+        </p>
+
+        <!-- Visual Grid: Before/After concept -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12 max-w-6xl mx-auto">
+          <!-- Editor -->
+          <div class="group relative data-animate">
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition"></div>
+            <div class="relative bg-slate-900 p-2 rounded-2xl border-2 border-blue-400">
+              <div class="relative overflow-hidden rounded-xl">
+                <img src="/projects/raytracer/image.png" alt="OpenGL Scene Editor" class="w-full h-auto" />
+                <div class="absolute top-4 left-4 px-4 py-2 bg-blue-500/90 backdrop-blur rounded-lg font-bold">
+                  1️⃣ DESIGN (OpenGL Editor)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ray traced result -->
+          <div class="group relative data-animate">
+            <div class="absolute -inset-1 bg-gradient-to-r from-pink-500 to-orange-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition"></div>
+            <div class="relative bg-slate-900 p-2 rounded-2xl border-2 border-pink-400">
+              <div class="relative overflow-hidden rounded-xl">
+                <img src="/projects/raytracer/raytracer-render.jpg" alt="Ray Traced Render" class="w-full h-auto" />
+                <div class="absolute top-4 left-4 px-4 py-2 bg-pink-500/90 backdrop-blur rounded-lg font-bold">
+                  2️⃣ RENDER (Ray Tracer)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4 justify-center data-animate">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-3 px-10 py-5 bg-white text-purple-900 font-black rounded-2xl hover:bg-pink-50 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:-translate-y-2 text-lg">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {viewOnGithub}
+          </a>
+          
+          <a href="#workflow" 
+             class="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-3 border-white text-white font-black rounded-2xl hover:bg-white/20 transition-all duration-300 text-lg backdrop-blur">
+            {currentLang === 'fr' ? 'Comment ça marche' : currentLang === 'zh' ? '如何工作' : 'How It Works'}
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎨 WHAT MAKES IT SPECIAL -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16 text-center data-animate">
+        {features[currentLang]}
+      </h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Real-time editor -->
+        <div class="group bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-8 rounded-3xl border-2 border-blue-200 dark:border-blue-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all hover:-translate-y-2 shadow-lg hover:shadow-2xl data-animate">
+          <div class="text-6xl mb-4">🎮</div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            {currentLang === 'fr' ? 'Éditeur Temps Réel' : currentLang === 'zh' ? '实时编辑器' : 'Real-Time Editor'}
+          </h3>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Placement d\'objets 3D instantané' : currentLang === 'zh' ? '即时3D对象放置' : 'Instant 3D object placement'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Caméra orbitale (rotate, zoom, pan)' : currentLang === 'zh' ? '轨道相机（旋转、缩放、平移）' : 'Orbital camera (rotate, zoom, pan)'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Preview OpenGL instantané' : currentLang === 'zh' ? '即时OpenGL预览' : 'Instant OpenGL preview'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Sauvegarde JSON des scènes' : currentLang === 'zh' ? '场景的JSON保存' : 'Save/load scenes (JSON)'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Photorealistic rendering -->
+        <div class="group bg-gradient-to-br from-pink-50 to-orange-50 dark:from-pink-900/20 dark:to-orange-900/20 p-8 rounded-3xl border-2 border-pink-200 dark:border-pink-700 hover:border-pink-500 dark:hover:border-pink-400 transition-all hover:-translate-y-2 shadow-lg hover:shadow-2xl data-animate">
+          <div class="text-6xl mb-4">✨</div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            {currentLang === 'fr' ? 'Rendu Photoréaliste' : currentLang === 'zh' ? '照片级渲染' : 'Photorealistic Rendering'}
+          </h3>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-pink-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Physique de la lumière réaliste' : currentLang === 'zh' ? '真实光物理' : 'Realistic light physics'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Réflexions & réfractions' : currentLang === 'zh' ? '反射与折射' : 'Reflections & refractions'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Anti-aliasing pour bords lisses' : currentLang === 'zh' ? '抗锯齿以获得平滑边缘' : 'Anti-aliasing for smooth edges'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Effet de profondeur de champ' : currentLang === 'zh' ? '景深效果' : 'Depth of field effect'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Performance -->
+        <div class="group bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-8 rounded-3xl border-2 border-green-200 dark:border-green-700 hover:border-green-500 dark:hover:border-green-400 transition-all hover:-translate-y-2 shadow-lg hover:shadow-2xl data-animate">
+          <div class="text-6xl mb-4">🚀</div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            {currentLang === 'fr' ? 'Optimisé' : currentLang === 'zh' ? '优化' : 'Optimized'}
+          </h3>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Multi-threading pour vitesse' : currentLang === 'zh' ? '多线程加速' : 'Multi-threaded rendering'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'C++ moderne (smart pointers)' : currentLang === 'zh' ? '现代C++（智能指针）' : 'Modern C++ (smart pointers)'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Architecture modulaire' : currentLang === 'zh' ? '模块化架构' : 'Modular architecture'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Gestion mémoire efficace' : currentLang === 'zh' ? '高效内存管理' : 'Efficient memory management'}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚡ THE WORKFLOW -->
+    <section id="workflow" class="bg-gradient-to-br from-slate-900 to-purple-900 text-white py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-16 data-animate">
+          {workflow[currentLang]}
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="relative data-animate">
+            <div class="absolute -top-8 -left-8 w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center text-4xl font-black shadow-2xl">
+              1
+            </div>
+            <div class="bg-white/10 backdrop-blur p-8 rounded-2xl border-2 border-blue-400 mt-8">
+              <h3 class="text-2xl font-bold mb-4 text-blue-300">
+                {currentLang === 'fr' ? 'Design' : currentLang === 'zh' ? '设计' : 'Design'}
+              </h3>
+              <p class="text-white/80 leading-relaxed">
+                {currentLang === 'fr' 
+                  ? 'Créez votre scène dans l\'éditeur OpenGL. Placez objets, ajustez matériaux, positionnez la caméra. Tout en temps réel avec feedback visuel instantané.'
+                  : currentLang === 'zh'
+                  ? '在OpenGL编辑器中创建场景。放置对象、调整材质、定位相机。一切都实时进行，并提供即时视觉反馈。'
+                  : 'Create your scene in the OpenGL editor. Place objects, adjust materials, position camera. Everything in real-time with instant visual feedback.'
+                }
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative data-animate">
+            <div class="absolute -top-8 -left-8 w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center text-4xl font-black shadow-2xl">
+              2
+            </div>
+            <div class="bg-white/10 backdrop-blur p-8 rounded-2xl border-2 border-pink-400 mt-8">
+              <h3 class="text-2xl font-bold mb-4 text-pink-300">
+                {currentLang === 'fr' ? 'Render' : currentLang === 'zh' ? '渲染' : 'Render'}
+              </h3>
+              <p class="text-white/80 leading-relaxed">
+                {currentLang === 'fr' 
+                  ? 'Lancez le ray tracer. Le moteur calcule les intersections rayon-objet, simule la physique de la lumière, génère ombres et réflexions.'
+                  : currentLang === 'zh'
+                  ? '启动光线追踪器。引擎计算光线与对象的交叉、模拟光物理、生成阴影和反射。'
+                  : 'Launch the ray tracer. Engine calculates ray-object intersections, simulates light physics, generates shadows and reflections.'
+                }
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative data-animate">
+            <div class="absolute -top-8 -left-8 w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center text-4xl font-black shadow-2xl">
+              3
+            </div>
+            <div class="bg-white/10 backdrop-blur p-8 rounded-2xl border-2 border-orange-400 mt-8">
+              <h3 class="text-2xl font-bold mb-4 text-orange-300">
+                {currentLang === 'fr' ? 'Export' : currentLang === 'zh' ? '导出' : 'Export'}
+              </h3>
+              <p class="text-white/80 leading-relaxed">
+                {currentLang === 'fr' 
+                  ? 'Obtenez une image photoréaliste avec ombres, reflets, matériaux réalistes. Qualité cinématographique en quelques minutes.'
+                  : currentLang === 'zh'
+                  ? '获得照片般真实的图像，包含阴影、反射、真实材质。几分钟内实现电影级质量。'
+                  : 'Get a photorealistic image with shadows, reflections, realistic materials. Cinematic quality in minutes.'
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 💎 MATERIAL SYSTEM -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16 text-center data-animate">
+        {materials[currentLang]}
+      </h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <!-- Diffuse -->
+        <div class="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl text-center hover:scale-110 transition-transform shadow-lg data-animate">
+          <div class="text-5xl mb-3">⚪</div>
+          <div class="font-bold text-slate-900 dark:text-white">
+            {currentLang === 'fr' ? 'Diffus' : currentLang === 'zh' ? '漫反射' : 'Diffuse'}
+          </div>
+          <div class="text-xs text-slate-600 dark:text-slate-400 mt-2">
+            {currentLang === 'fr' ? 'Mat' : currentLang === 'zh' ? '哑光' : 'Matte'}
+          </div>
+        </div>
+
+        <!-- Metal -->
+        <div class="bg-gradient-to-br from-gray-300 to-gray-500 dark:from-gray-600 dark:to-gray-800 p-6 rounded-2xl text-center hover:scale-110 transition-transform shadow-lg data-animate">
+          <div class="text-5xl mb-3">⚙️</div>
+          <div class="font-bold text-white">
+            {currentLang === 'fr' ? 'Métal' : currentLang === 'zh' ? '金属' : 'Metal'}
+          </div>
+          <div class="text-xs text-gray-200 mt-2">
+            {currentLang === 'fr' ? 'Rugosité' : currentLang === 'zh' ? '粗糙度' : 'Roughness'}
+          </div>
+        </div>
+
+        <!-- Glass -->
+        <div class="bg-gradient-to-br from-cyan-100 to-blue-200 dark:from-cyan-900 dark:to-blue-900 p-6 rounded-2xl text-center hover:scale-110 transition-transform shadow-lg data-animate">
+          <div class="text-5xl mb-3">💧</div>
+          <div class="font-bold text-slate-900 dark:text-white">
+            {currentLang === 'fr' ? 'Verre' : currentLang === 'zh' ? '玻璃' : 'Glass'}
+          </div>
+          <div class="text-xs text-slate-600 dark:text-slate-400 mt-2">
+            {currentLang === 'fr' ? 'Réfraction' : currentLang === 'zh' ? '折射' : 'Refraction'}
+          </div>
+        </div>
+
+        <!-- Emissive -->
+        <div class="bg-gradient-to-br from-yellow-300 to-orange-400 dark:from-yellow-600 dark:to-orange-700 p-6 rounded-2xl text-center hover:scale-110 transition-transform shadow-lg data-animate">
+          <div class="text-5xl mb-3">💡</div>
+          <div class="font-bold text-white">
+            {currentLang === 'fr' ? 'Émissif' : currentLang === 'zh' ? '发光' : 'Emissive'}
+          </div>
+          <div class="text-xs text-white/80 mt-2">
+            {currentLang === 'fr' ? 'Néon' : currentLang === 'zh' ? '霓虹灯' : 'Neon'}
+          </div>
+        </div>
+
+        <!-- Mirror -->
+        <div class="bg-gradient-to-br from-blue-300 to-purple-400 dark:from-blue-700 dark:to-purple-800 p-6 rounded-2xl text-center hover:scale-110 transition-transform shadow-lg data-animate">
+          <div class="text-5xl mb-3">🪞</div>
+          <div class="font-bold text-white">
+            {currentLang === 'fr' ? 'Miroir' : currentLang === 'zh' ? '镜子' : 'Mirror'}
+          </div>
+          <div class="text-xs text-white/80 mt-2">
+            {currentLang === 'fr' ? 'Réflexion' : currentLang === 'zh' ? '反射' : 'Reflection'}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎯 KEY CHALLENGES SOLVED -->
+    <section class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-12 text-center data-animate">
+          {challenges[currentLang]}
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Challenge 1 -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-blue-500 data-animate">
+            <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-3">
+              {currentLang === 'fr' ? '📐 Mathématiques 3D Complexes' : currentLang === 'zh' ? '📐 复杂的3D数学' : '📐 Complex 3D Mathematics'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">
+              {currentLang === 'fr' 
+                ? 'Implémentation intersections rayon-sphère/plan, vecteurs, matrices, transformations. Compréhension profonde de la géométrie 3D.'
+                : currentLang === 'zh'
+                ? '实现光线与球体/平面的交叉、向量、矩阵、变换。深入理解3D几何。'
+                : 'Implementing ray-sphere/plane intersections, vectors, matrices, transformations. Deep understanding of 3D geometry.'
+              }
+            </p>
+          </div>
+
+          <!-- Challenge 2 -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-pink-500 data-animate">
+            <h3 class="text-xl font-bold text-pink-600 dark:text-pink-400 mb-3">
+              {currentLang === 'fr' ? '💡 Physique de la Lumière' : currentLang === 'zh' ? '💡 光物理' : '💡 Light Physics'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">
+              {currentLang === 'fr' 
+                ? 'Réflexions, réfraction du verre (loi de Snell), équations de Fresnel. Simulation comportement réaliste de la lumière.'
+                : currentLang === 'zh'
+                ? '反射、玻璃折射（斯涅尔定律）、菲涅耳方程。模拟真实光行为。'
+                : 'Reflections, glass refraction (Snell\'s law), Fresnel equations. Simulating realistic light behavior.'
+              }
+            </p>
+          </div>
+
+          <!-- Challenge 3 -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-green-500 data-animate">
+            <h3 class="text-xl font-bold text-green-600 dark:text-green-400 mb-3">
+              {currentLang === 'fr' ? '⚡ Optimisation Multi-threading' : currentLang === 'zh' ? '⚡ 多线程优化' : '⚡ Multi-threading Optimization'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">
+              {currentLang === 'fr' 
+                ? 'Parallélisation du rendu pour vitesse maximale. Gestion threads, synchronisation, réduction temps de calcul.'
+                : currentLang === 'zh'
+                ? '并行化渲染以获得最大速度。线程管理、同步、减少计算时间。'
+                : 'Parallelizing rendering for maximum speed. Thread management, synchronization, reducing computation time.'
+              }
+            </p>
+          </div>
+
+          <!-- Challenge 4 -->
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-purple-500 data-animate">
+            <h3 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">
+              {currentLang === 'fr' ? '🏗️ Architecture C++ Propre' : currentLang === 'zh' ? '🏗️ 清晰的C++架构' : '🏗️ Clean C++ Architecture'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">
+              {currentLang === 'fr' 
+                ? 'Organisation modulaire (editor/tracer séparés), smart pointers, RAII, gestion mémoire sans fuites.'
+                : currentLang === 'zh'
+                ? '模块化组织（编辑器/追踪器分离）、智能指针、RAII、无泄漏的内存管理。'
+                : 'Modular organization (editor/tracer separated), smart pointers, RAII, leak-free memory management.'
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT I LEARNED -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+      <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-12 text-center data-animate">
+        {currentLang === 'fr' ? 'Ce Que J\'ai Appris' : currentLang === 'zh' ? '我学到的' : 'What I Learned'}
+      </h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Technical -->
+        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-8 rounded-2xl border-2 border-blue-200 dark:border-blue-700 data-animate">
+          <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">
+            {currentLang === 'fr' ? '🎓 Compétences Techniques' : currentLang === 'zh' ? '🎓 技术技能' : '🎓 Technical Skills'}
+          </h3>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span><strong>C++17:</strong> {currentLang === 'fr' ? 'POO, smart pointers, RAII' : currentLang === 'zh' ? 'OOP、智能指针、RAII' : 'OOP, smart pointers, RAII'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span><strong>OpenGL:</strong> {currentLang === 'fr' ? 'Shaders, pipeline, caméra' : currentLang === 'zh' ? '着色器、管道、相机' : 'Shaders, pipeline, camera'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span><strong>{currentLang === 'fr' ? 'Maths 3D' : currentLang === 'zh' ? '3D数学' : '3D Math'}:</strong> {currentLang === 'fr' ? 'Vecteurs, matrices, rayons' : currentLang === 'zh' ? '向量、矩阵、光线' : 'Vectors, matrices, rays'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span><strong>{currentLang === 'fr' ? 'Physique' : currentLang === 'zh' ? '物理' : 'Physics'}:</strong> {currentLang === 'fr' ? 'Optique, lumière, réfraction' : currentLang === 'zh' ? '光学、光、折射' : 'Optics, light, refraction'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span><strong>Multi-threading:</strong> {currentLang === 'fr' ? 'Parallélisation, threads' : currentLang === 'zh' ? '并行化、线程' : 'Parallelization, threads'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-8 rounded-2xl border-2 border-purple-200 dark:border-purple-700 data-animate">
+          <h3 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4">
+            {currentLang === 'fr' ? '🚀 Soft Skills' : currentLang === 'zh' ? '🚀 软技能' : '🚀 Soft Skills'}
+          </h3>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span><strong>{currentLang === 'fr' ? 'Résolution' : currentLang === 'zh' ? '问题解决' : 'Problem-solving'}:</strong> {currentLang === 'fr' ? 'Algorithmes complexes' : currentLang === 'zh' ? '复杂算法' : 'Complex algorithms'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span><strong>{currentLang === 'fr' ? 'Auto-apprentissage' : currentLang === 'zh' ? '自主学习' : 'Self-learning'}:</strong> {currentLang === 'fr' ? 'Documentation, tutorials' : currentLang === 'zh' ? '文档、教程' : 'Documentation, tutorials'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span><strong>Debugging:</strong> {currentLang === 'fr' ? 'Problèmes visuels/maths' : currentLang === 'zh' ? '视觉/数学问题' : 'Visual/math issues'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span><strong>{currentLang === 'fr' ? 'Architecture' : currentLang === 'zh' ? '架构' : 'Architecture'}:</strong> {currentLang === 'fr' ? 'Code propre, modulaire' : currentLang === 'zh' ? '清晰、模块化代码' : 'Clean, modular code'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span><strong>{currentLang === 'fr' ? 'Persévérance' : currentLang === 'zh' ? '毅力' : 'Perseverance'}:</strong> {currentLang === 'fr' ? 'Bugs complexes, itérations' : currentLang === 'zh' ? '复杂bug、迭代' : 'Complex bugs, iterations'}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔧 TECHNICAL HIGHLIGHTS - Collapsible -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+      <details class="group bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden data-animate">
+        <summary class="cursor-pointer p-8 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+              <span class="text-4xl">🔧</span>
+              {techHighlights[currentLang]}
+            </h2>
+            <svg class="w-8 h-8 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </summary>
+        
+        <div class="p-8 pt-0 space-y-8 border-t-2 border-slate-200 dark:border-slate-700">
+          <!-- Ray Tracing Engine -->
+          <div>
+            <h3 class="text-2xl font-bold text-pink-600 dark:text-pink-400 mb-4 flex items-center gap-2">
+              <span>🎯</span>
+              {currentLang === 'fr' ? 'Moteur de Ray Tracing' : currentLang === 'zh' ? '光线追踪引擎' : 'Ray Tracing Engine'}
+            </h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-2">
+                  {currentLang === 'fr' ? 'Calculs d\'Intersection' : currentLang === 'zh' ? '交叉计算' : 'Intersection Calculations'}
+                </h4>
+                <ul class="space-y-1 text-sm text-slate-600 dark:text-slate-300">
+                  <li>• Ray-Sphere intersection</li>
+                  <li>• Ray-Plane intersection</li>
+                  <li>• {currentLang === 'fr' ? 'Normales précises' : currentLang === 'zh' ? '精确法线' : 'Precise normals'}</li>
+                  <li>• Barycentric coordinates</li>
+                </ul>
+              </div>
+              
+              <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-2">
+                  {currentLang === 'fr' ? 'Physique de la Lumière' : currentLang === 'zh' ? '光物理' : 'Light Physics'}
+                </h4>
+                <ul class="space-y-1 text-sm text-slate-600 dark:text-slate-300">
+                  <li>• Snell's law (refraction)</li>
+                  <li>• Fresnel equations</li>
+                  <li>• {currentLang === 'fr' ? 'Réflexions récursives' : currentLang === 'zh' ? '递归反射' : 'Recursive reflections'}</li>
+                  <li>• {currentLang === 'fr' ? 'Ombres portées' : currentLang === 'zh' ? '投射阴影' : 'Cast shadows'}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- OpenGL Editor -->
+          <div>
+            <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center gap-2">
+              <span>🎮</span>
+              {currentLang === 'fr' ? 'Éditeur OpenGL + ImGui' : currentLang === 'zh' ? 'OpenGL + ImGui编辑器' : 'OpenGL + ImGui Editor'}
+            </h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-2">
+                  {currentLang === 'fr' ? 'Contrôles Caméra' : currentLang === 'zh' ? '相机控制' : 'Camera Controls'}
+                </h4>
+                <ul class="space-y-1 text-sm text-slate-600 dark:text-slate-300">
+                  <li>• Orbital rotation (mouse drag)</li>
+                  <li>• Zoom (mouse wheel)</li>
+                  <li>• Pan (right-click drag)</li>
+                  <li>• {currentLang === 'fr' ? 'FOV ajustable' : currentLang === 'zh' ? '可调FOV' : 'Adjustable FOV'}</li>
+                </ul>
+              </div>
+              
+              <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-2">
+                  {currentLang === 'fr' ? 'Interface ImGui' : currentLang === 'zh' ? 'ImGui界面' : 'ImGui Interface'}
+                </h4>
+                <ul class="space-y-1 text-sm text-slate-600 dark:text-slate-300">
+                  <li>• {currentLang === 'fr' ? 'Ajout/suppression objets' : currentLang === 'zh' ? '添加/删除对象' : 'Add/remove objects'}</li>
+                  <li>• Color pickers</li>
+                  <li>• Material selectors</li>
+                  <li>• {currentLang === 'fr' ? 'Paramètres de rendu' : currentLang === 'zh' ? '渲染参数' : 'Render settings'}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Performance -->
+          <div>
+            <h3 class="text-2xl font-bold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
+              <span>🚀</span>
+              {currentLang === 'fr' ? 'Optimisations Performance' : currentLang === 'zh' ? '性能优化' : 'Performance Optimizations'}
+            </h3>
+            <div class="space-y-3 text-slate-600 dark:text-slate-300">
+              <div class="flex items-start gap-3">
+                <span class="text-green-500 font-bold text-lg">▸</span>
+                <div>
+                  <strong>Multi-threading:</strong> {currentLang === 'fr' ? 'Parallélisation du rendu par lignes/blocs pour utiliser tous les cœurs CPU' : currentLang === 'zh' ? '通过行/块并行化渲染以使用所有CPU核心' : 'Parallelizing render by rows/blocks to use all CPU cores'}
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-500 font-bold text-lg">▸</span>
+                <div>
+                  <strong>Smart Pointers:</strong> {currentLang === 'fr' ? 'std::unique_ptr et std::shared_ptr pour gestion mémoire automatique' : currentLang === 'zh' ? 'std::unique_ptr和std::shared_ptr用于自动内存管理' : 'std::unique_ptr and std::shared_ptr for automatic memory management'}
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-green-500 font-bold text-lg">▸</span>
+                <div>
+                  <strong>Spatial Structures:</strong> {currentLang === 'fr' ? 'Structures de données optimisées pour accélération intersections' : currentLang === 'zh' ? '优化的数据结构以加速交叉' : 'Optimized data structures for faster intersections'}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech Stack -->
+          <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl border-2 border-purple-200 dark:border-purple-700">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">
+              Tech Stack
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              {project.stack.map(tech => (
+                <span class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold text-sm hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 📸 VISUAL SHOWCASE - Before removing gallery -->
+    <section class="bg-slate-900 py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 text-center data-animate">
+          {currentLang === 'fr' ? '📸 Galerie Visuelle' : currentLang === 'zh' ? '📸 视觉画廊' : '📸 Visual Gallery'}
+        </h2>
+        <p class="text-center text-slate-400 mb-12 text-lg">
+          {currentLang === 'fr' 
+            ? 'De la conception OpenGL au rendu photoréaliste'
+            : currentLang === 'zh'
+            ? '从OpenGL设计到照片级渲染'
+            : 'From OpenGL design to photorealistic render'
+          }
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- Image 1 -->
+          <a href={project.images[1]} target="_blank" rel="noopener noreferrer" 
+             class="group relative overflow-hidden rounded-2xl shadow-2xl border-4 border-white/20 hover:border-blue-400 transition-all hover:scale-105 cursor-pointer data-animate">
+            <img src={project.images[1]} alt="OpenGL Editor" class="w-full h-auto" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+              <div class="text-white">
+                <div class="text-2xl font-bold mb-2">
+                  {currentLang === 'fr' ? 'Éditeur OpenGL' : currentLang === 'zh' ? 'OpenGL编辑器' : 'OpenGL Editor'}
+                </div>
+                <div class="text-blue-300">
+                  {currentLang === 'fr' ? 'Interface temps réel avec ImGui' : currentLang === 'zh' ? '使用ImGui的实时界面' : 'Real-time interface with ImGui'}
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Image 2 -->
+          <a href={project.images[0]} target="_blank" rel="noopener noreferrer" 
+             class="group relative overflow-hidden rounded-2xl shadow-2xl border-4 border-white/20 hover:border-pink-400 transition-all hover:scale-105 cursor-pointer data-animate">
+            <img src={project.images[0]} alt="Ray Traced Render" class="w-full h-auto" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+              <div class="text-white">
+                <div class="text-2xl font-bold mb-2">
+                  {currentLang === 'fr' ? 'Rendu Ray Tracing' : currentLang === 'zh' ? '光线追踪渲染' : 'Ray Traced Render'}
+                </div>
+                <div class="text-pink-300">
+                  {currentLang === 'fr' ? 'Résultat photoréaliste final' : currentLang === 'zh' ? '最终照片级结果' : 'Final photorealistic result'}
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎯 FINAL CTA -->
+    <section class="bg-gradient-to-br from-purple-900 via-pink-900 to-orange-900 text-white py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center data-animate">
+        <div class="text-6xl mb-6">🎨✨</div>
+        <h2 class="text-4xl md:text-5xl font-black mb-6">
+          {currentLang === 'fr' ? 'Prêt à Créer Vos Propres Rendus ?' : currentLang === 'zh' ? '准备创建您自己的渲染？' : 'Ready to Create Your Own Renders?'}
+        </h2>
+        <p class="text-xl text-pink-200 mb-8 max-w-2xl mx-auto">
+          {currentLang === 'fr' 
+            ? 'Explorez le code complet sur GitHub. Architecture propre, documentation détaillée, prêt à compiler et utiliser.'
+            : currentLang === 'zh'
+            ? '在GitHub上探索完整代码。清晰的架构、详细的文档、准备编译和使用。'
+            : 'Explore the full code on GitHub. Clean architecture, detailed documentation, ready to compile and use.'
+          }
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-3 px-10 py-5 bg-white text-purple-900 font-black rounded-2xl hover:bg-pink-50 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:-translate-y-2 text-lg">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {viewOnGithub}
+          </a>
+          
+          <a href={`/${currentLang}/projects`}
+             class="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-3 border-white text-white font-black rounded-2xl hover:bg-white/20 transition-all duration-300 text-lg backdrop-blur">
+            {currentLang === 'fr' ? 'Autres Projets' : currentLang === 'zh' ? '其他项目' : 'Other Projects'}
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>
+
+<style>
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  [data-animate] {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  /* Gradient text */
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+</style>

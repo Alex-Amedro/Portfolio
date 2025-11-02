@@ -157,8 +157,6 @@ Compétences Transversales :
     descriptionZh: '完整的2D动作Roguelike游戏，具有实时战斗、程序化地牢和高级动画系统，使用Java和libGDX构建。',
     fullDescriptionEn: `A complete 2D action roguelike game built with Java and libGDX. Play as Heracles, the legendary Greek hero, exploring procedurally generated dungeons filled with enemies, treasures, and challenges.
 
-![Heracles gameplay screenshot](/projects/heracles/spawn.png)
-
 The game features four main systems:
 
 1. Action-Packed Combat System
@@ -259,7 +257,7 @@ Compétences Transversales :
 - 自主学习：阅读libGDX文档和API参考、遵循教程和最佳实践、尝试不同方法
 - 项目管理：规划功能和优先级、管理范围和时间约束、迭代开发和测试
 - 注重细节：微调游戏感觉和响应性、创建连贯的视觉反馈、平衡游戏机制`,
-    stack: ['Java 21', 'libGDX', 'Gradle', 'OpenGL', 'LWJGL3'],
+    stack: ['Java 21', 'libGDX', 'Gradle', 'LWJGL3'],
     image: '/projects/heracles/menubackground.png',
     images: [
       '/projects/heracles/menubackground.png',
@@ -268,7 +266,7 @@ Compétences Transversales :
     liveUrl: '',
     githubUrl: 'https://github.com/Alex-Amedro/Projet-long-java',
     status: 'completed' as const,
-    date: '2024-11',
+    date: '2025-05',
     featured: true,
   },
   {
@@ -394,7 +392,7 @@ Compétences Transversales :
 - 系统思维：在OS级别理解进程和信号
 - 测试：为核心解析功能编写单元测试
 - 文档：清晰的代码注释和技术文档`,
-    stack: ['C (C11, POSIX)', 'Makefile', 'GCC', 'Unix/Linux'],
+    stack: ['C', 'Makefile', 'GCC', 'Unix/Linux'],
     image: 'https://via.placeholder.com/800x600?text=Mini-Shell',
     images: [
       'https://via.placeholder.com/800x600?text=Mini-Shell+CLI',
@@ -402,7 +400,7 @@ Compétences Transversales :
     liveUrl: '',
     githubUrl: 'https://github.com/Alex-Amedro',
     status: 'completed' as const,
-    date: '2025-11-01',
+    date: '2025-05',
     featured: true,
   },
 ];
