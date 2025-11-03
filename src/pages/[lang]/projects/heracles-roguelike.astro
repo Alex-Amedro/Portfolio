@@ -1,0 +1,617 @@
+---
+// src/pages/[lang]/projects/heracles-roguelike.astro
+// VERSION OPTIMISÉE RECRUTEUR - Remplace la page générique
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getTranslation } from '../../../data/translations';
+import { getProjectBySlug } from '../../../data/projects';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang || 'en';
+const project = getProjectBySlug('heracles-roguelike');
+
+if (!project) {
+  return Astro.redirect(`/${currentLang}/projects`);
+}
+
+// Traductions
+const stackLabel = getTranslation(currentLang, 'projects.stack');
+const viewOnGithub = getTranslation(currentLang, 'projects.viewOnGithub');
+
+const heroTitles = {
+  en: 'Heracles - 2D Action Roguelike',
+  fr: 'Heracles - Roguelike d\'Action 2D',
+  zh: 'Heracles - 2D动作Roguelike'
+};
+
+const heroPitches = {
+  en: 'Slash, dodge, loot. Survive the mythological underworld.',
+  fr: 'Frappe, esquive, pille. Survis aux enfers mythologiques.',
+  zh: '挥砍、闪避、掠夺。在神话地下世界中生存。'
+};
+
+const visualsNeeded = {
+  en: 'Visuals to showcase',
+  fr: 'Visuels à présenter',
+  zh: '需要展示的视觉效果'
+};
+
+const visualsList = {
+  en: [''],
+  fr: [''],
+  zh: ['']
+};
+
+const coreSystemsTitle = {
+  en: 'Core Systems',
+  fr: 'Systèmes Principaux',
+  zh: '核心系统'
+};
+
+const metrics = {
+  en: 'Key Metrics',
+  fr: 'Métriques Clés',
+  zh: '关键指标'
+};
+
+const techDeepDive = {
+  en: 'Technical Deep Dive',
+  fr: 'Analyse Technique Approfondie',
+  zh: '技术深入分析'
+};
+
+const softSkillsTitle = {
+  en: 'Soft Skills Developed',
+  fr: 'Compétences Développées',
+  zh: '培养的软技能'
+};
+---
+
+<Layout title={`${heroTitles[currentLang]} | Alexandre Amedro`}>
+  <Header lang={currentLang} />
+
+  <main class="pt-20">
+    <!-- 🎯 HERO SECTION - Impact immédiat -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
+      <!-- Background pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-32">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Left: Text -->
+          <div class="space-y-6 data-animate">
+            <!-- Badges -->
+            <div class="flex flex-wrap gap-3">
+            <span class="px-5 py-2 bg-green-500/30 border-2 border-green-400 rounded-full text-green-200 font-bold text-sm backdrop-blur">
+            ✓ COMPLETED
+            </span>
+              <span class="px-4 py-1.5 bg-blue-500/20 border border-blue-500/50 rounded-full text-blue-300 text-sm font-semibold backdrop-blur">
+                June 2025
+              </span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+              {heroTitles[currentLang]}
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-blue-200 font-bold">
+              {heroPitches[currentLang]}
+            </p>
+            
+            <p class="text-lg text-slate-300 leading-relaxed">
+              {currentLang === 'fr' 
+                ? 'Roguelike 2D complet avec combat dynamique, donjons procéduraux et système d\'animation avancé. Construit en Java avec libGDX.'
+                : currentLang === 'zh'
+                ? '完整的2D Roguelike游戏，具有动态战斗、程序化地牢和高级动画系统。使用Java和libGDX构建。'
+                : 'Full-featured 2D roguelike with dynamic combat, procedural dungeons, and advanced animation system. Built with Java & libGDX.'
+              }
+            </p>
+            
+            <!-- CTAs -->
+            <div class="flex flex-wrap gap-4 pt-4">
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" 
+                 class="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                {viewOnGithub}
+              </a>
+              
+              <a href="#core-systems" 
+                 class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300">
+                {currentLang === 'fr' ? 'Voir les Systèmes' : currentLang === 'zh' ? '查看系统' : 'View Systems'}
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Right: Featured image -->
+          <div class="relative data-animate">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 backdrop-blur">
+              <img src="/projects/heracles/menubackground.png" alt="Heracles gameplay" class="w-full h-auto" />
+              
+              <!-- Overlay badge -->
+              <div class="absolute top-4 right-4 px-4 py-2 bg-red-500/90 backdrop-blur rounded-lg font-bold text-sm">
+                🎮 LIVE GAMEPLAY
+              </div>
+            </div>
+            
+            <!-- Floating stat cards -->
+            <div class="absolute -bottom-6 -left-6 bg-white text-slate-900 px-6 py-4 rounded-xl shadow-xl border-2 border-blue-500">
+              <div class="text-3xl font-black text-blue-600">60 FPS</div>
+              <div class="text-sm font-semibold text-slate-600">Smooth Gameplay</div>
+            </div>
+            
+            <div class="absolute -top-6 -right-6 bg-white text-slate-900 px-6 py-4 rounded-xl shadow-xl border-2 border-green-500">
+              <div class="text-3xl font-black text-green-600">4 Systems</div>
+              <div class="text-sm font-semibold text-slate-600">Modular Architecture</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📸 VISUALS NEEDED -->
+    <section class="max-w-7xl mx-auto px-6 py-12 data-animate">
+      <div class="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-400 dark:border-yellow-600 rounded-2xl p-8">
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+          <span class="text-3xl">📸</span>
+          {visualsNeeded[currentLang]}
+        </h3>
+        <ul class="space-y-3 text-lg text-slate-700 dark:text-slate-300">
+          {visualsList[currentLang].map(item => (
+            <li class="flex items-start gap-3">
+              <span class="text-yellow-600 dark:text-yellow-400 text-2xl">→</span>
+              <span class="font-medium">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 📊 KEY METRICS -->
+    <section class="bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900/30 py-16">
+      <div class="max-w-7xl mx-auto px-6 data-animate">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center flex items-center justify-center gap-3">
+          <span class="text-4xl">📊</span>
+          {metrics[currentLang]}
+        </h2>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg text-center border-2 border-blue-500/20 hover:border-blue-500 transition-all hover:-translate-y-2">
+            <div class="text-5xl font-black text-blue-600 dark:text-blue-400 mb-2">♾️</div>
+            <div class="text-sm font-bold text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' ? 'Salles/Donjon' : currentLang === 'zh' ? '房间/地牢' : 'Rooms/Dungeon'}
+            </div>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg text-center border-2 border-green-500/20 hover:border-green-500 transition-all hover:-translate-y-2">
+            <div class="text-5xl font-black text-green-600 dark:text-green-400 mb-2">20+</div>
+            <div class="text-sm font-bold text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' ? 'Items Uniques' : currentLang === 'zh' ? '独特物品' : 'Unique Items'}
+            </div>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg text-center border-2 border-purple-500/20 hover:border-purple-500 transition-all hover:-translate-y-2">
+            <div class="text-5xl font-black text-purple-600 dark:text-purple-400 mb-2">4</div>
+            <div class="text-sm font-bold text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' ? 'Types d\'Ennemis' : currentLang === 'zh' ? '敌人类型' : 'Enemy Types'}
+            </div>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg text-center border-2 border-red-500/20 hover:border-red-500 transition-all hover:-translate-y-2">
+            <div class="text-5xl font-black text-red-600 dark:text-red-400 mb-2">6</div>
+            <div class="text-sm font-bold text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' ? 'Images/Impact' : currentLang === 'zh' ? '冲击帧' : 'Frames/Impact'}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚔️ CORE SYSTEMS - Condensed -->
+    <section id="core-systems" class="max-w-7xl mx-auto px-6 py-20">
+      <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-12 text-center data-animate">
+        {coreSystemsTitle[currentLang]}
+      </h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Combat & Movement -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-2 border-transparent hover:border-red-500 transition-all hover:-translate-y-2 data-animate">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-5xl">⚔️</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+              {currentLang === 'fr' ? 'Combat & Mouvement' : currentLang === 'zh' ? '战斗与移动' : 'Combat & Movement'}
+            </h3>
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Combat temps réel avec hitboxes précises' : currentLang === 'zh' ? '实时战斗与精确碰撞箱' : 'Real-time combat with precise hitboxes'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Dash tactique pour esquiver' : currentLang === 'zh' ? '战术闪避' : 'Tactical dash mechanic'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'IA ennemie (poursuite, attaque)' : currentLang === 'zh' ? '敌人AI（追击、攻击）' : 'Enemy AI (pursuit, attack)'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Feedback visuel & audio synchronisé' : currentLang === 'zh' ? '视觉与音频反馈同步' : 'Synchronized visual & audio feedback'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Animations -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-2 border-transparent hover:border-blue-500 transition-all hover:-translate-y-2 data-animate">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-5xl">🎬</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+              {currentLang === 'fr' ? 'Animations Avancées' : currentLang === 'zh' ? '高级动画' : 'Advanced Animations'}
+            </h3>
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Multi-direction (4 directions)' : currentLang === 'zh' ? '多方向（4个方向）' : 'Multi-directional sprites (4 directions)'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'États : idle, run, attack' : currentLang === 'zh' ? '状态：闲置、奔跑、攻击' : 'States: idle, run, attack'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Effets d\'impact (6 images)' : currentLang === 'zh' ? '冲击效果（6帧）' : 'Impact effects (6-frame sequences)'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Transitions fluides' : currentLang === 'zh' ? '流畅过渡' : 'Smooth state transitions'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Inventory -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-2 border-transparent hover:border-green-500 transition-all hover:-translate-y-2 data-animate">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-5xl">🎒</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+              {currentLang === 'fr' ? 'Inventaire & Objets' : currentLang === 'zh' ? '库存与物品' : 'Inventory & Items'}
+            </h3>
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'UI grille pour visualisation' : currentLang === 'zh' ? '网格UI可视化' : 'Grid-based UI visualization'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Armes avec propriétés uniques' : currentLang === 'zh' ? '具有独特属性的武器' : 'Weapons with unique properties'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Potions & consommables' : currentLang === 'zh' ? '药水与消耗品' : 'Health potions & consumables'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Changement d\'équipement en jeu' : currentLang === 'zh' ? '游戏内装备切换' : 'In-game equipment switching'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Procedural Dungeons -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-2 border-transparent hover:border-purple-500 transition-all hover:-translate-y-2 data-animate">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="text-5xl">🏰</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+              {currentLang === 'fr' ? 'Donjons Procéduraux' : currentLang === 'zh' ? '程序化地牢' : 'Procedural Dungeons'}
+            </h3>
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Salles connectées par portes' : currentLang === 'zh' ? '通过门连接的房间' : 'Connected rooms with doors'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Spawn d\'ennemis intelligent' : currentLang === 'zh' ? '智能敌人生成' : 'Smart enemy spawning'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Placement d\'objets' : currentLang === 'zh' ? '物品放置' : 'Item placement logic'}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-500 font-bold">•</span>
+              <span>{currentLang === 'fr' ? 'Difficulté progressive' : currentLang === 'zh' ? '渐进式难度' : 'Progressive difficulty scaling'}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOFT SKILLS -->
+    <section class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 py-20">
+      <div class="max-w-5xl mx-auto px-6 data-animate">
+        <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
+          {softSkillsTitle[currentLang]}
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">
+              {currentLang === 'fr' ? '🎯 Résolution de Problèmes' : currentLang === 'zh' ? '🎯 问题解决' : '🎯 Problem-Solving'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' 
+                ? 'Décomposition de mécaniques complexes, debugging visuel/logique, solutions créatives aux limitations techniques.'
+                : currentLang === 'zh'
+                ? '分解复杂机制、视觉/逻辑调试、技术限制的创意解决方案。'
+                : 'Breaking down complex mechanics, visual/logical debugging, creative solutions to technical limitations.'
+              }
+            </p>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-4">
+              {currentLang === 'fr' ? '📚 Auto-apprentissage' : currentLang === 'zh' ? '📚 自主学习' : '📚 Self-Learning'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' 
+                ? 'Documentation libGDX, tutoriels, expérimentation d\'approches diverses.'
+                : currentLang === 'zh'
+                ? 'libGDX文档、教程、尝试不同方法。'
+                : 'libGDX documentation, tutorials, experimenting with different approaches.'
+              }
+            </p>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-green-600 dark:text-green-400 mb-4">
+              {currentLang === 'fr' ? '📋 Gestion de Projet' : currentLang === 'zh' ? '📋 项目管理' : '📋 Project Management'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' 
+                ? 'Planification features, gestion scope/temps, développement itératif.'
+                : currentLang === 'zh'
+                ? '功能规划、范围/时间管理、迭代开发。'
+                : 'Feature planning, scope/time management, iterative development.'
+              }
+            </p>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-red-600 dark:text-red-400 mb-4">
+              {currentLang === 'fr' ? '🎨 Attention aux Détails' : currentLang === 'zh' ? '🎨 注重细节' : '🎨 Attention to Detail'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300">
+              {currentLang === 'fr' 
+                ? 'Affinage game feel, feedback visuel cohérent, équilibrage gameplay.'
+                : currentLang === 'zh'
+                ? '微调游戏感觉、连贯的视觉反馈、游戏平衡。'
+                : 'Fine-tuning game feel, cohesive visual feedback, gameplay balancing.'
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔧 TECHNICAL DEEP DIVE - Collapsible -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+      <details class="group bg-white dark:bg-slate-800 rounded-2xl shadow-xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden data-animate">
+        <summary class="cursor-pointer p-8 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+              <span class="text-4xl">🔧</span>
+              {techDeepDive[currentLang]}
+            </h2>
+            <svg class="w-8 h-8 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </summary>
+        
+        <div class="p-8 pt-0 space-y-8 border-t-2 border-slate-200 dark:border-slate-700">
+          <!-- Game Architecture -->
+          <div>
+            <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center gap-2">
+              <span>🏗️</span>
+              {currentLang === 'fr' ? 'Architecture de Jeu' : currentLang === 'zh' ? '游戏架构' : 'Game Architecture'}
+            </h3>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
+              <li class="flex items-start gap-3">
+                <span class="text-blue-500 mt-1">▸</span>
+                <span><strong>MVC Architecture:</strong> {currentLang === 'fr' ? 'Séparation claire Modèle-Vue-Contrôleur pour maintenabilité' : currentLang === 'zh' ? '清晰的模型-视图-控制器分离以提高可维护性' : 'Clean Model-View-Controller separation for maintainability'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-500 mt-1">▸</span>
+                <span><strong>Entity-Component System:</strong> {currentLang === 'fr' ? 'Flexibilité maximum pour ajout features' : currentLang === 'zh' ? '最大灵活性以添加功能' : 'Maximum flexibility for adding features'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-500 mt-1">▸</span>
+                <span><strong>Design Patterns:</strong> Observer, State, Strategy, Factory</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-500 mt-1">▸</span>
+                <span><strong>Game States:</strong> Menu → Gameplay → Pause → Game Over</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Combat Physics -->
+          <div>
+            <h3 class="text-2xl font-bold text-red-600 dark:text-red-400 mb-4 flex items-center gap-2">
+              <span>⚡</span>
+              {currentLang === 'fr' ? 'Physique de Combat' : currentLang === 'zh' ? '战斗物理' : 'Combat Physics'}
+            </h3>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">▸</span>
+                <span><strong>Collision Detection:</strong> {currentLang === 'fr' ? 'Entre entités avec calcul précis' : currentLang === 'zh' ? '实体之间的精确计算' : 'Between entities with precise calculation'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">▸</span>
+                <span><strong>Attack Hitboxes:</strong> {currentLang === 'fr' ? 'Timing précis pour feedback satisfaisant' : currentLang === 'zh' ? '精确时间以获得令人满意的反馈' : 'Precise timing for satisfying feedback'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">▸</span>
+                <span><strong>Responsive Controls:</strong> {currentLang === 'fr' ? 'Input lag minimal (<16ms)' : currentLang === 'zh' ? '最小输入延迟（<16ms）' : 'Minimal input lag (<16ms)'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">▸</span>
+                <span><strong>Combat Balancing:</strong> {currentLang === 'fr' ? 'Dégâts, vitesse, cooldowns ajustés' : currentLang === 'zh' ? '调整伤害、速度、冷却时间' : 'Damage, speed, cooldowns tuned'}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- AI Behavior -->
+          <div>
+            <h3 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4 flex items-center gap-2">
+              <span>🤖</span>
+              {currentLang === 'fr' ? 'Comportement IA' : currentLang === 'zh' ? 'AI行为' : 'AI Behavior'}
+            </h3>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
+              <li class="flex items-start gap-3">
+                <span class="text-purple-500 mt-1">▸</span>
+                <span><strong>Pathfinding:</strong> {currentLang === 'fr' ? 'Algorithme de recherche de chemin pour poursuite' : currentLang === 'zh' ? '用于追击的寻路算法' : 'Pathfinding algorithm for pursuit'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-purple-500 mt-1">▸</span>
+                <span><strong>State Machines:</strong> {currentLang === 'fr' ? 'États ennemis (idle, patrol, chase, attack)' : currentLang === 'zh' ? '敌人状态（闲置、巡逻、追击、攻击）' : 'Enemy states (idle, patrol, chase, attack)'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-purple-500 mt-1">▸</span>
+                <span><strong>Attack Patterns:</strong> {currentLang === 'fr' ? 'Détection de portée et timing d\'attaque' : currentLang === 'zh' ? '范围检测和攻击时机' : 'Range detection and attack timing'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-purple-500 mt-1">▸</span>
+                <span><strong>Difficulty Balancing:</strong> {currentLang === 'fr' ? 'Ajustement dynamique selon progression' : currentLang === 'zh' ? '根据进度动态调整' : 'Dynamic adjustment based on progression'}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Performance Optimization -->
+          <div>
+            <h3 class="text-2xl font-bold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
+              <span>🚀</span>
+              {currentLang === 'fr' ? 'Optimisation Performance' : currentLang === 'zh' ? '性能优化' : 'Performance Optimization'}
+            </h3>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
+              <li class="flex items-start gap-3">
+                <span class="text-green-500 mt-1">▸</span>
+                <span><strong>Object Pooling:</strong> {currentLang === 'fr' ? 'Réutilisation objets pour réduire GC' : currentLang === 'zh' ? '重用对象以减少GC' : 'Reusing objects to reduce GC'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-green-500 mt-1">▸</span>
+                <span><strong>Sprite Batching:</strong> {currentLang === 'fr' ? 'Rendu groupé pour performance optimale' : currentLang === 'zh' ? '批量渲染以获得最佳性能' : 'Batch rendering for optimal performance'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-green-500 mt-1">▸</span>
+                <span><strong>Memory Management:</strong> {currentLang === 'fr' ? 'Surveillance allocation, cleanup proactif' : currentLang === 'zh' ? '监控分配、主动清理' : 'Monitoring allocation, proactive cleanup'}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-green-500 mt-1">▸</span>
+                <span><strong>Target:</strong> 60 FPS {currentLang === 'fr' ? 'maintenu constant' : currentLang === 'zh' ? '保持恒定' : 'maintained consistently'}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Tech Stack Details -->
+          <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">
+              {stackLabel}
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              {project.stack.map(tech => (
+                <span class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 🎯 FINAL CTA -->
+    <section class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center data-animate">
+        <h2 class="text-4xl md:text-5xl font-black mb-6">
+          {currentLang === 'fr' ? 'Prêt à explorer le code ?' : currentLang === 'zh' ? '准备探索代码？' : 'Ready to explore the code?'}
+        </h2>
+        <p class="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
+          {currentLang === 'fr' 
+            ? 'Découvrez l\'implémentation complète sur GitHub avec documentation détaillée et structure de code propre.'
+            : currentLang === 'zh'
+            ? '在GitHub上发现完整的实现，包含详细文档和清晰的代码结构。'
+            : 'Discover the full implementation on GitHub with detailed documentation and clean code structure.'
+          }
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-900 font-bold rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:-translate-y-1 text-lg">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {viewOnGithub}
+          </a>
+          
+          <a href={`/${currentLang}/projects`}
+             class="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 text-lg">
+            {currentLang === 'fr' ? 'Voir d\'autres projets' : currentLang === 'zh' ? '查看其他项目' : 'View other projects'}
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  [data-animate] {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+</style>

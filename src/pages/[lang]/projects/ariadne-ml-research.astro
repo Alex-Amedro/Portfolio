@@ -1,0 +1,682 @@
+---
+// src/pages/[lang]/projects/ariadne-ml-research.astro
+// PAGE PROJET RECHERCHE - Ariadne
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getTranslation } from '../../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang || 'en';
+
+const viewOnGithub = getTranslation(currentLang, 'projects.viewOnGithub');
+
+const heroTitles = {
+  en: 'Ariadne - Adaptive Game Level Generation',
+  fr: 'Ariadne - Génération Adaptative de Niveaux',
+  zh: 'Ariadne项目 - 自适应关卡生成'
+};
+
+const heroPitches = {
+  en: 'Guiding GAN latent space with RL to generate increasingly challenging Doom levels.',
+  fr: 'Guider l\'espace latent d\'un GAN par RL pour générer des niveaux Doom progressivement plus difficiles.',
+  zh: '使用RL引导GAN潜在空间，生成越来越具挑战性的Doom关卡。'
+};
+
+const researchContext = {
+  en: '🎓 Research Context',
+  fr: '🎓 Contexte de Recherche',
+  zh: '🎓 研究背景'
+};
+
+const technicalApproach = {
+  en: '🔬 Technical Approach',
+  fr: '🔬 Approche Technique',
+  zh: '🔬 技术方法'
+};
+
+const roadmap = {
+  en: '🗺️ 2.5-Month Roadmap',
+  fr: '🗺️ Feuille de Route (2.5 mois)',
+  zh: '🗺️ 2.5个月路线图'
+};
+
+const futureWork = {
+  en: 'Future Extensions',
+  fr: 'Extensions Futures',
+  zh: '未来扩展'
+};
+---
+
+<Layout title={`${heroTitles[currentLang]} | Alexandre Amedro`}>
+  <Header lang={currentLang} />
+
+  <main class="pt-20">
+    <!-- 🌟 HERO SECTION - Research Aesthetic -->
+    <section class="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white overflow-hidden">
+      <!-- Neural network pattern background -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-32">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Left: Text -->
+          <div class="space-y-6 data-animate">
+            <!-- Top badges -->
+            <div class="flex flex-wrap gap-3">
+              <span class="px-4 py-1.5 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-200 font-bold text-sm backdrop-blur">
+                🔬 IN PROGRESS
+              </span>
+              <span class="px-4 py-1.5 bg-purple-500/20 border border-purple-500/50 rounded-lg text-purple-200 font-bold text-sm backdrop-blur">
+                Oct 2025 - Jan 2026
+              </span>
+              <span class="px-4 py-1.5 bg-blue-500/20 border border-blue-500/50 rounded-lg text-blue-200 font-bold text-sm backdrop-blur">
+                🎓 Research
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+              
+              {heroTitles[currentLang]}
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-purple-200 font-bold">
+              {heroPitches[currentLang]}
+            </p>
+            
+            <p class="text-lg text-slate-200 leading-relaxed">
+              {currentLang === 'fr' 
+                ? 'Combinaison de Reinforcement Learning et GANs pour générer des niveaux Doom adaptatifs. Projet personnel de recherche.'
+                : currentLang === 'zh'
+                ? '结合强化学习和GAN生成自适应Doom关卡。个人研究项目。'
+                : 'Combining Reinforcement Learning and GANs to generate adaptive Doom levels. Personal research project.'
+              }
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-wrap gap-4 pt-4">
+              <a href="#approach" 
+                 class="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-900 font-bold rounded-xl hover:bg-purple-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                {currentLang === 'fr' ? 'Approche Technique' : currentLang === 'zh' ? '技术方法' : 'Technical Approach'}
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </a>
+              
+              <a href="#roadmap" 
+                 class="inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300">
+                {currentLang === 'fr' ? 'Voir la Roadmap' : currentLang === 'zh' ? '查看路线图' : 'View Roadmap'}
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Institution Badge -->
+            <div class="flex items-center gap-6 text-sm text-purple-200 pt-4">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🏛️</span>
+                <span class="font-semibold">NCKU Taiwan</span>
+              </div>
+              <div class="w-px h-6 bg-purple-400/30"></div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🎓</span>
+                <span class="font-semibold">ENSEEIHT</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right: Doom Image -->
+          <div class="relative data-animate">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 backdrop-blur">
+              <img src="/projects/ariadne/doom.jpeg" alt="Doom Level Generation" class="w-full h-auto" />
+              
+              
+            </div>
+            
+            <!-- Floating stat cards -->
+            <div class="absolute -bottom-6 -left-6 bg-white text-slate-900 px-6 py-4 rounded-xl shadow-xl border-2 border-purple-500">
+              <div class="text-3xl font-black text-purple-600">RL + GAN</div>
+              <div class="text-sm font-semibold text-slate-600">Hybrid Approach</div>
+            </div>
+            
+            <div class="absolute -top-6 -right-6 bg-white text-slate-900 px-6 py-4 rounded-xl shadow-xl border-2 border-pink-500">
+              <div class="text-3xl font-black text-pink-600">ARMS RACE</div>
+              <div class="text-sm font-semibold text-slate-600">co-evolution AI</div>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
+
+    <!-- 🎓 RESEARCH CONTEXT -->
+    <section class="bg-white dark:bg-slate-900 py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16 text-center data-animate">
+          {researchContext[currentLang]}
+        </h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Problem -->
+        <div class="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 p-8 rounded-2xl border-2 border-red-200 dark:border-red-700 data-animate">
+          <div class="text-5xl mb-4">❌</div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            {currentLang === 'fr' ? 'Le Problème' : currentLang === 'zh' ? '问题' : 'The Problem'}
+          </h3>
+          <p class="text-slate-600 dark:text-slate-300">
+            {currentLang === 'fr' 
+              ? 'Générer des niveaux de jeu qui s\'adaptent automatiquement à la compétence du joueur est difficile. Les approches traditionnelles échouent face à la complexité.'
+              : currentLang === 'zh'
+              ? '生成自动适应玩家技能的游戏关卡很困难。传统方法在复杂性面前失败。'
+              : 'Generating game levels that automatically adapt to player skill is hard. Traditional approaches fail against complexity.'
+            }
+          </p>
+        </div>
+
+        <!-- Approach -->
+        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-8 rounded-2xl border-2 border-blue-200 dark:border-blue-700 data-animate">
+          <div class="text-5xl mb-4">💡</div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            {currentLang === 'fr' ? 'Notre Approche' : currentLang === 'zh' ? '我们的方法' : 'Our Approach'}
+          </h3>
+          <p class="text-slate-600 dark:text-slate-300">
+            {currentLang === 'fr' 
+              ? 'Utiliser un agent RL pour explorer l\'espace latent d\'un GAN pré-entraîné. Le RL trouve les "bons" vecteurs latents qui génèrent des niveaux intéressants.'
+              : currentLang === 'zh'
+              ? '使用RL代理探索预训练GAN的潜在空间。RL找到生成有趣关卡的"好"潜在向量。'
+              : 'Use an RL agent to explore the latent space of a pre-trained GAN. RL finds the "good" latent vectors that generate interesting levels.'
+            }
+          </p>
+        </div>
+
+        <!-- Impact -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-8 rounded-2xl border-2 border-green-200 dark:border-green-700 data-animate">
+          <div class="text-5xl mb-4">🎯</div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            {currentLang === 'fr' ? 'Impact Attendu' : currentLang === 'zh' ? '预期影响' : 'Expected Impact'}
+          </h3>
+          <p class="text-slate-600 dark:text-slate-300">
+            {currentLang === 'fr' 
+              ? 'Créer un système qui génère automatiquement des niveaux de plus en plus difficiles, maintenant l\'engagement du joueur dans un état de "flow".'
+              : currentLang === 'zh'
+              ? '创建一个自动生成越来越困难关卡的系统，使玩家保持在"心流"状态。'
+              : 'Create a system that automatically generates progressively harder levels, keeping the player in a "flow" state.'
+            }
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔬 TECHNICAL APPROACH -->
+    <section id="approach" class="bg-gradient-to-br from-slate-900 to-purple-900 text-white py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-16 data-animate">
+          {technicalApproach[currentLang]}
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Pillar 1: RL Player -->
+          <div class="bg-white/10 backdrop-blur border-2 border-blue-500/30 p-8 rounded-2xl hover:border-blue-500 transition-all data-animate">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-3xl">
+                🎮
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-blue-300">
+                  {currentLang === 'fr' ? 'Pilier 1 : Joueur RL' : currentLang === 'zh' ? '支柱1：RL玩家' : 'Pillar 1: RL Player'}
+                </h3>
+                <p class="text-sm text-blue-200">{currentLang === 'fr' ? 'L\'Évaluateur' : currentLang === 'zh' ? '评估器' : 'The Evaluator'}</p>
+              </div>
+            </div>
+            
+            <ul class="space-y-3 text-white/90">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 font-bold">•</span>
+                <span><strong>Algorithm:</strong> DQN or PPO {currentLang === 'fr' ? '(pré-entraîné)' : currentLang === 'zh' ? '（预训练）' : '(pre-trained)'}</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 font-bold">•</span>
+                <span><strong>Role:</strong> {currentLang === 'fr' ? 'Jouer sur un niveau WAD et retourner un score (fitness)' : currentLang === 'zh' ? '玩WAD关卡并返回分数（适应度）' : 'Play a WAD level and return a score (fitness)'}</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 font-bold">•</span>
+                <span><strong>Environment:</strong> ViZDoom (Doom 1993)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 font-bold">•</span>
+                <span><strong>Output:</strong> {currentLang === 'fr' ? 'Score de difficulté/qualité' : currentLang === 'zh' ? '难度/质量分数' : 'Difficulty/quality score'}</span>
+              </li>
+            </ul>
+
+            <div class="mt-6 p-4 bg-slate-900 rounded-xl font-mono text-sm text-green-400">
+              <code>evaluate_agent.py → fitness_score</code>
+            </div>
+          </div>
+
+          <!-- Pillar 2: GAN Architect -->
+          <div class="bg-white/10 backdrop-blur border-2 border-pink-500/30 p-8 rounded-2xl hover:border-pink-500 transition-all data-animate">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-16 h-16 bg-pink-500 rounded-2xl flex items-center justify-center text-3xl">
+                🎨
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-pink-300">
+                  {currentLang === 'fr' ? 'Pilier 2 : Architecte GAN' : currentLang === 'zh' ? '支柱2：GAN架构师' : 'Pillar 2: GAN Architect'}
+                </h3>
+                <p class="text-sm text-pink-200">{currentLang === 'fr' ? 'Le Créateur' : currentLang === 'zh' ? '创造者' : 'The Creator'}</p>
+              </div>
+            </div>
+            
+            <ul class="space-y-3 text-white/90">
+              <li class="flex items-start gap-2">
+                <span class="text-pink-400 font-bold">•</span>
+                <span><strong>Model:</strong> {currentLang === 'fr' ? 'GAN pré-entraîné (gelé)' : currentLang === 'zh' ? '预训练GAN（冻结）' : 'Pre-trained GAN (frozen)'}</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-400 font-bold">•</span>
+                <span><strong>Input:</strong> {currentLang === 'fr' ? 'Vecteur latent z ∈ ℝⁿ' : currentLang === 'zh' ? '潜在向量 z ∈ ℝⁿ' : 'Latent vector z ∈ ℝⁿ'}</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-400 font-bold">•</span>
+                <span><strong>Output:</strong> {currentLang === 'fr' ? 'Fichier .WAD (niveau Doom jouable)' : currentLang === 'zh' ? '.WAD文件（可玩的Doom关卡）' : '.WAD file (playable Doom level)'}</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-pink-400 font-bold">•</span>
+                <span><strong>Framework:</strong> PyTorch</span>
+              </li>
+            </ul>
+
+            <div class="mt-6 p-4 bg-slate-900 rounded-xl font-mono text-sm text-green-400">
+              <code>generate_level.py → level.wad</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Steering Mechanism -->
+        <div class="mt-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur border-2 border-purple-400 p-8 rounded-2xl data-animate">
+          <h3 class="text-3xl font-bold text-purple-200 mb-8 flex items-center gap-3">
+            <span class="text-3xl">🎯</span>
+            {currentLang === 'fr' ? 'Le Mécanisme de Guidage' : currentLang === 'zh' ? '引导机制' : 'The Steering Mechanism'}
+          </h3>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-purple-400/30">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center text-white font-black text-xl">1</div>
+                <div class="font-bold text-xl text-white">{currentLang === 'fr' ? 'Échantillonner' : currentLang === 'zh' ? '采样' : 'Sample'}</div>
+              </div>
+              <p class="text-purple-200 leading-relaxed">{currentLang === 'fr' ? 'Générer N vecteurs latents aléatoires dans l\'espace du GAN' : currentLang === 'zh' ? '在GAN空间中生成N个随机潜在向量' : 'Generate N random latent vectors in GAN space'}</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-pink-400/30">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center text-white font-black text-xl">2</div>
+                <div class="font-bold text-xl text-white">{currentLang === 'fr' ? 'Évaluer' : currentLang === 'zh' ? '评估' : 'Evaluate'}</div>
+              </div>
+              <p class="text-pink-200 leading-relaxed">{currentLang === 'fr' ? 'Le joueur RL teste et score chaque niveau généré' : currentLang === 'zh' ? 'RL玩家测试并为每个生成的关卡评分' : 'RL player tests and scores each generated level'}</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-blue-400/30">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-black text-xl">3</div>
+                <div class="font-bold text-xl text-white">{currentLang === 'fr' ? 'Optimiser' : currentLang === 'zh' ? '优化' : 'Optimize'}</div>
+              </div>
+              <p class="text-blue-200 leading-relaxed">{currentLang === 'fr' ? 'Cross-Entropy Method affine la recherche vers les meilleurs vecteurs' : currentLang === 'zh' ? '交叉熵方法将搜索细化到最佳向量' : 'Cross-Entropy Method refines search toward best vectors'}</p>
+            </div>
+          </div>
+          <div class="mt-8 text-center">
+            <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-bold text-lg">
+              
+              <span>{currentLang === 'fr' ? 'Répéter jusqu\'à convergence' : currentLang === 'zh' ? '重复直至收敛' : 'Repeat until convergence'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🗺️ ROADMAP -->
+    <section id="roadmap" class="max-w-7xl mx-auto px-6 py-20">
+      <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-12 text-center data-animate">
+        {roadmap[currentLang]}
+      </h2>
+      
+      <div class="space-y-8">
+        <!-- Phase 1 -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-all data-animate">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl">
+                1
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                {currentLang === 'fr' ? 'Phase 1 : Fondations (Théorie & Outils)' : currentLang === 'zh' ? '阶段1：基础（理论与工具）' : 'Phase 1: Foundations (Theory & Tools)'}
+              </h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p class="font-semibold text-blue-600 dark:text-blue-400 mb-2">RL Setup</p>
+                  <ul class="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+                    <li>• {currentLang === 'fr' ? 'Installer ViZDoom' : currentLang === 'zh' ? '安装ViZDoom' : 'Install ViZDoom'}</li>
+                    <li>• {currentLang === 'fr' ? 'Comprendre la boucle RL' : currentLang === 'zh' ? '理解RL循环' : 'Understand RL loop'}</li>
+                    <li>• {currentLang === 'fr' ? 'Décortiquer learning_pytorch.py' : currentLang === 'zh' ? '分析learning_pytorch.py' : 'Analyze learning_pytorch.py'}</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="font-semibold text-pink-600 dark:text-pink-400 mb-2">GAN Setup</p>
+                  <ul class="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+                    <li>• {currentLang === 'fr' ? 'Trouver GAN pré-entraîné' : currentLang === 'zh' ? '找到预训练GAN' : 'Find pre-trained GAN'}</li>
+                    <li>• {currentLang === 'fr' ? 'Tester génération WAD' : currentLang === 'zh' ? '测试WAD生成' : 'Test WAD generation'}</li>
+                    <li>• {currentLang === 'fr' ? 'Valider niveaux jouables' : currentLang === 'zh' ? '验证可玩关卡' : 'Validate playable levels'}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-all data-animate">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl">
+                2
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                {currentLang === 'fr' ? 'Phase 2 : Construction des Piliers' : currentLang === 'zh' ? '阶段2：构建支柱' : 'Phase 2: Building Pillars'}
+              </h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p class="font-semibold text-blue-600 dark:text-blue-400 mb-2">RL Player</p>
+                  <ul class="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+                    <li>• {currentLang === 'fr' ? 'Entraîner agent compétent' : currentLang === 'zh' ? '训练称职的代理' : 'Train competent agent'}</li>
+                    <li>• {currentLang === 'fr' ? 'Script evaluate_agent.py' : currentLang === 'zh' ? '脚本evaluate_agent.py' : 'Script evaluate_agent.py'}</li>
+                    <li>• <strong>{currentLang === 'fr' ? 'Livrable: Fonction fitness' : currentLang === 'zh' ? '交付物：适应度函数' : 'Deliverable: Fitness function'}</strong></li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="font-semibold text-pink-600 dark:text-pink-400 mb-2">GAN Architect</p>
+                  <ul class="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+                    <li>• {currentLang === 'fr' ? 'Pipeline génération' : currentLang === 'zh' ? '生成管道' : 'Generation pipeline'}</li>
+                    <li>• {currentLang === 'fr' ? 'Script generate_level.py' : currentLang === 'zh' ? '脚本generate_level.py' : 'Script generate_level.py'}</li>
+                    <li>• <strong>{currentLang === 'fr' ? 'Livrable: z → WAD' : currentLang === 'zh' ? '交付物：z → WAD' : 'Deliverable: z → WAD'}</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition-all data-animate">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl">
+                3
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                {currentLang === 'fr' ? 'Phase 3 : Clé de Voûte (Steering)' : currentLang === 'zh' ? '阶段3：拱顶石（引导）' : 'Phase 3: Keystone (Steering)'}
+              </h3>
+              <ul class="text-sm text-slate-600 dark:text-slate-300 space-y-2">
+                <li class="flex items-start gap-2">
+                  <span class="text-purple-500 font-bold">•</span>
+                  <span>{currentLang === 'fr' ? 'Connecter les deux piliers (RL ↔ GAN)' : currentLang === 'zh' ? '连接两个支柱（RL ↔ GAN）' : 'Connect both pillars (RL ↔ GAN)'}</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-purple-500 font-bold">•</span>
+                  <span>{currentLang === 'fr' ? 'Implémenter Cross-Entropy Method pour optimiser l\'espace latent' : currentLang === 'zh' ? '实现交叉熵方法以优化潜在空间' : 'Implement Cross-Entropy Method to optimize latent space'}</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-purple-500 font-bold">•</span>
+                  <span><strong>{currentLang === 'fr' ? 'Livrable: Boucle génération → évaluation → optimisation' : currentLang === 'zh' ? '交付物：循环生成→评估→优化' : 'Deliverable: Loop generation → evaluation → optimization'}</strong></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        
+
+    <!-- 🚀 FUTURE EXTENSIONS -->
+    <section class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-12 text-center data-animate">
+          {futureWork[currentLang]}
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Extension 1 -->
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-purple-500 data-animate">
+            <div class="text-5xl mb-4">🔄</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+              {currentLang === 'fr' ? 'Fine-Tuning du GAN' : currentLang === 'zh' ? 'GAN微调' : 'GAN Fine-Tuning'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 mb-4">
+              {currentLang === 'fr' 
+                ? 'Utiliser le score du joueur RL pour ré-entraîner légèrement les dernières couches du GAN. L\'Architecte apprend activement à créer de nouveaux types de niveaux.'
+                : currentLang === 'zh'
+                ? '使用RL玩家的分数轻微重新训练GAN的最后几层。架构师主动学习创建新类型的关卡。'
+                : 'Use RL player score to slightly retrain the last layers of the GAN. The Architect actively learns to create new types of levels.'
+              }
+            </p>
+            <div class="flex items-center gap-2 text-sm text-purple-600 dark:text-purple-400 font-semibold">
+              <span>⏱️</span>
+              <span>{currentLang === 'fr' ? 'Si temps disponible' : currentLang === 'zh' ? '如有时间' : 'If time available'}</span>
+            </div>
+          </div>
+
+          <!-- Extension 2 -->
+          <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-pink-500 data-animate">
+            <div class="text-5xl mb-4">⚔️</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+              {currentLang === 'fr' ? 'Co-évolution Complète' : currentLang === 'zh' ? '完整协同进化' : 'Full Co-evolution'}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 mb-4">
+              {currentLang === 'fr' 
+                ? 'La vraie "course aux armes" : l\'Architecte génère de meilleurs niveaux → Le Joueur s\'améliore → L\'Architecte doit encore s\'améliorer. Boucle fermée complète.'
+                : currentLang === 'zh'
+                ? '真正的"军备竞赛"：架构师生成更好的关卡→玩家提高→架构师必须进一步提高。完整的闭环。'
+                : 'True "arms race": Architect generates better levels → Player improves → Architect must improve further. Complete closed loop.'
+              }
+            </p>
+            <div class="flex items-center gap-2 text-sm text-pink-600 dark:text-pink-400 font-semibold">
+              <span>🎓</span>
+              <span>{currentLang === 'fr' ? 'Objectif master class' : currentLang === 'zh' ? '大师级目标' : 'Master class goal'}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Impact -->
+        <div class="mt-12 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 p-8 rounded-2xl border-2 border-purple-300 dark:border-purple-700 data-animate">
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+            <span class="text-3xl">📚</span>
+            {currentLang === 'fr' ? 'Contribution Scientifique' : currentLang === 'zh' ? '科学贡献' : 'Scientific Contribution'}
+          </h3>
+          <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+            {currentLang === 'fr' 
+              ? 'Ce projet combine deux domaines majeurs du ML (Generative Modeling + Reinforcement Learning) dans le contexte du PCGRL (Procedural Content Generation via RL). L\'approche de "steering" d\'un GAN pré-entraîné est le premier pas vers une IA de co-évolution complète et crée une base stable pour créer notre modèle.'
+              : currentLang === 'zh'
+              ? '该项目在PCGRL（通过RL的程序化内容生成）背景下结合了ML的两个主要领域（生成建模+强化学习）。"引导"预训练GAN的方法比完整协同进化更实用，可能为其他领域的自适应系统开辟道路。'
+              : 'This project combines two major ML fields (Generative Modeling + Reinforcement Learning) in the PCGRL context (Procedural Content Generation via RL). The "steering" approach of a pre-trained GAN is the first step for a full co-evolution AI and creates a stable base to create our model.'
+            }
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📊 TECH STACK -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+      <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center data-animate">
+        {currentLang === 'fr' ? '🛠️ Technologies Utilisées' : currentLang === 'zh' ? '🛠️ 使用的技术' : '🛠️ Technologies Used'}
+      </h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 data-animate">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg text-center hover:scale-110 transition-transform">
+          <div class="text-4xl mb-2">🔥</div>
+          <div class="font-bold text-slate-900 dark:text-white">PyTorch</div>
+          <div class="text-xs text-slate-600 dark:text-slate-400 mt-1">Deep Learning</div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg text-center hover:scale-110 transition-transform">
+          <div class="text-4xl mb-2">🎮</div>
+          <div class="font-bold text-slate-900 dark:text-white">ViZDoom</div>
+          <div class="text-xs text-slate-600 dark:text-slate-400 mt-1">Environment</div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg text-center hover:scale-110 transition-transform">
+          <div class="text-4xl mb-2">🐍</div>
+          <div class="font-bold text-slate-900 dark:text-white">Python</div>
+          <div class="text-xs text-slate-600 dark:text-slate-400 mt-1">Core Language</div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg text-center hover:scale-110 transition-transform">
+          <div class="text-4xl mb-2">📊</div>
+          <div class="font-bold text-slate-900 dark:text-white">NumPy</div>
+          <div class="text-xs text-slate-600 dark:text-slate-400 mt-1">Computing</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 💡 SKILLS DEVELOPED -->
+    <section class="bg-gradient-to-br from-slate-900 to-indigo-900 text-white py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-center mb-12 data-animate">
+          {currentLang === 'fr' ? '💡 Compétences Développées' : currentLang === 'zh' ? '💡 培养的技能' : '💡 Skills Developed'}
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Technical -->
+          <div class="bg-white/10 backdrop-blur p-6 rounded-2xl border-2 border-blue-500/30 data-animate">
+            <h3 class="text-xl font-bold text-blue-300 mb-4">
+              {currentLang === 'fr' ? '🎓 Techniques' : currentLang === 'zh' ? '🎓 技术' : '🎓 Technical'}
+            </h3>
+            <ul class="space-y-2 text-sm text-white/90">
+              <li>• Reinforcement Learning (DQN, PPO)</li>
+              <li>• Generative Adversarial Networks</li>
+              <li>• {currentLang === 'fr' ? 'Optimisation espace latent' : currentLang === 'zh' ? '潜在空间优化' : 'Latent space optimization'}</li>
+              <li>• PyTorch {currentLang === 'fr' ? 'avancé' : currentLang === 'zh' ? '高级' : 'advanced'}</li>
+              <li>• {currentLang === 'fr' ? 'Métriques de performance' : currentLang === 'zh' ? '性能指标' : 'Performance metrics'}</li>
+            </ul>
+          </div>
+
+          <!-- Research -->
+          <div class="bg-white/10 backdrop-blur p-6 rounded-2xl border-2 border-purple-500/30 data-animate">
+            <h3 class="text-xl font-bold text-purple-300 mb-4">
+              {currentLang === 'fr' ? '🔬 Recherche' : currentLang === 'zh' ? '🔬 研究' : '🔬 Research'}
+            </h3>
+            <ul class="space-y-2 text-sm text-white/90">
+              <li>• {currentLang === 'fr' ? 'Revue littérature PCGRL' : currentLang === 'zh' ? 'PCGRL文献综述' : 'PCGRL literature review'}</li>
+              <li>• {currentLang === 'fr' ? 'Design expérimental' : currentLang === 'zh' ? '实验设计' : 'Experimental design'}</li>
+              <li>• {currentLang === 'fr' ? 'Analyse de résultats' : currentLang === 'zh' ? '结果分析' : 'Results analysis'}</li>
+              <li>• {currentLang === 'fr' ? 'Documentation scientifique' : currentLang === 'zh' ? '科学文档' : 'Scientific documentation'}</li>
+              <li>• {currentLang === 'fr' ? 'Communication recherche' : currentLang === 'zh' ? '研究交流' : 'Research communication'}</li>
+            </ul>
+          </div>
+
+          <!-- Soft Skills -->
+          <div class="bg-white/10 backdrop-blur p-6 rounded-2xl border-2 border-pink-500/30 data-animate">
+            <h3 class="text-xl font-bold text-pink-300 mb-4">
+              {currentLang === 'fr' ? '🚀 Transversales' : currentLang === 'zh' ? '🚀 软技能' : '🚀 Soft Skills'}
+            </h3>
+            <ul class="space-y-2 text-sm text-white/90">
+              <li>• {currentLang === 'fr' ? 'Gestion projet recherche' : currentLang === 'zh' ? '研究项目管理' : 'Research project management'}</li>
+              <li>• {currentLang === 'fr' ? 'Auto-apprentissage ML' : currentLang === 'zh' ? 'ML自学' : 'ML self-learning'}</li>
+              <li>• {currentLang === 'fr' ? 'Résolution problèmes complexes' : currentLang === 'zh' ? '复杂问题解决' : 'Complex problem-solving'}</li>
+              <li>• {currentLang === 'fr' ? 'Debugging systèmes ML' : currentLang === 'zh' ? 'ML系统调试' : 'ML systems debugging'}</li>
+              <li>• {currentLang === 'fr' ? 'Communication internationale' : currentLang === 'zh' ? '国际交流' : 'International collaboration'}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎯 FINAL CTA -->
+    <section class="bg-gradient-to-br from-purple-900 via-pink-900 to-indigo-900 text-white py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center data-animate">
+        <div class="flex items-center justify-center gap-4 text-6xl mb-6">
+          <span>🧠</span>
+          <span>🤝</span>
+          <span>🎮</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black mb-6">
+          {currentLang === 'fr' ? 'Suivez l\'Évolution du Projet' : currentLang === 'zh' ? '关注项目进展' : 'Follow the Project Evolution'}
+        </h2>
+        <p class="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
+          {currentLang === 'fr' 
+            ? 'Le dépôt GitHub sera mis à jour régulièrement avec le code, les notebooks, et les résultats expérimentaux.'
+            : currentLang === 'zh'
+            ? 'GitHub仓库将定期更新代码、笔记本和实验结果。'
+            : 'The GitHub repository will be updated regularly with code, notebooks, and experimental results.'
+          }
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://github.com/Alex-Amedro" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-3 px-10 py-5 bg-white text-purple-900 font-black rounded-2xl hover:bg-purple-50 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:-translate-y-2 text-lg">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {viewOnGithub}
+          </a>
+          
+          <a href={`/${currentLang}/projects`}
+             class="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-3 border-white text-white font-black rounded-2xl hover:bg-white/20 transition-all duration-300 text-lg backdrop-blur">
+            {currentLang === 'fr' ? 'Autres Projets' : currentLang === 'zh' ? '其他项目' : 'Other Projects'}
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Academic Context -->
+        <div class="mt-12 p-6 bg-white/10 backdrop-blur rounded-2xl border-2 border-purple-400/30">
+          <p class="text-sm text-purple-200">
+            <strong>{currentLang === 'fr' ? '🎓 Contexte Académique:' : currentLang === 'zh' ? '🎓 学术背景：' : '🎓 Academic Context:'}</strong>
+            {currentLang === 'fr' 
+              ? ' Stage de recherche de 3 mois à National Cheng Kung University (Taiwan) dans le cadre du programme d\'échange ENSEEIHT.'
+              : currentLang === 'zh'
+              ? ' 在国立成功大学（台湾）进行为期3个月的研究实习，作为ENSEEIHT交流项目的一部分。'
+              : ' 3-month research internship at National Cheng Kung University (Taiwan) as part of ENSEEIHT exchange program.'
+            }
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>
+
+<style>
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  [data-animate] {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
