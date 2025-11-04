@@ -240,7 +240,7 @@ const softSkillsTitle = {
           <ul class="space-y-2 text-slate-600 dark:text-slate-300">
             <li class="flex items-start gap-2">
               <span class="text-red-500 font-bold">•</span>
-              <span>{currentLang === 'fr' ? 'Combat temps réel avec hitboxes précises' : currentLang === 'zh' ? '实时战斗与精确碰撞箱' : 'Real-time combat with precise hitboxes'}</span>
+              <span>{currentLang === 'fr' ? 'IA - Algorithme de recherche de chemin pour poursuite' : currentLang === 'zh' ? 'AI - 用于追击的寻路算法' : 'AI - Pathfinding algorithm for pursuit'}</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-red-500 font-bold">•</span>
@@ -248,12 +248,9 @@ const softSkillsTitle = {
             </li>
             <li class="flex items-start gap-2">
               <span class="text-red-500 font-bold">•</span>
-              <span>{currentLang === 'fr' ? 'IA ennemie (poursuite, attaque)' : currentLang === 'zh' ? '敌人AI（追击、攻击）' : 'Enemy AI (pursuit, attack)'}</span>
+              <span>{currentLang === 'fr' ? 'IA ennemie (poursuite, attaque, inactivité, patrouille)' : currentLang === 'zh' ? '敌人AI（追击、攻击、闲置、巡逻）' : 'Enemy AI (idle, patrol, chase, attack)'}</span>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="text-red-500 font-bold">•</span>
-              <span>{currentLang === 'fr' ? 'Feedback visuel & audio synchronisé' : currentLang === 'zh' ? '视觉与音频反馈同步' : 'Synchronized visual & audio feedback'}</span>
-            </li>
+            
           </ul>
         </div>
 
@@ -278,10 +275,7 @@ const softSkillsTitle = {
               <span class="text-blue-500 font-bold">•</span>
               <span>{currentLang === 'fr' ? 'Effets d\'impact (6 images)' : currentLang === 'zh' ? '冲击效果（6帧）' : 'Impact effects (6-frame sequences)'}</span>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="text-blue-500 font-bold">•</span>
-              <span>{currentLang === 'fr' ? 'Transitions fluides' : currentLang === 'zh' ? '流畅过渡' : 'Smooth state transitions'}</span>
-            </li>
+            
           </ul>
         </div>
 
@@ -294,10 +288,7 @@ const softSkillsTitle = {
             </h3>
           </div>
           <ul class="space-y-2 text-slate-600 dark:text-slate-300">
-            <li class="flex items-start gap-2">
-              <span class="text-green-500 font-bold">•</span>
-              <span>{currentLang === 'fr' ? 'UI grille pour visualisation' : currentLang === 'zh' ? '网格UI可视化' : 'Grid-based UI visualization'}</span>
-            </li>
+          
             <li class="flex items-start gap-2">
               <span class="text-green-500 font-bold">•</span>
               <span>{currentLang === 'fr' ? 'Armes avec propriétés uniques' : currentLang === 'zh' ? '具有独特属性的武器' : 'Weapons with unique properties'}</span>
@@ -334,10 +325,7 @@ const softSkillsTitle = {
               <span class="text-purple-500 font-bold">•</span>
               <span>{currentLang === 'fr' ? 'Placement d\'objets' : currentLang === 'zh' ? '物品放置' : 'Item placement logic'}</span>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="text-purple-500 font-bold">•</span>
-              <span>{currentLang === 'fr' ? 'Difficulté progressive' : currentLang === 'zh' ? '渐进式难度' : 'Progressive difficulty scaling'}</span>
-            </li>
+           
           </ul>
         </div>
       </div>
@@ -353,56 +341,56 @@ const softSkillsTitle = {
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
             <h3 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">
-              {currentLang === 'fr' ? '🎯 Résolution de Problèmes' : currentLang === 'zh' ? '🎯 问题解决' : '🎯 Problem-Solving'}
+              {currentLang === 'fr' ? '👥 Team Management' : currentLang === 'zh' ? '👥 团队管理' : '👥 Team Management'}
             </h3>
             <p class="text-slate-600 dark:text-slate-300">
               {currentLang === 'fr' 
-                ? 'Décomposition de mécaniques complexes, debugging visuel/logique, solutions créatives aux limitations techniques.'
+                ? 'Répartition du travail, alignement sur les objectifs, coordination des contributions transverses.'
                 : currentLang === 'zh'
-                ? '分解复杂机制、视觉/逻辑调试、技术限制的创意解决方案。'
-                : 'Breaking down complex mechanics, visual/logical debugging, creative solutions to technical limitations.'
+                ? '分工、目标对齐、跨职能协调。'
+                : 'Workload allocation, goal alignment, cross-functional coordination.'
               }
             </p>
           </div>
           
           <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
             <h3 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-4">
-              {currentLang === 'fr' ? '📚 Auto-apprentissage' : currentLang === 'zh' ? '📚 自主学习' : '📚 Self-Learning'}
-            </h3>
-            <p class="text-slate-600 dark:text-slate-300">
-              {currentLang === 'fr' 
-                ? 'Documentation libGDX, tutoriels, expérimentation d\'approches diverses.'
-                : currentLang === 'zh'
-                ? 'libGDX文档、教程、尝试不同方法。'
-                : 'libGDX documentation, tutorials, experimenting with different approaches.'
-              }
+              {currentLang === 'fr' ? '📚 Project Management' : currentLang === 'zh' ? '📚 项目管理' : '📚 Project Management'}
+              </h3>
+              <p class="text-slate-600 dark:text-slate-300">
+                {currentLang === 'fr' 
+                  ? 'Fusion des modules, intégration technique, résolution d’incompatibilités inter-composants.'
+                  : currentLang === 'zh'
+                  ? '模块融合、技术整合、跨组件不兼容问题解决。'
+                  : 'Module merging, technical integration, resolving cross-component incompatibilities.'
+                }
             </p>
           </div>
           
           <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
             <h3 class="text-xl font-bold text-green-600 dark:text-green-400 mb-4">
-              {currentLang === 'fr' ? '📋 Gestion de Projet' : currentLang === 'zh' ? '📋 项目管理' : '📋 Project Management'}
-            </h3>
-            <p class="text-slate-600 dark:text-slate-300">
-              {currentLang === 'fr' 
-                ? 'Planification features, gestion scope/temps, développement itératif.'
-                : currentLang === 'zh'
-                ? '功能规划、范围/时间管理、迭代开发。'
-                : 'Feature planning, scope/time management, iterative development.'
-              }
+              {currentLang === 'fr' ? '📅 Planning Management' : currentLang === 'zh' ? '📅 规划管理' : '📅 Planning Management'}
+              </h3>
+              <p class="text-slate-600 dark:text-slate-300">
+                {currentLang === 'fr' 
+                  ? 'Roadmap, jalons itératifs, structuration robuste de la timeline.'
+                  : currentLang === 'zh'
+                  ? '路线图、迭代里程碑、稳健时间线结构。'
+                  : 'Roadmap, iterative milestones, robust timeline structuring.'
+                }
             </p>
           </div>
           
           <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
             <h3 class="text-xl font-bold text-red-600 dark:text-red-400 mb-4">
-              {currentLang === 'fr' ? '🎨 Attention aux Détails' : currentLang === 'zh' ? '🎨 注重细节' : '🎨 Attention to Detail'}
+              {currentLang === 'fr' ? '🎲 Risk & Dependency Management' : currentLang === 'zh' ? '🎲 风险与依赖管理' : '🎲 Risk & Dependency Management'}
             </h3>
             <p class="text-slate-600 dark:text-slate-300">
               {currentLang === 'fr' 
-                ? 'Affinage game feel, feedback visuel cohérent, équilibrage gameplay.'
+                ? 'Cartographie des dépendances critiques, mitigation proactive, réduction de l’incertitude technique.'
                 : currentLang === 'zh'
-                ? '微调游戏感觉、连贯的视觉反馈、游戏平衡。'
-                : 'Fine-tuning game feel, cohesive visual feedback, gameplay balancing.'
+                ? '关键依赖映射、主动缓解、降低技术不确定性。'
+                : 'Critical dependency mapping, proactive mitigation, reducing technical uncertainty.'
               }
             </p>
           </div>
@@ -411,141 +399,24 @@ const softSkillsTitle = {
     </section>
 
     <!-- 🔧 TECHNICAL DEEP DIVE - Collapsible -->
-    <section class="max-w-5xl mx-auto px-6 py-20">
-      <details class="group bg-white dark:bg-slate-800 rounded-2xl shadow-xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden data-animate">
-        <summary class="cursor-pointer p-8 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-          <div class="flex items-center justify-between">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-              <span class="text-4xl">🔧</span>
-              {techDeepDive[currentLang]}
-            </h2>
-            <svg class="w-8 h-8 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </div>
-        </summary>
-        
-        <div class="p-8 pt-0 space-y-8 border-t-2 border-slate-200 dark:border-slate-700">
-          <!-- Game Architecture -->
-          <div>
-            <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center gap-2">
-              <span>🏗️</span>
-              {currentLang === 'fr' ? 'Architecture de Jeu' : currentLang === 'zh' ? '游戏架构' : 'Game Architecture'}
-            </h3>
-            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
-              <li class="flex items-start gap-3">
-                <span class="text-blue-500 mt-1">▸</span>
-                <span><strong>MVC Architecture:</strong> {currentLang === 'fr' ? 'Séparation claire Modèle-Vue-Contrôleur pour maintenabilité' : currentLang === 'zh' ? '清晰的模型-视图-控制器分离以提高可维护性' : 'Clean Model-View-Controller separation for maintainability'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-blue-500 mt-1">▸</span>
-                <span><strong>Entity-Component System:</strong> {currentLang === 'fr' ? 'Flexibilité maximum pour ajout features' : currentLang === 'zh' ? '最大灵活性以添加功能' : 'Maximum flexibility for adding features'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-blue-500 mt-1">▸</span>
-                <span><strong>Design Patterns:</strong> Observer, State, Strategy, Factory</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-blue-500 mt-1">▸</span>
-                <span><strong>Game States:</strong> Menu → Gameplay → Pause → Game Over</span>
-              </li>
-            </ul>
-          </div>
+<section class="max-w-5xl mx-auto px-6 py-20">
+  
 
-          <!-- Combat Physics -->
-          <div>
-            <h3 class="text-2xl font-bold text-red-600 dark:text-red-400 mb-4 flex items-center gap-2">
-              <span>⚡</span>
-              {currentLang === 'fr' ? 'Physique de Combat' : currentLang === 'zh' ? '战斗物理' : 'Combat Physics'}
-            </h3>
-            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 mt-1">▸</span>
-                <span><strong>Collision Detection:</strong> {currentLang === 'fr' ? 'Entre entités avec calcul précis' : currentLang === 'zh' ? '实体之间的精确计算' : 'Between entities with precise calculation'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 mt-1">▸</span>
-                <span><strong>Attack Hitboxes:</strong> {currentLang === 'fr' ? 'Timing précis pour feedback satisfaisant' : currentLang === 'zh' ? '精确时间以获得令人满意的反馈' : 'Precise timing for satisfying feedback'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 mt-1">▸</span>
-                <span><strong>Responsive Controls:</strong> {currentLang === 'fr' ? 'Input lag minimal (<16ms)' : currentLang === 'zh' ? '最小输入延迟（<16ms）' : 'Minimal input lag (<16ms)'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 mt-1">▸</span>
-                <span><strong>Combat Balancing:</strong> {currentLang === 'fr' ? 'Dégâts, vitesse, cooldowns ajustés' : currentLang === 'zh' ? '调整伤害、速度、冷却时间' : 'Damage, speed, cooldowns tuned'}</span>
-              </li>
-            </ul>
-          </div>
+  <!-- Tech Stack Details -->
+  <div class="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-6 rounded-xl shadow-xl mt-8">
+    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">
+      {stackLabel}
+    </h3>
+    <div class="flex flex-wrap gap-3">
+      {project.stack.map(tech => (
+        <span class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
 
-          <!-- AI Behavior -->
-          <div>
-            <h3 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4 flex items-center gap-2">
-              <span>🤖</span>
-              {currentLang === 'fr' ? 'Comportement IA' : currentLang === 'zh' ? 'AI行为' : 'AI Behavior'}
-            </h3>
-            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
-              <li class="flex items-start gap-3">
-                <span class="text-purple-500 mt-1">▸</span>
-                <span><strong>Pathfinding:</strong> {currentLang === 'fr' ? 'Algorithme de recherche de chemin pour poursuite' : currentLang === 'zh' ? '用于追击的寻路算法' : 'Pathfinding algorithm for pursuit'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-purple-500 mt-1">▸</span>
-                <span><strong>State Machines:</strong> {currentLang === 'fr' ? 'États ennemis (idle, patrol, chase, attack)' : currentLang === 'zh' ? '敌人状态（闲置、巡逻、追击、攻击）' : 'Enemy states (idle, patrol, chase, attack)'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-purple-500 mt-1">▸</span>
-                <span><strong>Attack Patterns:</strong> {currentLang === 'fr' ? 'Détection de portée et timing d\'attaque' : currentLang === 'zh' ? '范围检测和攻击时机' : 'Range detection and attack timing'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-purple-500 mt-1">▸</span>
-                <span><strong>Difficulty Balancing:</strong> {currentLang === 'fr' ? 'Ajustement dynamique selon progression' : currentLang === 'zh' ? '根据进度动态调整' : 'Dynamic adjustment based on progression'}</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Performance Optimization -->
-          <div>
-            <h3 class="text-2xl font-bold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-              <span>🚀</span>
-              {currentLang === 'fr' ? 'Optimisation Performance' : currentLang === 'zh' ? '性能优化' : 'Performance Optimization'}
-            </h3>
-            <ul class="space-y-3 text-slate-600 dark:text-slate-300 pl-6">
-              <li class="flex items-start gap-3">
-                <span class="text-green-500 mt-1">▸</span>
-                <span><strong>Object Pooling:</strong> {currentLang === 'fr' ? 'Réutilisation objets pour réduire GC' : currentLang === 'zh' ? '重用对象以减少GC' : 'Reusing objects to reduce GC'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-green-500 mt-1">▸</span>
-                <span><strong>Sprite Batching:</strong> {currentLang === 'fr' ? 'Rendu groupé pour performance optimale' : currentLang === 'zh' ? '批量渲染以获得最佳性能' : 'Batch rendering for optimal performance'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-green-500 mt-1">▸</span>
-                <span><strong>Memory Management:</strong> {currentLang === 'fr' ? 'Surveillance allocation, cleanup proactif' : currentLang === 'zh' ? '监控分配、主动清理' : 'Monitoring allocation, proactive cleanup'}</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-green-500 mt-1">▸</span>
-                <span><strong>Target:</strong> 60 FPS {currentLang === 'fr' ? 'maintenu constant' : currentLang === 'zh' ? '保持恒定' : 'maintained consistently'}</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Tech Stack Details -->
-          <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">
-              {stackLabel}
-            </h3>
-            <div class="flex flex-wrap gap-3">
-              {project.stack.map(tech => (
-                <span class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
 
     <!-- 🎯 FINAL CTA -->
     <section class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
