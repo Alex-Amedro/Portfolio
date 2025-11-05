@@ -61,8 +61,8 @@ export const education: Education[] = [
       zh: '计算机科学与工程',
     },
     location: 'Tainan, Taiwan',
-    startDate: '2024-09',
-    endDate: '2025-06',
+    startDate: '2025-09',
+    endDate: '2026-02',
     description: {
       en: 'International exchange program. Courses: Computer Architecture (GPU), Computer Vision & Deep Learning, New Generation Networks (video streaming), Computational Neuroscience.',
       fr: 'Programme d\'échange international. Cours : Architecture Informatique (GPU), Vision par Ordinateur & Deep Learning, Réseaux Nouvelle Génération (streaming vidéo), Neurosciences Computationnelles.',

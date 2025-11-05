@@ -59,8 +59,12 @@ const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Remplacer par votre ID Google Analy
       </>
     )}
     
-    <!-- Script pour éviter le flash en mode sombre -->
+    <!-- Script pour forcer le mode sombre -->
     <script is:inline>
+      // Force le mode sombre pour l'instant
+      document.documentElement.classList.add('dark');
+      
+      /* Code original - désactivé temporairement
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
           return localStorage.getItem('theme');
@@ -76,6 +80,7 @@ const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Remplacer par votre ID Google Analy
       } else {
         document.documentElement.classList.remove('dark');
       }
+      */
     </script>
   </head>
   <body class="bg-bg-light dark:bg-dark-bg text-text-dark dark:text-dark-text font-sans transition-colors duration-300">
