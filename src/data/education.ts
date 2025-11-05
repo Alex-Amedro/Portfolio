@@ -45,6 +45,7 @@ export const education: Education[] = [
       fr: 'Diplôme d\'ingénieur certifié CTI, spécialisé en Imagerie et Multimédia. Focus sur l\'informatique graphique, la vision par ordinateur, le traitement du signal et l\'apprentissage automatique.',
       zh: 'CTI认证的工程学位，专注于成像与多媒体。重点学习计算机图形学、计算机视觉、信号处理和机器学习。',
     },
+    logo: '/logo/Logo-toulouse-inp-N7.png',
   },
   {
     id: '2',
@@ -67,6 +68,7 @@ export const education: Education[] = [
       fr: 'Programme d\'échange international. Cours : Architecture Informatique (GPU), Vision par Ordinateur & Deep Learning, Réseaux Nouvelle Génération (streaming vidéo), Neurosciences Computationnelles.',
       zh: '国际交流项目。课程：计算机体系结构（GPU）、计算机视觉与深度学习、新一代网络（视频流）、计算神经科学。',
     },
+    logo: '/logo/msys_1045_9644985_71823.gif',
   },
   {
     id: '3',

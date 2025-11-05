@@ -423,9 +423,9 @@ Compétences Transversales :
 - 测试：为核心解析功能编写单元测试
 - 文档：清晰的代码注释和技术文档`,
     stack: ['C', 'Makefile', 'GCC', 'Unix/Linux'],
-    image: 'https://via.placeholder.com/800x600?text=Mini-Shell',
+    image: '/projects/minishell/Gemini_Generated_Image_s7mjqws7mjqws7mj.png',
     images: [
-      'https://via.placeholder.com/800x600?text=Mini-Shell+CLI',
+      '/projects/minishell/Gemini_Generated_Image_s7mjqws7mjqws7mj.png',
     ],
     liveUrl: '',
     githubUrl: 'https://github.com/Alex-Amedro',

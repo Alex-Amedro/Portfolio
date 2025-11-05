@@ -38,13 +38,15 @@ function formatDate(dateString: string | null, isCurrent: boolean) {
             </p>
           </div>
           
-          <!-- Placeholder pour logo (optionnel) -->
+          <!-- Logo avec fond blanc -->
           {edu.logo && (
-            <img 
-              src={edu.logo} 
-              alt={`${edu.school} logo`}
-              class="w-16 h-16 object-contain"
-            />
+            <div class="bg-white dark:bg-white rounded-lg p-2 shadow-sm">
+              <img 
+                src={edu.logo} 
+                alt={`${edu.school} logo`}
+                class="w-16 h-16 object-contain"
+              />
+            </div>
           )}
         </div>
         

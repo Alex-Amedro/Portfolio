@@ -1,149 +1,258 @@
 ---
+// src/pages/[lang]/projects/minishell.astro
+// VERSION SIMPLIFIÉE ET COMPLÈTE
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { getTranslation } from '../../../data/translations';
 import { getProjectBySlug } from '../../../data/projects';
 
 export function getStaticPaths() {
   return [
-    { params: { lang: 'en', slug: 'minishell' } },
-    { params: { lang: 'fr', slug: 'minishell' } },
-    { params: { lang: 'zh', slug: 'minishell' } }
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
   ];
 }
 
-const { lang, slug } = Astro.params;
-const currentLang = (lang || 'en') as 'en' | 'fr' | 'zh';
+const { lang } = Astro.params;
+const currentLang = lang || 'en';
 const project = getProjectBySlug('minishell');
 
 if (!project) {
-  return Astro.redirect(`/${lang}/projects`);
+  return Astro.redirect(`/${currentLang}/projects`);
 }
 
-const t = {
-  en: {
-    challenge: 'Technical Challenges',
-    solution: 'Solution',
-    learnings: 'What I Learned',
-    stack: 'Tech Stack',
-    viewCode: 'View Code',
-    backToProjects: 'Back to Projects',
-  },
-  fr: {
-    challenge: 'Défis Techniques',
-    solution: 'Solution',
-    learnings: 'Ce que j\'ai Appris',
-    stack: 'Stack Technique',
-    viewCode: 'Voir le Code',
-    backToProjects: 'Retour aux Projets',
-  },
-  zh: {
-    challenge: '技术挑战',
-    solution: '解决方案',
-    learnings: '学到的知识',
-    stack: '技术栈',
-    viewCode: '查看代码',
-    backToProjects: '返回项目',
-  }
-};
-
-const translations = t[currentLang];
-const getTitle = () => currentLang === 'fr' ? project.titleFr : currentLang === 'zh' ? project.titleZh : project.titleEn;
-const getDescription = () => currentLang === 'fr' ? project.descriptionFr : currentLang === 'zh' ? project.descriptionZh : project.descriptionEn;
-const getChallenge = () => currentLang === 'fr' ? project.challengeFr : currentLang === 'zh' ? project.challengeZh : project.challengeEn;
-const getSolution = () => currentLang === 'fr' ? project.solutionFr : currentLang === 'zh' ? project.solutionZh : project.solutionEn;
-const getLearnings = () => currentLang === 'fr' ? project.learningsFr : currentLang === 'zh' ? project.learningsZh : project.learningsEn;
+const viewOnGithub = getTranslation(currentLang, 'projects.viewOnGithub');
 ---
 
-<Layout title={`${getTitle()} | Alexandre Amedro`} description={getDescription()}>
+<Layout title="Mini-Shell - POSIX Shell | Alexandre Amedro">
   <Header lang={currentLang} />
 
   <main class="pt-20">
-    <!-- Hero Section -->
-    <section class="max-w-5xl mx-auto px-6 py-20">
-      <a href={`/${currentLang}/projects`} class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline mb-8">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        {translations.backToProjects}
-      </a>
-
-      <h1 class="text-5xl md:text-6xl font-bold text-text-dark dark:text-dark-text mb-4 data-animate">
-        {getTitle()}
-      </h1>
-      <p class="text-xl text-gray-600 dark:text-dark-text-secondary mb-8 data-animate">
-        {getDescription()}
-      </p>
-
-      <!-- Meta Info -->
-      <div class="flex flex-wrap gap-6 mb-12 data-animate">
-        <div>
-          <span class="text-sm text-gray-600 dark:text-dark-text-secondary">Status</span>
-          <p class="text-lg font-semibold text-text-dark dark:text-dark-text">
-            {project.status === 'completed' ? 'Completed' : 'In Progress'}
-          </p>
+    <!-- HERO -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white overflow-hidden min-h-screen flex items-center">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.1) 2px, rgba(0,255,0,0.1) 4px);"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-6 py-20 w-full">
+        <div class="flex flex-wrap gap-3 mb-8 justify-center">
+          <span class="px-5 py-2 bg-green-500/30 border-2 border-green-400 rounded-lg text-green-200 font-mono font-bold text-sm backdrop-blur">✓ COMPLETED</span>
+          <span class="px-5 py-2 bg-blue-500/30 border-2 border-blue-400 rounded-lg text-blue-200 font-mono font-bold text-sm backdrop-blur">Nov 2025</span>
+          <span class="px-5 py-2 bg-purple-500/30 border-2 border-purple-400 rounded-lg text-purple-200 font-mono font-bold text-sm backdrop-blur">C • POSIX</span>
         </div>
-        <div>
-          <span class="text-sm text-gray-600 dark:text-dark-text-secondary">Date</span>
-          <p class="text-lg font-semibold text-text-dark dark:text-dark-text">{project.date}</p>
+
+        <div class="max-w-5xl mx-auto mb-12">
+          <div class="bg-slate-800 rounded-t-xl p-4 flex items-center gap-2 border-b-2 border-green-500">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <span class="ml-4 text-slate-400 font-mono text-sm">minishell</span>
+          </div>
+          <div class="bg-slate-950 p-8 rounded-b-xl border-2 border-green-500/30 font-mono">
+            <div class="space-y-3 text-lg">
+              <div class="flex items-center gap-2">
+                <span class="text-green-400">$</span>
+                <span class="text-white">./minishell</span>
+              </div>
+              <div class="text-green-300 italic">
+                {currentLang === 'fr' ? '// Un shell POSIX complet écrit en C' : currentLang === 'zh' ? '// 用C编写的完整POSIX shell' : '// A complete POSIX shell written in C'}
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-green-400">minishell$</span>
+                <span class="text-white animate-pulse">|</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-center mb-6 font-mono">
+          <span class="text-green-400">&gt;</span> Mini-Shell - POSIX Implementation
+        </h1>
+        
+        <p class="text-2xl text-center text-green-200 font-bold mb-12">
+          {currentLang === 'fr' ? 'Construire un shell from scratch. Maîtriser les appels POSIX.' : currentLang === 'zh' ? '从头开始构建shell。掌握POSIX调用。' : 'Build a shell from scratch. Master POSIX system calls.'}
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
+          <div class="bg-slate-800/50 backdrop-blur border-2 border-green-500/30 p-6 rounded-xl text-center">
+            <div class="text-4xl font-black text-green-400 mb-2 font-mono">5+</div>
+            <div class="text-sm text-slate-300">{currentLang === 'fr' ? 'Appels POSIX' : 'POSIX Calls'}</div>
+          </div>
+          <div class="bg-slate-800/50 backdrop-blur border-2 border-blue-500/30 p-6 rounded-xl text-center">
+            <div class="text-4xl font-black text-blue-400 mb-2 font-mono">3</div>
+            <div class="text-sm text-slate-300">{currentLang === 'fr' ? 'États Process' : 'Process States'}</div>
+          </div>
+          <div class="bg-slate-800/50 backdrop-blur border-2 border-purple-500/30 p-6 rounded-xl text-center">
+            <div class="text-4xl font-black text-purple-400 mb-2 font-mono">100%</div>
+            <div class="text-sm text-slate-300">{currentLang === 'fr' ? 'Sécurité' : 'Memory Safe'}</div>
+          </div>
+          <div class="bg-slate-800/50 backdrop-blur border-2 border-orange-500/30 p-6 rounded-xl text-center">
+            <div class="text-4xl font-black text-orange-400 mb-2 font-mono">0</div>
+            <div class="text-sm text-slate-300">{currentLang === 'fr' ? 'Fuites' : 'Leaks'}</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href={project.githubUrl} target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-green-500 text-slate-900 font-black rounded-xl hover:bg-green-400 transition-all duration-300 shadow-2xl text-lg font-mono">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {viewOnGithub}
+          </a>
         </div>
       </div>
+    </section>
 
-      <!-- Tech Stack -->
-      <div class="mb-12 data-animate">
-        <h3 class="text-lg font-bold text-text-dark dark:text-dark-text mb-4">{translations.stack}</h3>
-        <div class="flex flex-wrap gap-3">
-          {project.stack.map((tech) => (
-            <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-semibold">
+    <!-- CORE FEATURES -->
+    <section class="bg-white dark:bg-slate-900 py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-12 text-center">⚙️ {currentLang === 'fr' ? 'Fonctionnalités Principales' : 'Core Features'}</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-8 rounded-2xl border-2 border-green-200 dark:border-green-700">
+            <div class="text-5xl mb-4">⚡</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-mono">{currentLang === 'fr' ? 'Exécution' : 'Execution'}</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+              <li>• Fork/exec for process creation</li>
+              <li>• Wait for parent-child sync</li>
+              <li>• Return code handling</li>
+              <li>• PATH resolution</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-8 rounded-2xl border-2 border-blue-200 dark:border-blue-700">
+            <div class="text-5xl mb-4">🔍</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-mono">{currentLang === 'fr' ? 'Parsing' : 'Parsing'}</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+              <li>• Advanced tokenization</li>
+              <li>• Multiple spaces handling</li>
+              <li>• Quotes (single/double)</li>
+              <li>• State machine logic</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-8 rounded-2xl border-2 border-purple-200 dark:border-purple-700">
+            <div class="text-5xl mb-4">🛡️</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-mono">{currentLang === 'fr' ? 'Signaux' : 'Signals'}</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+              <li>• SIGINT (Ctrl+C) handling</li>
+              <li>• Shell stays active</li>
+              <li>• Clean signal handlers</li>
+              <li>• Graceful interrupts</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 p-8 rounded-2xl border-2 border-orange-200 dark:border-orange-700">
+            <div class="text-5xl mb-4">📥</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-mono">I/O</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+              <li>• stdin/stdout/stderr</li>
+              <li>• File descriptors</li>
+              <li>• Robust error handling</li>
+              <li>• Informative messages</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 p-8 rounded-2xl border-2 border-red-200 dark:border-red-700">
+            <div class="text-5xl mb-4">🔒</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-mono">{currentLang === 'fr' ? 'Mémoire' : 'Memory'}</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+              <li>• Zero memory leaks</li>
+              <li>• Systematic cleanup</li>
+              <li>• Valgrind clean</li>
+              <li>• Allocation tracking</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 p-8 rounded-2xl border-2 border-yellow-200 dark:border-yellow-700">
+            <div class="text-5xl mb-4">💪</div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 font-mono">{currentLang === 'fr' ? 'Robustesse' : 'Resilience'}</h3>
+            <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+              <li>• No crashes</li>
+              <li>• Clear error messages</li>
+              <li>• Continues after errors</li>
+              <li>• Consistent state</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="bg-slate-50 dark:bg-slate-800 py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">🛠️ Tech Stack</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+          {project.stack.map(tech => (
+            <span class="px-6 py-3 bg-green-600 text-white rounded-xl font-mono font-bold text-lg hover:bg-green-700 transition-all shadow-lg hover:-translate-y-1">
               {tech}
             </span>
           ))}
         </div>
       </div>
-
-      <!-- CTA -->
-      {project.githubUrl && (
-        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 btn btn-primary text-lg data-animate">
-          {translations.viewCode}
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
-          </svg>
-        </a>
-      )}
     </section>
 
-    <!-- Challenges Section -->
-    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-gray-200 dark:border-gray-700">
-      <h2 class="text-4xl font-bold text-text-dark dark:text-dark-text mb-12 data-animate">
-        {translations.challenge}
-      </h2>
-      <div class="prose dark:prose-invert max-w-none data-animate">
-        <div class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-          {getChallenge()}
+    <!-- SKILLS -->
+    <section class="bg-white dark:bg-slate-900 py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-12 text-center">💡 {currentLang === 'fr' ? 'Compétences Acquises' : 'Skills Gained'}</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-8 rounded-2xl border-2 border-green-500">
+            <h3 class="text-2xl font-bold text-green-600 dark:text-green-400 mb-6 font-mono">🎓 Technical</h3>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+              <li>• <strong>POSIX System Calls:</strong> fork, exec, wait, signal</li>
+              <li>• <strong>Process Management:</strong> Lifecycle, parent-child sync</li>
+              <li>• <strong>C Programming:</strong> Pointers, malloc/free, structs</li>
+              <li>• <strong>Parsing:</strong> State machines, validation</li>
+              <li>• <strong>Systems Programming:</strong> Understanding OS at low level</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-8 rounded-2xl border-2 border-blue-500">
+            <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-6 font-mono">🚀 Soft Skills</h3>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+              <li>• <strong>Problem-solving:</strong> Complex system interactions</li>
+              <li>• <strong>System Thinking:</strong> Processes and OS signals</li>
+              <li>• <strong>Testing:</strong> Unit tests, edge cases</li>
+              <li>• <strong>Documentation:</strong> Clear comments, man pages</li>
+              <li>• <strong>Rigor:</strong> Error-free memory management</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Solution Section -->
-    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-gray-200 dark:border-gray-700">
-      <h2 class="text-4xl font-bold text-text-dark dark:text-dark-text mb-12 data-animate">
-        {translations.solution}
-      </h2>
-      <div class="prose dark:prose-invert max-w-none data-animate">
-        <div class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-          {getSolution()}
-        </div>
-      </div>
-    </section>
-
-    <!-- Learnings Section -->
-    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-gray-200 dark:border-gray-700">
-      <h2 class="text-4xl font-bold text-text-dark dark:text-dark-text mb-12 data-animate">
-        {translations.learnings}
-      </h2>
-      <div class="prose dark:prose-invert max-w-none data-animate">
-        <div class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-          {getLearnings()}
+    <!-- CTA -->
+    <section class="bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="text-6xl mb-6 font-mono">$_</div>
+        <h2 class="text-4xl md:text-5xl font-black mb-6 font-mono">
+          {currentLang === 'fr' ? 'Prêt à Plonger dans le Code ?' : 'Ready to Dive Into the Code?'}
+        </h2>
+        <p class="text-xl text-green-200 mb-8 max-w-2xl mx-auto">
+          {currentLang === 'fr' 
+            ? 'Explorez l\'implémentation complète sur GitHub. Code propre, commentaires détaillés.'
+            : 'Explore the full implementation on GitHub. Clean code, detailed comments.'
+          }
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={project.githubUrl} target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-green-500 text-slate-900 font-black rounded-xl hover:bg-green-400 transition-all duration-300 shadow-2xl text-lg font-mono">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {viewOnGithub}
+          </a>
+          
+          <a href={`/${currentLang}/projects`} class="inline-flex items-center gap-3 px-10 py-5 bg-transparent border-3 border-green-400 text-green-400 font-black rounded-xl hover:bg-green-400/20 transition-all duration-300 text-lg font-mono">
+            {currentLang === 'fr' ? 'Autres Projets' : 'Other Projects'}
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -151,3 +260,20 @@ const getLearnings = () => currentLang === 'fr' ? project.learningsFr : currentL
 
   <Footer lang={currentLang} />
 </Layout>
+
+<style>
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
