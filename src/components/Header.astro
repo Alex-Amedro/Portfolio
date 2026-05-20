@@ -38,6 +38,12 @@ const navContact = getTranslation(lang, 'nav.contact');
           {navContact}
         </a>
       </li>
+      <li>
+        <a href={`/${lang}/cam`} class="cam-link">
+          <span class="cam-dot"></span>
+          CAM
+        </a>
+      </li>
     </ul>
 
     <!-- Theme Toggle + Language Switcher + Menu Mobile -->
@@ -55,3 +61,35 @@ const navContact = getTranslation(lang, 'nav.contact');
     </div>
   </nav>
 </header>
+
+<style>
+  .cam-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    transition: background 0.2s;
+  }
+  .cam-link:hover {
+    background: rgba(139, 92, 246, 0.25);
+  }
+  .cam-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 6px #22c55e;
+    display: inline-block;
+    animation: cam-blink 1.4s ease-in-out infinite;
+  }
+  @keyframes cam-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+</style>
