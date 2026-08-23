@@ -1,0 +1,797 @@
+---
+// src/pages/[lang]/projects/drone-speedrunner-rl.astro
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getTranslation } from '../../../data/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'zh' } }
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang || 'en') as 'en' | 'fr' | 'zh';
+
+const t = (key: string) => getTranslation(currentLang, key);
+
+const heroTitles = {
+  en: 'Drone Speedrunner',
+  fr: 'Drone Speedrunner',
+  zh: '无人机极速跑者',
+};
+
+const heroSubtitles = {
+  en: 'RL Obstacle Avoidance — Phase 1',
+  fr: 'Évitement d\'Obstacles par RL — Phase 1',
+  zh: '强化学习避障 — 第一阶段',
+};
+
+const heroPitches = {
+  en: 'A quadrotor learns to fly at ~12 m/s through an infinite tree corridor — no map, no trajectory, only a 2D LiDAR.',
+  fr: 'Un quadrirotor apprend à voler à ~12 m/s dans un couloir d\'arbres infini — sans carte, sans trajectoire, seulement un LiDAR 2D.',
+  zh: '四旋翼无人机学习以约12m/s穿越无限树木走廊——无地图、无轨迹、仅凭2D LiDAR。',
+};
+---
+
+<Layout title={`${heroTitles[currentLang]} | Alexandre Amedro`} description={heroPitches[currentLang]}>
+  <Header lang={currentLang} />
+
+  <main class="pt-20">
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section class="relative bg-gradient-to-br from-slate-950 via-cyan-950 to-teal-900 text-white overflow-hidden min-h-[90vh] flex items-center">
+      <!-- Animated grid bg -->
+      <div class="absolute inset-0 opacity-10" aria-hidden="true">
+        <div class="absolute inset-0" style="background-image: linear-gradient(rgba(20,184,166,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(20,184,166,0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+      </div>
+      <!-- Radial glow -->
+      <div class="absolute top-1/4 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-400/8 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <div class="relative max-w-7xl mx-auto px-6 py-24 md:py-32 w-full">
+        <div class="grid md:grid-cols-2 gap-14 items-center">
+
+          <!-- Left: text -->
+          <div class="space-y-8 data-animate">
+            <!-- Badges -->
+            <div class="flex flex-wrap gap-3">
+              <span class="px-4 py-1.5 bg-cyan-500/20 border border-cyan-500/50 rounded-lg text-cyan-200 font-bold text-sm backdrop-blur-sm">
+                ⚡ Phase 1
+              </span>
+              <span class="px-4 py-1.5 bg-teal-500/20 border border-teal-500/50 rounded-lg text-teal-200 font-bold text-sm backdrop-blur-sm">
+                🤖 Reinforcement Learning
+              </span>
+              <span class="px-4 py-1.5 bg-orange-500/20 border border-orange-500/50 rounded-lg text-orange-200 font-bold text-sm backdrop-blur-sm">
+                🔬 {currentLang === 'fr' ? 'En cours' : currentLang === 'zh' ? '进行中' : 'In Progress'}
+              </span>
+            </div>
+
+            <div>
+              <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tight">
+                {heroTitles[currentLang]}
+              </h1>
+              <p class="text-2xl md:text-3xl font-bold text-cyan-300 mt-3">
+                {heroSubtitles[currentLang]}
+              </p>
+            </div>
+
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-xl">
+              {heroPitches[currentLang]}
+            </p>
+
+            <!-- Key number -->
+            <div class="flex flex-wrap gap-6">
+              <div class="bg-white/5 border border-cyan-500/30 rounded-2xl px-6 py-4 backdrop-blur-sm">
+                <div class="text-4xl font-black text-cyan-300">~12 m/s</div>
+                <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1">
+                  {currentLang === 'fr' ? 'Vitesse de vol' : currentLang === 'zh' ? '飞行速度' : 'Flight speed'}
+                </div>
+              </div>
+              <div class="bg-white/5 border border-teal-500/30 rounded-2xl px-6 py-4 backdrop-blur-sm">
+                <div class="text-4xl font-black text-teal-300">486 m</div>
+                <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1">
+                  {currentLang === 'fr' ? 'Meilleure distance (obstacles)' : currentLang === 'zh' ? '最佳有障碍距离' : 'Best distance (obstacles)'}
+                </div>
+              </div>
+              <div class="bg-white/5 border border-emerald-500/30 rounded-2xl px-6 py-4 backdrop-blur-sm">
+                <div class="text-4xl font-black text-emerald-300">1.7×</div>
+                <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1">
+                  {currentLang === 'fr' ? 'Au-delà de l\'entraînement' : currentLang === 'zh' ? '超越训练距离' : 'Beyond training dist.'}
+                </div>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex flex-wrap gap-4 pt-2">
+              <a href="#results"
+                 class="inline-flex items-center gap-3 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-400/40 hover:-translate-y-1">
+                {currentLang === 'fr' ? 'Voir les résultats' : currentLang === 'zh' ? '查看结果' : 'See Results'}
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </a>
+              <a href="#perception"
+                 class="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border-2 border-white/20 text-white font-bold rounded-xl hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 backdrop-blur-sm">
+                {currentLang === 'fr' ? 'Approche technique' : currentLang === 'zh' ? '技术方法' : 'Technical Approach'}
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: visual placeholder / media zone -->
+          <div class="relative data-animate" aria-label="Project visuals">
+            <!-- Main clip placeholder -->
+            <div class="relative rounded-2xl overflow-hidden border-2 border-cyan-500/30 bg-slate-900/80 backdrop-blur-sm shadow-2xl shadow-cyan-900/40 aspect-video flex items-center justify-center group">
+              <!-- If cover.jpg exists it will display; otherwise shows placeholder -->
+              <img
+                src="/projects/drone-speedrunner/cover.jpg"
+                alt="Drone flying through obstacle forest"
+                class="w-full h-full object-cover"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="absolute inset-0 flex-col items-center justify-center gap-4 text-slate-400 text-center p-8 hidden">
+                <svg class="w-20 h-20 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.069A1 1 0 0121 8.868V15.5M3 8l9 5 9-5M3 8v8l9 5 9-5V8"></path>
+                </svg>
+                <p class="text-sm opacity-50">{currentLang === 'fr' ? 'Clips vidéo à venir' : currentLang === 'zh' ? '视频片段即将上传' : 'Video clips coming soon'}</p>
+              </div>
+              <!-- Corner glow -->
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Floating stat cards -->
+            <div class="absolute -bottom-5 -left-5 bg-slate-900 border-2 border-cyan-500 px-5 py-3 rounded-xl shadow-xl shadow-cyan-900/40">
+              <div class="text-2xl font-black text-cyan-400">SAC</div>
+              <div class="text-xs text-slate-400 font-semibold">Soft Actor-Critic</div>
+            </div>
+            <div class="absolute -top-5 -right-5 bg-slate-900 border-2 border-teal-500 px-5 py-3 rounded-xl shadow-xl shadow-teal-900/40">
+              <div class="text-2xl font-black text-teal-400">∞ Runner</div>
+              <div class="text-xs text-slate-400 font-semibold">{currentLang === 'fr' ? 'Couloir infini' : currentLang === 'zh' ? '无限走廊' : 'Infinite corridor'}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         RESULTS
+    ═══════════════════════════════════════ -->
+    <section id="results" class="bg-slate-950 text-white py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 data-animate">
+          {currentLang === 'fr' ? '📊 Résultats' : currentLang === 'zh' ? '📊 结果' : '📊 Results'}
+        </h2>
+        <p class="text-center text-slate-400 mb-16 data-animate">
+          {currentLang === 'fr' ? 'Modèle final · 30 épisodes par configuration' : currentLang === 'zh' ? '最终模型 · 每配置30集' : 'Final model · 30 episodes per configuration'}
+        </p>
+
+        <!-- Stat cards row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 data-animate">
+          {[
+            { label: currentLang === 'fr' ? 'Couloir vide' : currentLang === 'zh' ? '空走廊' : 'Empty corridor', value: '100%', sub: '300m / 500m / 1000m', color: 'emerald' },
+            { label: currentLang === 'fr' ? 'Densité faible' : currentLang === 'zh' ? '低密度' : 'Low density', value: '96.7%', sub: '100m track', color: 'teal' },
+            { label: currentLang === 'fr' ? 'Densité moyenne' : currentLang === 'zh' ? '中密度' : 'Medium density', value: '90%', sub: '150m track', color: 'cyan' },
+            { label: currentLang === 'fr' ? 'Densité élevée' : currentLang === 'zh' ? '高密度' : 'Dense', value: '75%', sub: '50m track', color: 'yellow' },
+          ].map(s => (
+            <div class={`bg-slate-900 border border-${s.color}-500/30 rounded-2xl p-6 text-center hover:border-${s.color}-500/60 transition-colors`}>
+              <div class={`text-4xl md:text-5xl font-black text-${s.color}-400 mb-2`}>{s.value}</div>
+              <div class="text-sm font-bold text-white mb-1">{s.label}</div>
+              <div class="text-xs text-slate-500">{s.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Results table -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden data-animate">
+          <div class="px-6 py-4 border-b border-slate-700 bg-slate-800/50">
+            <h3 class="font-bold text-slate-200">
+              {currentLang === 'fr' ? 'Taux de réussite par configuration' : currentLang === 'zh' ? '各配置成功率' : 'Success rate by configuration'}
+            </h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-700/60">
+                  <th class="text-left px-6 py-3 text-slate-400 font-semibold">
+                    {currentLang === 'fr' ? 'Densité d\'obstacles' : currentLang === 'zh' ? '障碍物密度' : 'Obstacle density'}
+                  </th>
+                  <th class="text-center px-4 py-3 text-slate-400 font-semibold">50 m</th>
+                  <th class="text-center px-4 py-3 text-slate-400 font-semibold">100 m</th>
+                  <th class="text-center px-4 py-3 text-slate-400 font-semibold">150 m</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { density: currentLang === 'fr' ? 'Vide' : currentLang === 'zh' ? '空' : 'Empty', v50: '100%', v100: '—', v150: '—', highlight: true },
+                  { density: currentLang === 'fr' ? 'Faible' : currentLang === 'zh' ? '低' : 'Low', v50: '95%', v100: '96.7%', v150: '90%', highlight: false },
+                  { density: currentLang === 'fr' ? 'Moyenne' : currentLang === 'zh' ? '中' : 'Medium', v50: '95%', v100: '80%', v150: '90%', highlight: false },
+                  { density: currentLang === 'fr' ? 'Dense' : currentLang === 'zh' ? '高' : 'Dense', v50: '75%', v100: '—', v150: '—', highlight: false },
+                ].map((row, i) => (
+                  <tr class={`border-b border-slate-800 ${i % 2 === 0 ? 'bg-slate-900' : 'bg-slate-900/50'} hover:bg-slate-800/50 transition-colors`}>
+                    <td class="px-6 py-4 font-semibold text-slate-200">{row.density}</td>
+                    <td class="text-center px-4 py-4 text-emerald-400 font-bold">{row.v50}</td>
+                    <td class="text-center px-4 py-4 text-cyan-400 font-bold">{row.v100}</td>
+                    <td class="text-center px-4 py-4 text-teal-400 font-bold">{row.v150}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Headline result -->
+        <div class="mt-10 bg-gradient-to-r from-cyan-950 to-teal-950 border-2 border-cyan-500/40 rounded-2xl p-8 data-animate">
+          <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="text-6xl font-black text-cyan-400 shrink-0">486 m</div>
+            <div>
+              <p class="text-white font-bold text-xl mb-1">
+                {currentLang === 'fr'
+                  ? 'Parcourus sur une piste de 500 m avec obstacles'
+                  : currentLang === 'zh'
+                  ? '在有障碍物的500m赛道上行驶'
+                  : 'Covered on a 500m track with obstacles'}
+              </p>
+              <p class="text-slate-300 leading-relaxed">
+                {currentLang === 'fr'
+                  ? '1,7× plus loin que la plus longue piste jamais vue pendant l\'entraînement (limité à 300 m). Le modèle généralise au-delà de ce qu\'il a appris.'
+                  : currentLang === 'zh'
+                  ? '比训练期间见过的最长赛道（限300m）远1.7倍。模型能够泛化到超出训练范围的场景。'
+                  : '1.7× farther than the longest track ever seen during training (capped at 300m). The model generalizes beyond what it learned.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PERCEPTION — LiDAR FOVÉAL
+    ═══════════════════════════════════════ -->
+    <section id="perception" class="bg-gradient-to-br from-slate-900 to-cyan-950 text-white py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 data-animate">
+          {currentLang === 'fr' ? '🔭 Le Problème de Perception' : currentLang === 'zh' ? '🔭 感知问题' : '🔭 The Perception Problem'}
+        </h2>
+        <p class="text-center text-cyan-300/70 mb-16 text-lg data-animate">
+          {currentLang === 'fr' ? 'Résolu par le calcul, pas par tâtonnement' : currentLang === 'zh' ? '用数学解决，而非试错' : 'Solved by math, not trial and error'}
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <!-- Explanation -->
+          <div class="space-y-6 data-animate">
+            <div class="bg-white/5 border border-cyan-500/20 rounded-2xl p-6">
+              <h3 class="text-xl font-bold text-cyan-300 mb-4">
+                {currentLang === 'fr' ? 'Le LiDAR : 128 rayons sur 240°' : currentLang === 'zh' ? 'LiDAR：240°内128条射线' : 'The LiDAR: 128 rays over 240°'}
+              </h3>
+              <div class="space-y-3 text-slate-300 text-sm leading-relaxed">
+                <p>{currentLang === 'fr'
+                  ? 'Résolution angulaire entre deux rayons :'
+                  : currentLang === 'zh' ? '两条射线间的角分辨率：' : 'Angular resolution between two rays:'}
+                  <span class="text-cyan-300 font-bold font-mono ml-2">240° / 128 = 1.89°</span>
+                </p>
+                <p>{currentLang === 'fr'
+                  ? 'Angle couvert par un arbre de 30 cm vu à 20 m :'
+                  : currentLang === 'zh' ? '20m处30cm半径树木的覆盖角度：' : 'Angle covered by a 30cm tree at 20m:'}
+                  <span class="text-orange-300 font-bold font-mono ml-2">2×arctan(0.3/20) ≈ 1.72°</span>
+                </p>
+                <div class="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 mt-2">
+                  <p class="text-orange-200 font-semibold">
+                    {currentLang === 'fr'
+                      ? '1.72° < 1.89° → Au-delà de ~18 m, l\'arbre passe entre deux rayons et reste invisible.'
+                      : currentLang === 'zh'
+                      ? '1.72° < 1.89° → 超过约18m，树木可能从射线间隙穿过而不被探测到。'
+                      : '1.72° < 1.89° → Beyond ~18m, the tree slips between two rays and stays invisible.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6">
+              <h3 class="text-xl font-bold text-emerald-300 mb-3">
+                {currentLang === 'fr' ? '→ Capteur Fovéal' : currentLang === 'zh' ? '→ 中央凹传感器' : '→ Foveal Sensor'}
+              </h3>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                {currentLang === 'fr'
+                  ? 'Même nombre de rayons, mais concentrés vers l\'avant — comme la fovéa de l\'œil humain. La résolution angulaire devant est bien inférieure à 1.72°, rendant chaque arbre détectable à grande distance.'
+                  : currentLang === 'zh'
+                  ? '相同数量的射线，但集中在前方——类似人眼中央凹。前方角分辨率远低于1.72°，使每棵树在远处都能被探测到。'
+                  : 'Same number of rays, but concentrated forward — like the human eye\'s fovea. Forward angular resolution drops well below 1.72°, making every tree detectable at distance.'}
+              </p>
+            </div>
+          </div>
+
+          <!-- Visual diagram -->
+          <div class="data-animate">
+            <div class="bg-slate-950 rounded-2xl border border-slate-700 overflow-hidden aspect-square flex items-center justify-center relative">
+              <!-- SVG LiDAR diagram -->
+              <svg viewBox="0 0 400 400" class="w-full h-full p-8" aria-label="LiDAR foveal diagram">
+                <defs>
+                  <radialGradient id="droneGlow" cx="50%" cy="80%" r="30%">
+                    <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <ellipse cx="200" cy="340" rx="120" ry="60" fill="url(#droneGlow)"/>
+
+                <!-- === LEFT: Uniform rays === -->
+                <text x="22" y="22" fill="#94a3b8" font-size="11" font-family="monospace">Uniform (before)</text>
+                <!-- 9 uniform rays, -60° to +60° step 15° -->
+                <line x1="90" y1="330" x2="25" y2="265" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="42" y2="244" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="63" y2="232" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="84" y2="256" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="90" y2="255" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="109" y2="256" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="130" y2="268" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="145" y2="288" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <line x1="90" y1="330" x2="155" y2="265" stroke="#ef4444" stroke-width="1" stroke-opacity="0.6"/>
+                <circle cx="90" cy="330" r="6" fill="#06b6d4"/>
+                <text x="108" y="248" fill="#f97316" font-size="9" font-family="monospace">blind</text>
+                <text x="108" y="259" fill="#f97316" font-size="9" font-family="monospace">zone</text>
+
+                <!-- === RIGHT: Foveal rays === -->
+                <text x="218" y="22" fill="#94a3b8" font-size="11" font-family="monospace">Foveal (after)</text>
+                <!-- angles: -55,-35,-18,-8,0,8,18,35,55 — outer rays teal, center cyan+wider -->
+                <line x1="310" y1="330" x2="237" y2="278" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+                <line x1="310" y1="330" x2="258" y2="256" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+                <line x1="310" y1="330" x2="282" y2="244" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+                <line x1="310" y1="330" x2="297" y2="241" stroke="#22d3ee" stroke-width="2" stroke-opacity="1"/>
+                <line x1="310" y1="330" x2="310" y2="240" stroke="#22d3ee" stroke-width="2" stroke-opacity="1"/>
+                <line x1="310" y1="330" x2="323" y2="241" stroke="#22d3ee" stroke-width="2" stroke-opacity="1"/>
+                <line x1="310" y1="330" x2="338" y2="244" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+                <line x1="310" y1="330" x2="362" y2="256" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+                <line x1="310" y1="330" x2="383" y2="278" stroke="#14b8a6" stroke-width="1" stroke-opacity="0.7"/>
+                <circle cx="310" cy="330" r="6" fill="#06b6d4"/>
+                <text x="252" y="210" fill="#22d3ee" font-size="9" font-family="monospace">fine coverage</text>
+                <text x="296" y="226" fill="#22d3ee" font-size="8" font-family="monospace">↑ fovea</text>
+
+                <!-- Divider -->
+                <line x1="200" y1="10" x2="200" y2="390" stroke="#334155" stroke-width="1" stroke-dasharray="6 4"/>
+              </svg>
+            </div>
+            <!-- Clip placeholder for LiDAR view -->
+            <div class="mt-4 bg-slate-900 border border-slate-700 rounded-xl p-4 flex items-center gap-3 text-sm text-slate-400">
+              <svg class="w-5 h-5 shrink-0 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>{currentLang === 'fr' ? 'Clip « Vue LiDAR » à intégrer' : currentLang === 'zh' ? '待集成"LiDAR视图"片段' : '"LiDAR View" clip to be added'}</span>
+              <span class="ml-auto font-mono text-xs text-slate-600">lidar-view.gif</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         BUGS RÉVÉLATEURS
+    ═══════════════════════════════════════ -->
+    <section class="bg-slate-950 text-white py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 data-animate">
+          {currentLang === 'fr' ? '🐛 Ce qui a failli tout casser' : currentLang === 'zh' ? '🐛 差点毁掉一切的问题' : '🐛 What Almost Broke Everything'}
+        </h2>
+        <p class="text-center text-slate-400 mb-16 data-animate">
+          {currentLang === 'fr' ? 'Trois bugs, trois décisions — et ce qu\'ils ont appris' : currentLang === 'zh' ? '三个bug，三个决策——以及从中学到的' : 'Three bugs, three decisions — and what they taught'}
+        </p>
+
+        <div class="space-y-6">
+          <!-- Bug 1 -->
+          <div class="bg-slate-900 border border-slate-700 rounded-2xl p-8 hover:border-red-500/40 transition-colors data-animate">
+            <div class="flex items-start gap-6">
+              <div class="w-14 h-14 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-center text-2xl shrink-0">🤖</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
+                    Bug #1
+                  </span>
+                  <h3 class="text-xl font-bold text-white">
+                    {currentLang === 'fr' ? 'Le drone qui apprenait à faire du surplace' : currentLang === 'zh' ? '学会悬停原地的无人机' : 'The drone that learned to hover'}
+                  </h3>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                  {currentLang === 'fr'
+                    ? 'Une pénalité de reward mal bornée a rendu l\'immobilité totale plus rentable qu\'avancer. Aucun message d\'erreur — le système tournait parfaitement. Repéré uniquement parce que l\'actor_loss est passé positif pour la première fois du projet.'
+                    : currentLang === 'zh'
+                    ? '奖励惩罚边界设置错误导致静止不动比向前飞行更有利。没有错误消息——系统运行完美。仅因为actor_loss在项目中首次变为正值而被发现。'
+                    : 'A poorly bounded reward penalty made staying completely still more profitable than moving forward. No error message — the system ran perfectly. Caught only because actor_loss went positive for the first time in the project.'}
+                </p>
+                <div class="flex items-center gap-2 text-sm">
+                  <span class="text-slate-500">{currentLang === 'fr' ? 'Signal d\'alerte :' : currentLang === 'zh' ? '警报信号：' : 'Alert signal:'}</span>
+                  <code class="bg-slate-800 text-cyan-300 px-3 py-1 rounded-lg font-mono text-xs">actor_loss > 0</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bug 2 -->
+          <div class="bg-slate-900 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/40 transition-colors data-animate">
+            <div class="flex items-start gap-6">
+              <div class="w-14 h-14 bg-orange-500/10 border border-orange-500/30 rounded-2xl flex items-center justify-center text-2xl shrink-0">⚠️</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full">
+                    Bug #2
+                  </span>
+                  <h3 class="text-xl font-bold text-white">
+                    {currentLang === 'fr' ? 'La règle de sécurité qui punissait l\'évitement' : currentLang === 'zh' ? '惩罚规避动作的安全规则' : 'The safety rule that penalized evasion'}
+                  </h3>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                  {currentLang === 'fr'
+                    ? 'Une limite de vitesse de rotation posée tôt sans être vérifiée tuait le drone dès qu\'il tournait vite — y compris pendant des manœuvres d\'évitement réussies. Le modèle était puni pour avoir bien fait.'
+                    : currentLang === 'zh'
+                    ? '早期设置但未经验证的旋转速度限制在无人机快速转弯时将其杀死——包括成功的规避机动。模型因做对的事而受到惩罚。'
+                    : 'An early rotation speed limit, set without being verified, killed the drone whenever it turned fast — including during successful evasion maneuvers. The model was being punished for doing the right thing.'}
+                </p>
+                <div class="flex items-center gap-3 text-sm flex-wrap">
+                  <span class="text-slate-500">{currentLang === 'fr' ? 'Fix :' : currentLang === 'zh' ? '修复：' : 'Fix:'}</span>
+                  <span class="text-orange-300 font-semibold">
+                    {currentLang === 'fr' ? 'Limite relâchée → réentraînement →' : currentLang === 'zh' ? '放松限制 → 重新训练 →' : 'Limit relaxed → retrain →'}
+                  </span>
+                  <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 px-3 py-1 rounded-full font-bold">
+                    +13 pts {currentLang === 'fr' ? 'sur la config la plus dure' : currentLang === 'zh' ? '最难配置' : 'on hardest config'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Behavior emergent -->
+          <div class="bg-gradient-to-r from-cyan-950/50 to-teal-950/50 border border-cyan-500/30 rounded-2xl p-8 data-animate">
+            <div class="flex items-start gap-6">
+              <div class="w-14 h-14 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl flex items-center justify-center text-2xl shrink-0">✨</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full">
+                    {currentLang === 'fr' ? 'Émergent' : currentLang === 'zh' ? '涌现行为' : 'Emergent'}
+                  </span>
+                  <h3 class="text-xl font-bold text-white">
+                    {currentLang === 'fr' ? 'Des comportements non programmés' : currentLang === 'zh' ? '未编程的行为' : 'Unprogrammed behaviors'}
+                  </h3>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                  {currentLang === 'fr'
+                    ? 'Le drone choisit parfois un évitement plus complexe qu\'un évitement direct, parce que le chemin le plus simple mène vers une zone plus dense en arbres — il anticipe au-delà de l\'obstacle immédiat. Il exécute aussi des freinages de sauvetage in extremis, plutôt que de subir la collision.'
+                    : currentLang === 'zh'
+                    ? '无人机有时选择比直接路线更复杂的规避，因为最简单的路径通向前方更密集的区域——它在即时障碍之外进行预判。它还会在最后时刻执行紧急制动，而非接受碰撞。'
+                    : 'The drone sometimes chooses a more complex evasion than the direct route, because the simplest path leads toward a denser area ahead — it anticipates beyond the immediate obstacle. It also executes last-second emergency braking instead of accepting a collision.'}
+                </p>
+                <!-- Clip placeholder -->
+                <div class="mt-4 flex items-center gap-3 text-sm text-slate-500">
+                  <svg class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                  </svg>
+                  <span>{currentLang === 'fr' ? 'Clip « Évitement complexe » à intégrer' : currentLang === 'zh' ? '待集成"复杂规避"片段' : '"Complex evasion" clip to be added'}</span>
+                  <span class="font-mono text-xs">complex-evasion.gif</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PROGRESSION
+    ═══════════════════════════════════════ -->
+    <section class="bg-gradient-to-br from-slate-900 to-slate-950 text-white py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 data-animate">
+          {currentLang === 'fr' ? '📈 La Progression' : currentLang === 'zh' ? '📈 进展过程' : '📈 The Progression'}
+        </h2>
+        <p class="text-center text-slate-400 mb-16 data-animate">
+          {currentLang === 'fr' ? 'Le travail, pas juste le résultat' : currentLang === 'zh' ? '过程，而非仅结果' : 'The work, not just the result'}
+        </p>
+
+        <!-- Timeline table -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden data-animate">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-700 bg-slate-800/50">
+                  <th class="text-left px-6 py-4 text-slate-400 font-semibold">Version</th>
+                  <th class="text-left px-6 py-4 text-slate-400 font-semibold">
+                    {currentLang === 'fr' ? 'Changement clé' : currentLang === 'zh' ? '关键变更' : 'Key change'}
+                  </th>
+                  <th class="text-right px-6 py-4 text-slate-400 font-semibold">
+                    {currentLang === 'fr' ? 'Réussite (moy., 150m)' : currentLang === 'zh' ? '成功率（中密度，150m）' : 'Success (medium, 150m)'}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    v: currentLang === 'fr' ? 'Modèle PPO (11 iter.)' : currentLang === 'zh' ? 'PPO模型（11次迭代）' : 'PPO model (11 iter.)',
+                    c: currentLang === 'fr' ? 'Plafond PPO — bascule vers SAC' : currentLang === 'zh' ? 'PPO达到上限 — 切换到SAC' : 'PPO plateau — switch to SAC',
+                    r: '20–40%', color: 'red'
+                  },
+                  {
+                    v: currentLang === 'fr' ? 'SAC + plafond vitesse' : currentLang === 'zh' ? 'SAC + 速度限制' : 'SAC + speed cap',
+                    c: currentLang === 'fr' ? 'Plafond de vitesse ajouté' : currentLang === 'zh' ? '添加速度限制' : 'Speed cap added',
+                    r: '20%', color: 'red'
+                  },
+                  {
+                    v: currentLang === 'fr' ? '+ Empilement de trames' : currentLang === 'zh' ? '+ 帧堆叠' : '+ Frame stacking',
+                    c: currentLang === 'fr' ? 'Empilement de plusieurs trames d\'observation' : currentLang === 'zh' ? '多帧观测堆叠' : 'Multiple observation frames stacked',
+                    r: '3%', color: 'orange', note: currentLang === 'fr' ? '↘ régression (corrigée après)' : currentLang === 'zh' ? '↘ 回归（之后修复）' : '↘ regression (fixed after)'
+                  },
+                  {
+                    v: currentLang === 'fr' ? '+ Curriculum élargi' : currentLang === 'zh' ? '+ 扩展课程' : '+ Extended curriculum',
+                    c: currentLang === 'fr' ? 'Curriculum 30 → 300 m' : currentLang === 'zh' ? '课程30 → 300m' : 'Curriculum 30 → 300m',
+                    r: '77%', color: 'yellow'
+                  },
+                  {
+                    v: currentLang === 'fr' ? 'Modèle final' : currentLang === 'zh' ? '最终模型' : 'Final model',
+                    c: currentLang === 'fr' ? 'Correction seuil de rotation' : currentLang === 'zh' ? '修正旋转阈值' : 'Rotation threshold fix',
+                    r: '90%', color: 'emerald', final: true
+                  },
+                ].map(row => (
+                  <tr class={`border-b border-slate-800 hover:bg-slate-800/30 transition-colors ${row.final ? 'bg-emerald-950/30' : ''}`}>
+                    <td class={`px-6 py-4 font-semibold ${row.final ? 'text-emerald-300' : 'text-slate-200'}`}>{row.v}</td>
+                    <td class="px-6 py-4 text-slate-400">
+                      {row.c}
+                      {row.note && <span class="ml-2 text-orange-400 text-xs font-semibold">{row.note}</span>}
+                    </td>
+                    <td class={`px-6 py-4 text-right font-black text-lg ${
+                      row.color === 'red' ? 'text-red-400' :
+                      row.color === 'orange' ? 'text-orange-400' :
+                      row.color === 'yellow' ? 'text-yellow-400' :
+                      'text-emerald-400'
+                    }`}>{row.r}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="mt-6 text-slate-500 text-sm text-center data-animate">
+          {currentLang === 'fr'
+            ? 'L\'empilement de trames a d\'abord fait régresser le résultat avant d\'être rattrapé — c\'est une vraie démarche d\'itération, pas une ligne droite vers le succès.'
+            : currentLang === 'zh'
+            ? '帧堆叠最初导致结果回归，之后才被追上——这是真实的迭代过程，而非通往成功的直线。'
+            : 'Frame stacking first caused a regression before being caught up — a real iteration process, not a straight line to success.'}
+        </p>
+
+        <!-- Before/after clip placeholder -->
+        <div class="mt-8 grid md:grid-cols-2 gap-4 data-animate">
+          {['early-crashes.gif', 'forest-flight.gif'].map((file, i) => (
+            <div class="bg-slate-900 border border-slate-700 rounded-xl p-5 flex items-center gap-4">
+              <div class={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${i === 0 ? 'bg-red-500/10 border border-red-500/20' : 'bg-emerald-500/10 border border-emerald-500/20'}`}>
+                {i === 0 ? '💥' : '✅'}
+              </div>
+              <div>
+                <p class="font-semibold text-slate-200 text-sm">
+                  {i === 0
+                    ? (currentLang === 'fr' ? 'Crash des premiers modèles' : currentLang === 'zh' ? '早期模型崩溃' : 'Early model crashes')
+                    : (currentLang === 'fr' ? 'Vol final en forêt dense' : currentLang === 'zh' ? '最终模型密林飞行' : 'Final model forest flight')}
+                </p>
+                <p class="text-slate-500 text-xs font-mono mt-1">{file}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         LIMITES + SUITE
+    ═══════════════════════════════════════ -->
+    <section class="bg-slate-950 text-white py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12">
+
+          <!-- Limites assumées -->
+          <div class="data-animate">
+            <h2 class="text-3xl font-black mb-8">
+              {currentLang === 'fr' ? '⚠️ Limites Assumées' : currentLang === 'zh' ? '⚠️ 已知局限性' : '⚠️ Known Limitations'}
+            </h2>
+            <p class="text-slate-400 text-sm mb-6">
+              {currentLang === 'fr'
+                ? 'Un projet qui admet ses limites est plus crédible qu\'un projet qui prétend n\'en avoir aucune.'
+                : currentLang === 'zh'
+                ? '承认局限性的项目比声称没有局限性的项目更可信。'
+                : 'A project that admits its limits is more credible than one that claims to have none.'}
+            </p>
+            <ul class="space-y-4">
+              {[
+                {
+                  icon: '🖥️',
+                  text: currentLang === 'fr' ? 'Simulation uniquement (MuJoCo) — aucun test sur un vrai drone.' : currentLang === 'zh' ? '仅仿真（MuJoCo）——无真实无人机测试。' : 'Simulation only (MuJoCo) — no real drone test.',
+                },
+                {
+                  icon: '🌲',
+                  text: currentLang === 'fr' ? 'Couloir de largeur fixe, obstacles cylindriques statiques et identiques — pas un terrain naturel complexe.' : currentLang === 'zh' ? '固定宽度走廊，静态相同的圆柱形障碍物——非复杂自然地形。' : 'Fixed-width corridor, static identical cylindrical obstacles — not a complex natural terrain.',
+                },
+                {
+                  icon: '📉',
+                  text: currentLang === 'fr' ? 'La densité la plus élevée (0.5) reste le point faible à 75 %.' : currentLang === 'zh' ? '最高密度（0.5）仍是弱点，成功率75%。' : 'Highest obstacle density (0.5) remains the weak point at 75%.',
+                },
+                {
+                  icon: '🎮',
+                  text: currentLang === 'fr' ? 'Commandes directes (poussée + couples) sans couche de contrôle bas niveau — choix assumé, documenté comme piste d\'amélioration.' : currentLang === 'zh' ? '直接控制命令（推力+力矩），无低级控制层——有意的选择，记录为改进方向。' : 'Direct commands (thrust + torques) with no low-level control layer — an intentional choice, documented as a future improvement.',
+                },
+              ].map(item => (
+                <li class="flex items-start gap-4 bg-slate-900 border border-slate-800 rounded-xl p-4 hover:border-slate-600 transition-colors">
+                  <span class="text-2xl shrink-0 mt-0.5">{item.icon}</span>
+                  <span class="text-slate-300 text-sm leading-relaxed">{item.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Suite prévue -->
+          <div class="data-animate">
+            <h2 class="text-3xl font-black mb-8">
+              {currentLang === 'fr' ? '🚀 Ce qui vient ensuite' : currentLang === 'zh' ? '🚀 下一步计划' : '🚀 What\'s Next'}
+            </h2>
+            <div class="bg-gradient-to-br from-cyan-950/60 to-teal-950/60 border border-cyan-500/30 rounded-2xl p-8">
+              <div class="text-5xl mb-4">🛸</div>
+              <h3 class="text-2xl font-bold text-white mb-4">
+                {currentLang === 'fr' ? 'Phase 2 — Multi-drone' : currentLang === 'zh' ? '第二阶段——多无人机' : 'Phase 2 — Multi-drone'}
+              </h3>
+              <p class="text-slate-300 leading-relaxed mb-6">
+                {currentLang === 'fr'
+                  ? 'Passage prévu au multi-drone : plusieurs drones qui coordonnent l\'interception d\'une cible mobile dans le même type d\'environnement, avec partage d\'informations entre eux.'
+                  : currentLang === 'zh'
+                  ? '计划扩展到多无人机：多架无人机协调在相同环境中拦截移动目标，并共享信息。'
+                  : 'Planned extension to multi-drone: several drones coordinating to intercept a moving target in the same type of environment, with information sharing between them.'}
+              </p>
+              <div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/60 border border-slate-700 rounded-full text-sm text-slate-400">
+                <span class="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></span>
+                {currentLang === 'fr' ? 'En préparation — pas encore commencé' : currentLang === 'zh' ? '准备中——尚未开始' : 'In preparation — not yet started'}
+              </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="mt-6 space-y-3">
+              <h3 class="text-lg font-bold text-slate-300">
+                {currentLang === 'fr' ? 'Ressources' : currentLang === 'zh' ? '资源' : 'Resources'}
+              </h3>
+              {[
+                {
+                  icon: '📓',
+                  label: currentLang === 'fr' ? 'Journal d\'expériences complet' : currentLang === 'zh' ? '完整实验日志' : 'Full experiment log',
+                  sub: currentLang === 'fr' ? 'Run par run, hypothèses + résultats' : currentLang === 'zh' ? '逐次运行，假设+结果' : 'Run by run, hypotheses + results',
+                  href: null,
+                },
+                {
+                  icon: '📄',
+                  label: currentLang === 'fr' ? 'Rapport technique Phase 1' : currentLang === 'zh' ? '第一阶段技术报告' : 'Phase 1 technical report',
+                  sub: currentLang === 'fr' ? 'Version longue complète' : currentLang === 'zh' ? '完整长版本' : 'Full long-form version',
+                  href: null,
+                },
+                {
+                  icon: '💻',
+                  label: currentLang === 'fr' ? 'Dépôt de code' : currentLang === 'zh' ? '代码仓库' : 'Code repository',
+                  sub: currentLang === 'fr' ? 'En cours de préparation' : currentLang === 'zh' ? '准备发布中' : 'Being prepared for release',
+                  href: null,
+                },
+              ].map(r => (
+                <div class="flex items-center gap-4 bg-slate-900 border border-slate-800 rounded-xl px-5 py-4">
+                  <span class="text-xl">{r.icon}</span>
+                  <div class="flex-1">
+                    <div class="font-semibold text-slate-200 text-sm">{r.label}</div>
+                    <div class="text-slate-500 text-xs">{r.sub}</div>
+                  </div>
+                  <span class="text-xs text-slate-600 bg-slate-800 px-2 py-1 rounded-full">
+                    {currentLang === 'fr' ? 'À venir' : currentLang === 'zh' ? '即将' : 'Soon'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         TECH STACK
+    ═══════════════════════════════════════ -->
+    <section class="bg-gradient-to-br from-slate-900 to-cyan-950 text-white py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 data-animate">
+          {currentLang === 'fr' ? '🛠️ Technologies' : currentLang === 'zh' ? '🛠️ 技术栈' : '🛠️ Tech Stack'}
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 data-animate">
+          {[
+            { icon: '🐍', name: 'Python', role: 'Core language' },
+            { icon: '🦾', name: 'MuJoCo', role: 'Physics sim' },
+            { icon: '📦', name: 'Stable-Baselines3', role: 'SAC / PPO' },
+            { icon: '📐', name: 'Gymnasium', role: 'RL environment' },
+            { icon: '🧮', name: 'NumPy', role: 'Computation' },
+            { icon: '📊', name: 'TensorBoard', role: 'Monitoring' },
+            { icon: '🎯', name: 'SAC', role: 'Final algorithm' },
+            { icon: '🔁', name: 'PPO', role: 'First 11 iterations' },
+          ].map(t => (
+            <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 text-center hover:border-cyan-500/50 hover:scale-105 transition-all duration-300">
+              <div class="text-3xl mb-2">{t.icon}</div>
+              <div class="font-bold text-slate-100 text-sm">{t.name}</div>
+              <div class="text-slate-500 text-xs mt-1">{t.role}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CTA FINAL
+    ═══════════════════════════════════════ -->
+    <section class="bg-gradient-to-br from-slate-950 via-cyan-950 to-teal-900 text-white py-24">
+      <div class="max-w-4xl mx-auto px-6 text-center data-animate">
+        <h2 class="text-4xl md:text-5xl font-black mb-6">
+          {currentLang === 'fr' ? 'Suivre l\'évolution du projet' : currentLang === 'zh' ? '关注项目进展' : 'Follow the project'}
+        </h2>
+        <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
+          {currentLang === 'fr'
+            ? 'Le dépôt GitHub et le rapport technique seront mis en ligne prochainement. La phase 2 est en préparation.'
+            : currentLang === 'zh'
+            ? 'GitHub仓库和技术报告即将上线。第二阶段正在筹备中。'
+            : 'GitHub repository and technical report coming soon. Phase 2 is in preparation.'}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="inline-flex items-center gap-3 px-8 py-4 bg-slate-800 border border-slate-600 text-slate-300 font-bold rounded-xl cursor-not-allowed opacity-70">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            {currentLang === 'fr' ? 'GitHub — Bientôt' : currentLang === 'zh' ? 'GitHub — 即将上线' : 'GitHub — Coming Soon'}
+          </div>
+
+          <a href={`/${currentLang}/projects`}
+             class="inline-flex items-center gap-3 px-8 py-4 bg-white/10 border-2 border-white/20 text-white font-bold rounded-xl hover:bg-white/20 hover:border-cyan-400/50 transition-all duration-300 backdrop-blur-sm">
+            {currentLang === 'fr' ? 'Autres Projets' : currentLang === 'zh' ? '其他项目' : 'Other Projects'}
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={currentLang} />
+</Layout>
+
+<style>
+  @keyframes slideUp {
+    from { transform: translateY(28px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  [data-animate] {
+    opacity: 0;
+    animation: slideUp 0.75s ease-out forwards;
+  }
+
+  html { scroll-behavior: smooth; }
+</style>
+
+<script>
+  // Stagger animations on scroll
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            (entry.target as HTMLElement).style.opacity = '1';
+            (entry.target as HTMLElement).style.animationPlayState = 'running';
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    (el as HTMLElement).style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>

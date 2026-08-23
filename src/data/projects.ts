@@ -32,6 +32,90 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: '5',
+    slug: 'drone-speedrunner-rl',
+    titleEn: 'Drone Speedrunner — RL Obstacle Avoidance (Phase 1)',
+    titleFr: 'Drone Speedrunner — Évitement d\'Obstacles par RL (Phase 1)',
+    titleZh: '无人机极速跑者 — 强化学习避障（第一阶段）',
+    descriptionEn: 'A quadrotor learns to fly at ~12 m/s through an infinite obstacle corridor using only a 2D LiDAR — trained with SAC after 11 failed PPO iterations.',
+    descriptionFr: 'Un quadrirotor apprend à voler à ~12 m/s dans un couloir d\'obstacles infini avec seulement un LiDAR 2D — entraîné avec SAC après 11 itérations PPO en échec.',
+    descriptionZh: '四旋翼无人机仅凭2D LiDAR以约12m/s穿越无限障碍走廊——经历11次PPO失败后改用SAC训练成功。',
+    fullDescriptionEn: `A reinforcement learning project where a quadrotor learns to fly autonomously through an infinite tree corridor at ~12 m/s — no map, no pre-computed trajectory, only a 2D LiDAR, speed, and orientation.
+
+The goal is not to finish a fixed-length track: it's an "infinite runner" — fly as far as possible without hitting an obstacle.
+
+Eleven iterations with PPO plateaued at 20–40% success with obstacles (vs 97–100% in an empty corridor) — the decision-making was not the problem, perception and control were. Switched to SAC (Soft Actor-Critic), then fifteen more iterations to reach the final model.`,
+    fullDescriptionFr: `Un projet d'apprentissage par renforcement où un quadrirotor apprend à voler de façon autonome dans un couloir d'arbres infini à ~12 m/s — sans carte, sans trajectoire pré-calculée, avec pour seule perception un LiDAR 2D, sa vitesse et son orientation.
+
+L'objectif n'est pas de finir une piste de longueur fixe : c'est un « runner infini » — voler la plus grande distance possible sans percuter un obstacle.
+
+Onze itérations avec PPO ont plafonné à 20–40 % de réussite dès qu'il y avait des obstacles (contre 97–100 % en couloir vide) — la décision n'était pas le problème, la perception et le contrôle l'étaient. Bascule vers SAC (Soft Actor-Critic), puis quinze itérations supplémentaires jusqu'au modèle final.`,
+    fullDescriptionZh: `强化学习项目：四旋翼无人机学习在无限树木走廊中以约12m/s自主飞行——无地图、无预计算轨迹，仅凭2D LiDAR、速度和方向感知。
+
+目标不是完成固定长度的赛道，而是"无限跑者"——在不撞击障碍物的情况下尽可能飞远。
+
+PPO算法经历11次迭代后在有障碍物时仅达20-40%成功率（空走廊97-100%）——决策不是问题，感知和控制才是。切换到SAC（软演员评论家），再经过15次迭代达到最终模型。`,
+    challengeEn: `Four key technical hurdles:
+
+1. A real perception problem solved by math, not trial and error. The LiDAR (128 rays over 240°) had 1.89° resolution. A 30cm-radius tree at 20m only covers 1.72° — narrower than the gap between two rays. Beyond ~18m, a tree could slip between two rays and stay invisible. Computing this threshold led to a "foveal" sensor (resolution concentrated forward, like an eye's fovea) that fixes the problem without changing the number of rays.
+
+2. A bug that triggered no error. A poorly bounded reward penalty made staying still more profitable than moving forward — the drone learned to hover in place. Caught not by a system error but by an internal metric (actor_loss) going positive for the first time in the project.
+
+3. A safety rule that penalized a skill. An early rotation speed limit killed the drone whenever it turned fast — including during successful evasion maneuvers. Fixed by retraining with the limit relaxed: +13 points on the hardest configuration.
+
+4. Unprogrammed behaviors. The drone sometimes chooses a more complex evasion than the direct route, because the simplest path leads to a denser area ahead — it anticipates beyond the immediate obstacle.`,
+    challengeFr: `Quatre obstacles techniques clés :
+
+1. Un vrai problème de perception résolu par le calcul. Le LiDAR (128 rayons sur 240°) avait une résolution de 1,89°. Un arbre de 30 cm vu à 20 m ne couvre que 1,72° — plus fin qu'un intervalle entre deux rayons. Au-delà de ~18 m, un arbre pouvait passer entre deux rayons et rester invisible. Le calcul de ce seuil a mené à un capteur "fovéal" (résolution concentrée devant) qui règle le problème sans changer le nombre de rayons.
+
+2. Un bug sans message d'erreur. Une pénalité de reward mal bornée a rendu l'immobilité plus rentable qu'avancer — le drone a appris à faire du surplace. Repéré non par une erreur système mais par l'actor_loss qui est passé positif pour la première fois.
+
+3. Une règle de sécurité qui punissait une compétence. Une limite de vitesse de rotation tuait le drone dès qu'il tournait vite — y compris pendant des manœuvres d'évitement réussies. Corrigée en réentraînant avec la limite relâchée : +13 points sur la configuration la plus difficile.
+
+4. Des comportements non programmés. Le drone choisit parfois un évitement plus complexe qu'un évitement direct, parce que le chemin le plus simple mène vers une zone plus dense — il anticipe au-delà de l'obstacle immédiat.`,
+    challengeZh: `四个关键技术障碍：
+
+1. 用数学解决的真实感知问题。LiDAR（240°内128条射线）角分辨率1.89°，20m处30cm半径的树木只覆盖1.72°——比两条射线间隔还窄。超过约18m，树木可能从射线间隙穿过而不被探测到。计算此阈值后设计了"中央凹"传感器（分辨率集中在前方），在不改变射线数量的情况下解决了问题。
+
+2. 不触发任何错误的bug。奖励惩罚边界设置错误导致静止不动比向前飞行更有利——无人机学会了悬停原地。通过actor_loss首次变为正值发现，而非系统错误。
+
+3. 惩罚技能的安全规则。早期设置的旋转速度限制在无人机快速转弯时将其杀死——包括成功的规避机动。放松限制后重新训练：在最难配置上+13个百分点。
+
+4. 未编程的行为。无人机有时选择比直接路线更复杂的规避，因为最简单的路径通向前方更密集的区域——它在即时障碍之外进行预判。`,
+    solutionEn: `Switched from PPO to SAC (Soft Actor-Critic) after 11 failed iterations. Designed a foveal LiDAR sensor with concentrated resolution in the forward direction. Fixed reward shaping to prevent degenerate hover strategies. Relaxed rotation limits after diagnosing actor_loss anomaly. Trained on a curriculum from 30m to 300m before testing generalization up to 500m and 1000m.`,
+    solutionFr: `Bascule de PPO vers SAC (Soft Actor-Critic) après 11 itérations en échec. Conception d'un capteur LiDAR fovéal avec résolution concentrée vers l'avant. Correction du reward shaping pour prévenir les stratégies dégénérées de surplace. Relâchement des limites de rotation après diagnostic via l'actor_loss. Entraînement sur un curriculum de 30 m à 300 m avant de tester la généralisation jusqu'à 500 m et 1 000 m.`,
+    solutionZh: `11次失败迭代后从PPO切换到SAC（软演员评论家）。设计了前向分辨率集中的中央凹LiDAR传感器。修复奖励塑形以防止退化的悬停策略。通过actor_loss异常诊断后放松旋转限制。在30m到300m的课程上训练，然后测试泛化能力到500m和1000m。`,
+    learningsEn: `Technical Skills:
+- Reinforcement Learning: SAC, PPO, reward shaping, curriculum learning, actor-loss diagnostics
+- Robotics simulation: MuJoCo physics environment, quadrotor dynamics
+- Sensor design: LiDAR ray modeling, foveal perception, blind-spot computation
+- ML iteration methodology: hypothesis-driven experimentation, logging, regression detection
+
+Key insight: A model that admits its limits (simulation-only, static obstacles) is more credible than one that doesn't. The iteration log — hypotheses written before each run, results after — is the most revealing artifact of this project.`,
+    learningsFr: `Compétences Techniques :
+- Apprentissage par renforcement : SAC, PPO, reward shaping, curriculum learning, diagnostic via actor_loss
+- Simulation robotique : environnement physique MuJoCo, dynamique quadrirotor
+- Conception de capteur : modélisation rayons LiDAR, perception fovéale, calcul de zones aveugles
+- Méthodologie d'itération ML : expérimentation par hypothèses, logging, détection de régression
+
+Insight clé : Un modèle qui admet ses limites (simulation uniquement, obstacles statiques) est plus crédible qu'un modèle qui prétend n'en avoir aucune. Le journal d'expériences — hypothèses rédigées avant chaque run, résultats après — est la pièce la plus révélatrice du projet.`,
+    learningsZh: `技术技能：
+- 强化学习：SAC、PPO、奖励塑形、课程学习、actor_loss诊断
+- 机器人仿真：MuJoCo物理环境、四旋翼动力学
+- 传感器设计：LiDAR射线建模、中央凹感知、盲区计算
+- ML迭代方法：假设驱动的实验、日志记录、回归检测
+
+关键洞察：承认局限性（仅仿真、静态障碍物）的模型比声称没有局限性的模型更可信。实验日志——每次运行前写下的假设，之后的结果——是本项目最具揭示性的成果。`,
+    stack: ['Python', 'MuJoCo', 'Stable-Baselines3', 'SAC', 'PPO', 'NumPy', 'Gymnasium'],
+    image: '/projects/drone-speedrunner/cover.jpg',
+    images: [],
+    liveUrl: '',
+    githubUrl: '',
+    status: 'in-progress' as const,
+    date: '2026-07',
+    featured: true,
+  },
+  {
     id: '4',
     slug: 'ariadne-ml-research',
     titleEn: 'Project Ariadne - Adaptive Game Level Generation',
