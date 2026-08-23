@@ -27,6 +27,45 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
+    id: '3',
+    title: {
+      en: 'R&D Intern — Digital Twin & VR',
+      fr: 'Stagiaire R&D — Jumeaux Numériques & VR',
+      zh: 'R&D实习生 — 数字孪生与VR',
+    },
+    company: 'IMMErsion',
+    location: 'France',
+    type: 'internship',
+    startDate: '2026-06',
+    endDate: '2026-09',
+    description: {
+      en: '4-month R&D internship focused on digital twins, VR visualization, and AI-assisted urban planning.',
+      fr: 'Stage R&D de 4 mois axé sur les jumeaux numériques, la visualisation VR et l\'assistance IA pour l\'urbanisme.',
+      zh: '为期4个月的R&D实习，专注于数字孪生、VR可视化和AI辅助城市规划。',
+    },
+    achievements: {
+      en: [
+        'Optimized real-time and manual data collection pipelines for urban digital twins',
+        'Built 3D VR visualizations for city planning use cases in Helsinki',
+        'Designed and implemented genetic algorithms for spatial optimization',
+        'Contributed to a full pipeline for 3D virtual AI assistance in urban planning',
+      ],
+      fr: [
+        'Optimisation des pipelines de collecte de données en temps réel et manuels pour les jumeaux numériques urbains',
+        'Développement de visualisations 3D VR pour des cas d\'usage d\'urbanisme à Helsinki',
+        'Conception et implémentation d\'algorithmes génétiques pour l\'optimisation spatiale',
+        'Contribution à un pipeline complet d\'assistance IA virtuelle 3D pour l\'urbanisme',
+      ],
+      zh: [
+        '优化城市数字孪生的实时和手动数据采集管道',
+        '为赫尔辛基城市规划构建3D VR可视化',
+        '设计并实现用于空间优化的遗传算法',
+        '参与城市规划3D虚拟AI辅助完整管道的开发',
+      ],
+    },
+    technologies: ['VR', 'Digital Twins', 'Genetic Algorithms', 'Python', '3D Visualization'],
+  },
+  {
     id: '1',
     title: {
       en: 'Full-Stack Development Intern',

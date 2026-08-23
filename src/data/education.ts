@@ -25,6 +25,29 @@ export interface Education {
 
 export const education: Education[] = [
   {
+    id: '4',
+    school: 'Georgia Institute of Technology',
+    degree: {
+      en: 'Master of Science in Computer Science (MSCS)',
+      fr: 'Master of Science en Informatique (MSCS)',
+      zh: '计算机科学理学硕士（MSCS）',
+    },
+    field: {
+      en: 'Machine Learning',
+      fr: 'Machine Learning',
+      zh: '机器学习',
+    },
+    location: 'Atlanta, GA, USA',
+    startDate: '2026-08',
+    endDate: '2028-05',
+    description: {
+      en: 'Admitted to the MSCS program with a specialization in Machine Learning.',
+      fr: 'Admis au programme MSCS avec une spécialisation en Machine Learning.',
+      zh: '已录取机器学习方向计算机科学理学硕士项目。',
+    },
+    logo: '/logo/georgia-tech.png',
+  },
+  {
     id: '1',
     school: 'ENSEEIHT',
     degree: {
